@@ -1,0 +1,266 @@
+{
+ "note": "Real search results (public inhousegym.in page text) for the question below, captured 2026-10-21. Used to test answer-type evidence in ranking only.",
+ "question": "Price list for remote workout sessions with a trainer?",
+ "results": [
+  {
+   "id": "a9360607-dd44-483f-8663-49f0fc7b0f9f",
+   "score": 0.6086401,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Interested in Any Equipment?",
+    "anchor": "",
+    "chunk": "Interested in Any Equipment?:\nFor renting Equipment, please provide following information:\n- Equipment Required (e.g. Treamill, Crosstrainer etc)\n- Actual Max User weight\n- Number of users\n- Locality\nSend these info by any of the options mentioned below:\nBased on your inputs,we will share detailed quotation of the suitable equipment.",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "31bfe21e-c3c1-4265-9f4f-82fc74c2bc44",
+   "score": 0.60381126,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Treadmill on Rent for Home. Rent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida",
+    "anchor": "para",
+    "chunk": "Treadmill on Rent for Home. Rent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida:\nRent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "d63ba3d6-1adf-411d-a5c8-f6dbdd3e01bf",
+   "score": 0.63578236,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Introducing online Training Programme",
+    "anchor": "",
+    "chunk": "Introducing online Training Programme:\nIs Social Distancing become barrier in your workout? No Need to Worry, Join Inhousegym’s live fitness Training Programme today!\n45 Minutes Training: There will be a 45 Minutes online training by our fitness trainer, trainer will guide you on live video call and keep you motivated\n3 Classes per week: One can choose 3 classes in a week as per comfort\nRegular one to one call with Personal Trainer: Regular monitering of your progress and there will be direct call with your fitness trainer.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "d45d2bb0-4b09-4a74-b2f5-90a8b589a3e9",
+   "score": 0.6312438,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "OUR PACKAGES",
+    "anchor": "",
+    "chunk": "OUR PACKAGES:\nwe offer 4 differents packages for our customers, one can choose package accordingly as per his/her convininece\n₹1200: Customer can try our weekly plan worth ₹1200/- only.\n₹3000: An individual can choose our monthly basis plan for only ₹3000/- .\n₹7500: one can also select our 3 months plan worth ₹7500/- and transform his /her body.\n₹12000: If you wish for single time investment then you can go for our 6 months plan worth ₹12000/- only.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "61dd2db9-6acd-47dc-91fc-71cf8cee3ab2",
+   "score": 0.6294143,
+   "payload": {
+    "url": "https://www.inhousegym.in/contact.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym contact us",
+    "heading": "Are you looking for a fitness equipment on rental basis?",
+    "anchor": "first",
+    "chunk": "Are you looking for a fitness equipment on rental basis?:\nDelhi | Gurgaon | Faridabad | Noida",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "7c0772eb-e650-4c3b-ad89-d56540cb52ef",
+   "score": 0.62920415,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Below are some reasons that why you should go for our experts:",
+    "anchor": "",
+    "chunk": "Below are some reasons that why you should go for our experts::\n- No fitness coals can be achieved without a trainer who trains you dedicatedly.\n- Proper Body posture is required to get positive results of exercise can give us come nagetive results.\n- individual attention by our trainer with small batch size.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "a6bef22a-38fd-4e5e-ab60-045d8a822f40",
+   "score": 0.60948634,
+   "payload": {
+    "url": "https://www.inhousegym.in/dietitian_service.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Packages",
+    "anchor": "",
+    "chunk": "Packages:\nPackage Duration\nPackage Name\nRate\n1 months package\nHit and Try\n₹2000/-\n3 month package\nBasic\n₹5000/-\n6 month package\nPro package\n₹9000/-\n1 year package\nPremium package\n₹12,000/-\nWeight loss: Only you can improve your fitness no one can do it for you, so wake up every morning for fitness you want to achieve\n2-Balanced Diet: Inhousegym is here to offer you both at same place. You can buy our combo package at less than offered prices.(T&C Applied)",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "85c0ca75-294e-4d65-bb48-3da70e1136f8",
+   "score": 0.604843,
+   "payload": {
+    "url": "https://www.inhousegym.in/about.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, about us Noida - InHouseGym",
+    "heading": "Interested in Any Equipment?",
+    "anchor": "",
+    "chunk": "Interested in Any Equipment?:\nFor renting Equipment, please provide following information:\n- Equipment Required (e.g. Treamill, Crosstrainer etc)\n- Actual Max User weight\n- Number of users\n- Locality\nSend these info by any of the options mentioned below:\nBased on your inputs,we will share detailed quotation of the suitable equipment.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "70c45d19-e27b-4e55-9f85-59ca339f764b",
+   "score": 0.6042098,
+   "payload": {
+    "url": "https://www.inhousegym.in/ac-treadmills.html",
+    "title": "Treadmill ac, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Interested in Any Equipment?",
+    "anchor": "",
+    "chunk": "Interested in Any Equipment?:\nFor renting Equipment, please provide following information:\n- Equipment Required (e.g. Treamill,Crosstrainer etc)\n- Actual Max User weight\n- Number of users\n- Locality\nSend these info by any of the options mentioned below:\nBased on your inputs,we will share detailed quotation of the suitable equipment.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "701a0b9e-e821-484c-b6b5-75826d205528",
+   "score": 0.5872103,
+   "payload": {
+    "url": "https://www.inhousegym.in/AC_Treadmill.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Elite W-855",
+    "anchor": "",
+    "chunk": "Elite W-855:\nNew\n- Motor: 4.5 HP High insulation\n- Speed: 1-20km/h\n- Incline: Smooth Auto Incline 0-15\n- Beltarea: 500mm x 3160mm\n- Display: 4 Speed & 4 Incline Hot Keys\n- Air Step Cushion Deck With Enlarge Footrail For Extra Safety\n- 18 Pre-set Program, 3 Users, 1 Manual & 1 Body Fat Function\n- Exquisite Control Panel with 17.78 Cm,(7\")\n- Blue Backlit Lcd Display Speed, Distance, Time, Calorie, Pulse & Incline\n- Extra Strong Stable Steel Frame For The Most Demanding Users\n- Great Entertainment With Built In Mp3\n- Speaker And Ipad/Smart Phone Holder, Foldable Treadmill With Soft Drop\n- Lowering System\n- 1 Year Warranty + 1 Free Onsite-Service\n- Brand-Fitking\n- MAX. USER WT : 120 KG.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "af7c35b4-b692-4927-86f8-882190897fea",
+   "score": 0.5843289,
+   "payload": {
+    "url": "https://www.inhousegym.in/dietitian_service.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "anchor": "",
+    "chunk": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym:\nThanku for query\nWe will revert shortly!\nIntroducing InhouseGym dietitian service: On 12 years of successful achievement in serving fitness equipment with a vision of \"Healthier India\".\nExplore the packages and choose your favourite plan.\nIntroducing InhouseGym dietitian service: On 12 years of successful achievement in serving fitness equipment with a vision of \"Healthier India\".\nExplore the packages and choose your favorite plan.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "8b4cd674-ef32-46bf-9860-1c686d45791e",
+   "score": 0.58384496,
+   "payload": {
+    "url": "https://www.inhousegym.in/commercial_treadmill.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "BENEFITS",
+    "anchor": "",
+    "chunk": "BENEFITS:\n- Monthly rental instead of bulky cost at one go\n- Full cost can be booked as expenditure.\n- We will take care of 100% maintainance at no cost.\n- Hassle free deployment right at your door step.\nALL RENTAL INCLUDES FREE SERVICE, REPAIR, PREVENTATIVE MAINTAINENCE AND EQUIPMENT REPLACEMENTS FOR LIFE.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "c8fec308-b277-4612-8bad-4e7ac49c5bc1",
+   "score": 0.5821992,
+   "payload": {
+    "url": "https://www.inhousegym.in/about.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, about us Noida - InHouseGym",
+    "heading": "We are Home and Commercial Fitness Equipment Engineers.",
+    "anchor": "",
+    "chunk": "We are Home and Commercial Fitness Equipment Engineers.:\nWe specialize in the Repair, Service, and Maintenance, on all Makes and Models of Fitness Equipment (Treadmills, Cross Trainer, Exercise Bike, Strength Equipment etc.)",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "a0044719-a4b2-4934-b658-5a793e6e46a7",
+   "score": 0.5793815,
+   "payload": {
+    "url": "https://www.inhousegym.in/crosstraineronrent.html",
+    "title": "Cross Trainer on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Model:CT-5600",
+    "anchor": "",
+    "chunk": "Model:CT-5600:\n- Deluxe Magnetic Elliptical Bike.\n- 8 Level Manual Tension Control\n- Step Through Frame For Easy Access.\n- Stylish And Practical Fitking Design.\n- Computer Display Time, Distance, Speed, Calorie And Pulse Along With 4 Integrated Racing Games.\n- Handle Bar Design Offer Superb Ergonomics And Versatile Options\n- Ultimate Cross Trainer Frame For The Most Demanding User\n- Top Quality Components Ensure Perfect Training Ergonomic\n- Long Stride And 10 Kg Of Rotating Mass Ensures Smooth And Dynamic Movement.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "67e0aa32-4b19-4cf2-a52c-252eb9444c33",
+   "score": 0.5774847,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Our Happy Clients",
+    "anchor": "",
+    "chunk": "Our Happy Clients:\nThanks much, Mr. Garg. Yes, it did help. Good day ahead and will connect with you/ refer InHouseGym should there be a need in future..\nMiss.Rachna\nThe cross trainer has arrived, your staff efficiently installed the machine and were very polite. I am very impressed with the quality of the machine and the quality of service. I look forward to exercising with this machine daily.\nMr.Rahul\nThe treadmill was great and it served our purpose very well. We hope to work with you again.\nMiss.Nita\nThanks team. Appreciate this kind of service..\nMr.Rohan\nThanks for the services sir, will get back if required in future..\nMr.Sidharth",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "46ab0bcb-ddda-452a-9d07-ac1500d1652d",
+   "score": 0.5774349,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "We are Home and Commercial Fitness Equipment Engineers.",
+    "anchor": "",
+    "chunk": "We are Home and Commercial Fitness Equipment Engineers.:\nWe specialize in the Repair, Service, and Maintenance, on all Makes and Models of Fitness Equipment (Treadmills, Cross Trainer, Exercise Bike, Strength Equipment etc.)",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "5200d075-1cb9-4315-8ec1-e14efee53f43",
+   "score": 0.57462966,
+   "payload": {
+    "url": "https://www.inhousegym.in/treadmillonrent.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Model:Elite T-717AC",
+    "anchor": "",
+    "chunk": "Model:Elite T-717AC:\n\"Don't limit continuous usage to 30 mins\" (2 hours continuous usage)\n- Motor: 3 HP AC HIGH GRADE COMMERCIAL AC MOTOR.\n- Max. User Wt: 120 Kg.\n- Incline: 0~15%.\n- Speed: 1~18 km/hr.\n- Belt Area: 18.9\"x116.1\".\n- Foldable Treadmill With Soft Drop Lowering System.\n- Great Entertainment With Built In Usb Jack, Mp3 Speaker And Ipad/ Smart Phone Holder.\n- 8 Pre Set Programs 8 Levels, 1 Body Fat Function & 1 Manual Program.\n- Ergonomically Design Handle Bar And Durable Frame Structure With Shock Absorber System Having 4 Pcs. Greycush Ion, 2 Pcs. Air Cushion For Ultimate Running Experience.\n- Exquisite Control Panel With 17.78 Cm. (7”) Blue Display Speed, Distance, Time ,calories, Pulse,incline & Bodyfat.\nRent Now",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "93213120-f51b-4d3a-96b1-e0620cacc421",
+   "score": 0.57423615,
+   "payload": {
+    "url": "https://www.inhousegym.in/crosstraineronrent.html",
+    "title": "Cross Trainer on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Model: CT - BK78H",
+    "anchor": "CT-BK78H",
+    "chunk": "Model: CT - BK78H:\n- Deluxe Magnetic Elliptical Bike.\n- Resistance: 8 Level Manual Tension Control.\n- Computer Display Time, Distance, Speed, Calorie And Pulse.\n- Flywheel : 7 Kg\n- Crank Type : 3 Pieces\n- Skidproof Big Padels\n- Strong Study Frame\n- User Weight Limit: 120 Kg",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "0a3f6da7-95b2-4b97-9f86-9eb47c5b2a11",
+   "score": 0.5737097,
+   "payload": {
+    "url": "https://www.inhousegym.in/contact%20faridabad.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym contact us",
+    "heading": "submitting...",
+    "anchor": "",
+    "chunk": "submitting...:\nThank you for query!\nWe will revert shortly!\nContact Information: Address: 1404 B, Princess Park, Sector-86, Faridabad, 121002\nPhone: 7303056077\nEmail: contactus@inhousegym.in inhousegym@gmail.com\nWebsite: www.inhousegym.in",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "85573850-5e51-447b-b55f-2c964c8c8eca",
+   "score": 0.57357335,
+   "payload": {
+    "url": "https://www.inhousegym.in/contact.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym contact us",
+    "heading": "submitting...",
+    "anchor": "",
+    "chunk": "submitting...:\nThank you for query!\nWe will revert shortly!\nThanku for query",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  }
+ ]
+}

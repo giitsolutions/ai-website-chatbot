@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Chatbot Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #FAF6EF; --card: #FFFFFF; --border: #EAE1D4; --line: #F1EBE1;
+        --text: #2A2420; --muted: #6A5F55;
+        --accent: #2E6B4E; --accent-hover: #1F4C37; --accent-soft: #E6F0EA; --accent-soft-text: #1F4C37;
+        --highlight: #F4C054; --highlight-soft: #FDF1D6; --highlight-soft-text: #5A3E05;
+        --danger: #A8412A; --danger-soft: #FBE3DC; --danger-soft-text: #8A321F; --danger-border: #E5C4BA;
+        --grey-soft: #EFEAE2; --grey-text: #4F463E;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; font: 15px/1.5 "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    h1, h2, h3, .product { font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-weight: 700; }
+    h1 { font-size: 32px; line-height: 1.15; margin: 0; overflow-wrap: anywhere; }
+    h2 { font-size: 19px; line-height: 1.25; margin: 0 0 10px; }
+    h3 { font-size: 16px; line-height: 1.3; margin: 18px 0 6px; }
+    a { color: var(--accent-hover); }
+    label { display: block; font-weight: 600; font-size: 13px; margin: 12px 0 4px; }
+    .hint { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+
+    /* Controls: at least 44 px tall */
+    input[type=text], input[type=url], input[type=email], input[type=password], input[type=number], input[type=search], textarea, select {
+        width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #B9AD9D; border-radius: 8px; font: inherit; color: var(--text); background: #fff;
+    }
+    input[type=file] { width: 100%; min-height: 44px; font: inherit; padding: 9px 0; }
+    textarea { min-height: 76px; resize: vertical; }
+    input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); vertical-align: -3px; margin: 0 6px 0 0; }
+    input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 2px; }
+    button { font: inherit; font-weight: 600; min-height: 44px; border-radius: 8px; border: 1px solid transparent; padding: 8px 16px; cursor: pointer; }
+    button.primary { background: var(--accent); color: #fff; }
+    button.primary:hover { background: var(--accent-hover); }
+    button.secondary { background: #fff; border-color: #B9AD9D; color: var(--text); }
+    button.secondary:hover { background: var(--bg); }
+    button.danger { background: #fff; border-color: var(--danger-border); color: var(--danger); }
+    button.danger:hover { background: var(--danger-soft); }
+    button.link { background: none; border: 0; padding: 8px 4px; color: var(--accent-hover); text-decoration: underline; font-weight: 500; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+    .row > .grow { flex: 1 1 240px; min-width: 0; }
+    .row > .small { flex: 0 0 140px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+
+    /* Messages and pills */
+    .message { margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; overflow-wrap: anywhere; }
+    .message.error { background: var(--danger-soft); color: var(--danger-soft-text); }
+    .message.success { background: var(--accent-soft); color: var(--accent-soft-text); }
+    .message.info { background: var(--grey-soft); color: var(--grey-text); }
+    .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; padding: 3px 12px; border-radius: 999px; }
+    .badge.ready { background: var(--accent-soft); color: var(--accent-soft-text); }
+    .badge.partial { background: var(--highlight-soft); color: var(--highlight-soft-text); }
+    .badge.failed { background: var(--danger-soft); color: var(--danger-soft-text); }
+    .badge.indexing { background: var(--accent-soft); color: var(--accent-soft-text); }
+    .badge.pending { background: var(--grey-soft); color: var(--grey-text); }
+    .badge.new { background: var(--highlight); color: var(--text); margin-left: 6px; }
+    .badge.admin { background: var(--highlight-soft); color: var(--highlight-soft-text); }
+    .badge.dotted::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .progress { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+    .progress > div { height: 100%; background: var(--accent); width: 0; transition: width .4s; }
+    .progress-text { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* Top bar */
+    .topbar { background: #fff; border-bottom: 1px solid var(--border); }
+    .topbar-inner { max-width: 1160px; margin: 0 auto; padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+    .logo { width: 34px; height: 34px; border-radius: 8px; background: var(--accent); color: #fff; display: grid; place-items: center; flex: 0 0 auto; }
+    .logo svg { width: 20px; height: 20px; }
+    .product { font-size: 17px; margin-left: -4px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .bot-picker { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 0 1 300px; margin-left: 8px; }
+    .bot-picker label { margin: 0; color: var(--muted); font-weight: 500; }
+    .bot-picker select { flex: 1; min-width: 0; }
+    .spacer { flex: 1; }
+    .session { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; min-width: 0; }
+    .key-state { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
+
+    /* Page */
+    main { max-width: 1160px; margin: 0 auto; padding: 24px 16px 60px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; min-width: 0; }
+    .card-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .card-head h1, .card-head h2 { margin: 0; }
+    .plain-box { border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .plain-box h2 { font-size: 16px; }
+    .empty { color: var(--muted); margin: 2px 0 0; }
+    .empty-state h3 { margin-top: 4px; }
+
+    /* Chatbot heading and tabs */
+    .detail-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; }
+    .detail-text { min-width: 0; flex: 1 1 320px; }
+    .detail-meta { color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 2px 6px; border-bottom: 1px solid var(--border); margin: 0 0 20px; }
+    .tabs button { background: none; border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: 8px 12px; font-weight: 500; color: var(--muted); margin-bottom: -1px; }
+    .tabs button:hover { color: var(--text); }
+    .tabs button[aria-selected=true] { color: var(--text); font-weight: 700; border-bottom-color: var(--accent); }
+
+    /* Overview: stacks on phones */
+    .cols { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .col-main { flex: 999 1 560px; min-width: 0; max-width: 100%; }
+    .col-side { flex: 1 1 300px; min-width: 0; max-width: 100%; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+    .tile { background: var(--bg); border-radius: 8px; padding: 10px 14px; }
+    .tile b { display: block; font: 700 24px/1.2 "Bricolage Grotesque", system-ui, sans-serif; }
+    .tile span { font-size: 13px; color: var(--muted); }
+    .stats { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .stats b { color: var(--text); font-weight: 600; }
+    .stats small { font-size: inherit; }
+    .check-box { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .check-box label { margin: 0; font-size: 14px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+    .chip { background: var(--accent-soft); color: var(--accent-soft-text); border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 500; }
+    .warn-box { background: var(--highlight-soft); color: var(--highlight-soft-text); border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 14px; overflow-wrap: anywhere; }
+    .warn-box p { margin: 6px 0; }
+
+    /* Crawl report */
+    .crawl-report details { margin-top: 8px; font-size: 13px; }
+    .crawl-report summary { cursor: pointer; font-weight: 600; min-height: 28px; }
+    .crawl-filters { margin: 12px 0 8px; }
+    .crawl-filters select { flex: 1 1 170px; width: auto; }
+    .crawl-filters input { flex: 3 1 200px; width: auto; }
+    .table-scroll { overflow: auto; max-height: 420px; border: 1px solid var(--border); border-radius: 8px; }
+    .crawl-table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 13px; }
+    .crawl-table th, .crawl-table td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: break-word; }
+    .crawl-table th { position: sticky; top: 0; background: var(--bg); white-space: nowrap; }
+    .crawl-table td.status-cell, .crawl-table td:has(> button) { white-space: nowrap; }
+    .crawl-table td > button + button { margin-left: 6px; }
+    .crawl-table .status-failed td.status-cell { color: var(--danger); font-weight: 600; }
+    .crawl-table .status-not-processed td.status-cell { color: var(--highlight-soft-text); font-weight: 600; }
+    .crawl-table .status-in-progress td.status-cell { color: var(--accent-hover); font-weight: 600; }
+    .crawl-table .status-indexed-elsewhere td.status-cell, .crawl-table .status-kept-earlier td.status-cell { color: var(--accent-hover); font-weight: 600; }
+    .continue-form { margin-top: 14px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; }
+    .live-counts { font-size: 13px; margin: 6px 0; }
+    .current-url { font-size: 13px; overflow-wrap: anywhere; color: var(--muted); }
+    .url-results li { overflow-wrap: anywhere; font-size: 13px; }
+    .crawl-report li { overflow-wrap: anywhere; color: var(--muted); }
+
+    /* Chatbot list, documents */
+    .chatbots { display: grid; gap: 10px; }
+    .bot { border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: grid; gap: 8px; background: #fff; overflow-wrap: anywhere; }
+    .bot > .badge { justify-self: start; }
+    .bot-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+    .bot-text { min-width: 0; flex: 1 1 200px; }
+    .bot-name { font-weight: 700; }
+    .bot-url { color: var(--muted); font-size: 13px; word-break: break-all; }
+    .bot .stats { margin-top: 0; }
+    .bot .actions { margin-top: 0; }
+
+    /* Enquiries */
+    .enquiry-table td { font-size: 14px; }
+    .enquiry-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .enquiry-details { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .email-pill { display: inline-block; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 600; }
+    .email-pill.good { background: var(--accent-soft); color: var(--accent-soft-text); }
+    .email-pill.bad { background: var(--danger-soft); color: var(--danger-soft-text); }
+    .email-pill.grey { background: var(--grey-soft); color: var(--grey-text); }
+    .pill-stack { display: grid; gap: 6px; justify-items: start; }
+    .action-stack { display: grid; gap: 6px; justify-items: start; }
+
+    /* Appearance */
+    .customize-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+    .customize-grid > form { flex: 999 1 420px; min-width: 0; }
+    .live-preview { flex: 1 1 260px; min-width: 0; max-width: 372px; }
+    .live-title { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .mini-chat { border-radius: 18px; overflow: hidden; border: 1px solid #E2D8C9; background: #fff; font-size: 14px; }
+    .mini-head { display: flex; gap: 10px; align-items: center; padding: 12px 14px; border-bottom: 1px solid #E2D8C9; }
+    .mini-logo { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; flex: 0 0 auto; text-transform: uppercase; }
+    .mini-name { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .mini-body { padding: 14px; display: grid; gap: 10px; min-height: 160px; align-content: start; background: #FDFBF7; }
+    .mini-bot { background: #fff; border: 1px solid #E2D8C9; border-radius: 14px 14px 14px 4px; padding: 8px 12px; justify-self: start; max-width: 92%; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .mini-user { border-radius: 14px 14px 4px 14px; padding: 8px 12px; justify-self: end; }
+    .color-row { display: flex; gap: 10px; align-items: center; }
+    .color-row input[type=color] { width: 48px; height: 44px; border: 1px solid #B9AD9D; border-radius: 8px; padding: 3px; background: #fff; cursor: pointer; }
+
+    /* Test and Install */
+    .preview { display: block; width: 100%; max-width: 372px; height: 600px; margin: 12px 0 0; border: 1px solid #E2D8C9; border-radius: 18px; background: #fff; }
+    pre.code { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 13px; white-space: pre-wrap; word-break: break-all; }
+    ol.steps { padding-left: 20px; margin: 6px 0; }
+    .platform select { width: 100%; }
+    .account { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+
+    /* Add a website */
+    dialog { border: 1px solid var(--border); border-radius: 12px; padding: 20px; width: min(520px, calc(100vw - 24px)); color: var(--text); }
+    dialog::backdrop { background: rgba(42, 36, 32, .4); }
+
+    /* Login screen: shown only when logged out */
+    .login-screen { max-width: 1160px; margin: 0 auto; padding: 20px 16px 48px; }
+    .login-cols { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; margin-top: 56px; }
+    .login-copy { flex: 999 1 420px; min-width: 0; }
+    .login-copy h1 { font-size: 44px; line-height: 1.1; max-width: 560px; }
+    .login-copy p { color: var(--muted); font-size: 17px; margin: 14px 0 0; max-width: 500px; }
+    .login-card { flex: 1 1 340px; max-width: 420px; margin: 0; }
+    .login-card h2 { font-size: 22px; margin-bottom: 4px; }
+    .login-card .primary { width: 100%; }
+    .login-note { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+    .login-card button.link { display: block; margin-top: 8px; padding-left: 0; text-align: left; min-height: 44px; }
+    #keyForm { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 4px; }
+    #keyForm .key-state { display: block; margin-top: 8px; }
+
+    @media (max-width: 600px) {
+        h1 { font-size: 28px; }
+        .login-copy h1 { font-size: 34px; }
+        .login-cols { margin-top: 28px; gap: 22px; }
+        .preview { height: 500px; }
+        .row > .small { flex: 1 1 100%; }
+        .bot-picker { flex: 1 1 100%; margin-left: 0; }
+        .card, .plain-box { padding: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        * { transition: none !important; }
+    }
+</style>
+</head>
+<body>
+<div class="login-screen" id="loginScreen">
+    <div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-3A8 8 0 1 1 21 12Z"/></svg></div><span class="product">Chatbot</span></div>
+    <div class="login-cols">
+        <div class="login-copy">
+            <h1>Let your website answer its own questions.</h1>
+            <p>A chatbot that reads your website and answers visitors from what it finds there.</p>
+        </div>
+        <div class="card login-card">
+            <div id="globalMessage" role="alert"></div>
+            <form id="loginForm" novalidate>
+                <h2>Log in</h2>
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" autocomplete="username">
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" autocomplete="current-password">
+                <div class="actions"><button class="primary" type="submit">Log in</button></div>
+                <p class="login-note">Forgot your password? Ask your admin to reset it.</p>
+            </form>
+            <button class="link" type="button" id="showAdminKey" aria-expanded="false" aria-controls="keyForm">Platform admin? Use the admin key instead</button>
+            <form id="keyForm" autocomplete="off" hidden>
+                <label for="adminKey">Admin key</label>
+                <input id="adminKey" type="password" autocomplete="off" aria-describedby="keyState">
+                <div class="actions"><button class="primary" type="submit">Connect</button></div>
+                <span class="key-state" id="keyState" role="status">Not connected</span>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="appShell" hidden>
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-3A8 8 0 1 1 21 12Z"/></svg></div><span class="product">Chatbot</span></div>
+        <div class="bot-picker">
+            <label for="chatbotSelect">Chatbot</label>
+            <select id="chatbotSelect"></select>
+        </div>
+        <span class="spacer"></span>
+        <button class="secondary" type="button" id="openAddWebsite">+ Add website</button>
+        <button class="secondary" type="button" id="refreshButton">Refresh</button>
+        <div class="session" id="sessionBar" hidden>
+            <span class="badge admin" id="adminPill" hidden>Platform admin</span>
+            <span class="key-state" id="sessionState" role="status"></span>
+            <button class="link" type="button" id="logoutButton">Log out</button>
+        </div>
+    </div>
+</header>
+
+<main id="appMain">
+
+    <section id="listSection" aria-labelledby="listTitle">
+        <h1 id="listTitle" style="margin-bottom:16px">Your chatbots</h1>
+        <div id="listMessage" role="status"></div>
+        <div id="chatbotList" class="chatbots"><p class="empty">Log in, or connect with the admin key, to see your chatbots.</p></div>
+    </section>
+
+    <section id="detail" hidden aria-labelledby="detailTitle">
+        <div class="detail-head">
+            <div class="detail-text">
+                <h1 id="detailTitle">Chatbot</h1>
+                <div class="detail-meta"><span id="detailUrl"></span> <span id="detailLastRead"></span></div>
+            </div>
+            <span id="detailBadge" class="badge"></span>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Chatbot sections">
+            <button role="tab" aria-selected="true" aria-controls="tab-overview" id="t-overview" data-tab="overview">Overview</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-test" id="t-test" data-tab="test">Test</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-documents" id="t-documents" data-tab="documents">Documents</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-enquiries" id="t-enquiries" data-tab="enquiries">Enquiries</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-customize" id="t-customize" data-tab="customize">Appearance</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-install" id="t-install" data-tab="install">Install</button>
+        </div>
+
+        <div class="panel" id="tab-overview" role="tabpanel" aria-labelledby="t-overview">
+            <div id="overviewError"></div>
+            <div class="cols">
+                <div class="col-main">
+                    <section class="card" aria-labelledby="readTitle">
+                        <div class="card-head">
+                            <h2 id="readTitle">What the bot has read</h2>
+                            <form id="reindexForm"><button class="primary" type="submit" id="reindexButton">Read the website again</button></form>
+                        </div>
+                        <div class="tiles">
+                            <div class="tile"><b id="tilePages">–</b><span>Pages read</span></div>
+                            <div class="tile"><b id="tileSections">–</b><span>Text sections</span></div>
+                            <div class="tile"><b id="tileClicks">–</b><span>Menu buttons clicked</span></div>
+                        </div>
+                        <div id="overviewStats" class="stats"></div>
+                        <div id="overviewProgress"></div>
+                        <div class="check-box" id="buttonDiscoveryBox" hidden>
+                            <label><input type="checkbox" id="buttonDiscovery">Click menu buttons while reading</label>
+                            <p class="hint">For websites whose menu is buttons, not links. Use only on a website you own or manage. Buttons that look like actions (sign up, pay, delete…) are never clicked, and nothing can be sent while clicking. Takes effect the next time the website is read.</p>
+                        </div>
+                        <div id="reindexMessage" role="status"></div>
+                        <div id="overviewLive" class="crawl-report"></div>
+                    </section>
+                    <section class="card" aria-labelledby="lastReadTitle">
+                        <h2 id="lastReadTitle">Last read</h2>
+                        <div id="overviewReport" class="crawl-report"></div>
+                    </section>
+                    <section class="card" aria-labelledby="chosenTitle">
+                        <h2 id="chosenTitle">Read chosen pages</h2>
+                        <p class="hint">Read and index only these pages of this website (one address per line, up to 10) without crawling the whole website — for example a new page, or a page that failed. The same checks apply as in a full crawl (same website, robots.txt, safe addresses). A page that fails keeps the version indexed earlier.</p>
+                        <form id="crawlUrlsForm">
+                            <label for="crawlUrlsInput">Page addresses</label>
+                            <textarea id="crawlUrlsInput" rows="3" placeholder="https://www.example.com/new-page"></textarea>
+                            <div class="actions"><button class="secondary" type="submit" id="crawlUrlsButton">Crawl these pages</button></div>
+                        </form>
+                        <div id="crawlUrlsMessage" role="status"></div>
+                    </section>
+                </div>
+                <aside class="col-side">
+                    <section class="card" aria-labelledby="cantAnswerTitle">
+                        <h2 id="cantAnswerTitle">When the bot can't answer</h2>
+                        <form id="supportForm">
+                            <label for="setSupportEmail">Support email</label>
+                            <input id="setSupportEmail" type="email" maxlength="254" placeholder="support@example.com">
+                            <div id="supportEmailSuggestions"></div>
+                            <p class="hint" id="supportEmailNote">When the chatbot cannot answer from this website's information, visitors see a form to send their question. It is saved in the Enquiries tab and emailed to this address. Without an address, questions are only saved in the Enquiries tab.</p>
+                            <div class="actions"><button class="primary" type="submit" id="saveSupportEmail">Save</button></div>
+                            <div id="supportMessage" role="status"></div>
+                        </form>
+                    </section>
+                    <section class="card" aria-labelledby="limitsTitle">
+                        <h2 id="limitsTitle">Reading limits</h2>
+                        <label for="reindexPages">Page limit</label>
+                        <input id="reindexPages" type="number" min="1" max="50" value="20" form="reindexForm">
+                        <p class="hint">How many pages to read each time, from 1 to 50.</p>
+                    </section>
+                    <section class="plain-box" aria-labelledby="removeTitle">
+                        <h2 id="removeTitle">Remove this chatbot</h2>
+                        <p class="hint">Each action first shows what it will remove and asks you to type the website's domain. <strong>Remove website content</strong> deletes the indexed pages and the crawl report; the chatbot, its settings and its documents stay. <strong>Delete chatbot</strong> removes everything of this chatbot. Neither can be undone. To remove a single page, use <em>Remove</em> in the table under Last read; to remove one document, use the Documents tab.</p>
+                        <div class="actions">
+                            <button class="secondary" type="button" id="clearWebsiteButton">Remove website content…</button>
+                            <button class="danger" type="button" id="deleteChatbotButton">Delete chatbot…</button>
+                        </div>
+                        <div id="removalMessage" role="status"></div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+
+        <div class="panel" id="tab-test" role="tabpanel" aria-labelledby="t-test" hidden>
+            <p class="hint">Ask the questions your visitors would ask. Answers come only from the indexed pages; each answer links to the page it used.</p>
+            <iframe class="preview" id="previewFrame" title="Chatbot preview"></iframe>
+            <section class="card" style="margin-top:20px" aria-labelledby="explainTitle">
+                <h2 id="explainTitle">Explain an answer</h2>
+                <p class="hint">Runs a question through the same pipeline as the chat and shows why it was answered or not: which sections were retrieved, which were sent to the model, and which check produced a fallback. Asking the model takes as long as a normal answer.</p>
+                <form id="explainForm" class="row">
+                    <div class="grow">
+                        <label for="explainQuestion">Question</label>
+                        <input id="explainQuestion" type="text" maxlength="500" placeholder="How much does the monthly plan cost?">
+                    </div>
+                    <div><label><input id="explainGenerate" type="checkbox" checked>Ask the model too</label></div>
+                    <div><button class="secondary" type="submit" id="explainButton">Explain</button></div>
+                </form>
+                <div id="explainMessage" role="status"></div>
+                <div id="explainResult"></div>
+            </section>
+        </div>
+
+        <div class="panel" id="tab-documents" role="tabpanel" aria-labelledby="t-documents" hidden>
+            <section class="card" aria-labelledby="documentsTitle">
+                <h2 id="documentsTitle">Documents</h2>
+                <p class="hint">Add documents the chatbot should know as well as the website, for example procedures, manuals or policies. Answers cite the document and page.</p>
+                <p class="hint" id="documentFormats"></p>
+                <form class="row" id="documentForm">
+                    <div class="grow">
+                        <label for="documentFiles">Files</label>
+                        <input id="documentFiles" type="file" multiple accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </div>
+                    <div><button class="primary" type="submit" id="uploadDocuments">Upload</button></div>
+                </form>
+                <div id="documentMessage" role="status"></div>
+            </section>
+            <div id="documentList" class="chatbots"></div>
+        </div>
+
+        <div class="panel" id="tab-enquiries" role="tabpanel" aria-labelledby="t-enquiries" hidden>
+            <h2 id="enquiriesTitle">Questions visitors sent</h2>
+            <div id="enquiryNotice"></div>
+            <div class="row" style="margin-bottom:12px">
+                <div class="small">
+                    <label for="enquiryFilter">Show</label>
+                    <select id="enquiryFilter"><option value="open">Open</option><option value="handled">Handled</option><option value="">All</option></select>
+                </div>
+                <div><button class="secondary" type="button" id="enquiryRefresh">Refresh</button></div>
+            </div>
+            <div id="enquiryMessage" role="status"></div>
+            <div id="enquiryList"></div>
+        </div>
+
+        <div class="panel" id="tab-customize" role="tabpanel" aria-labelledby="t-customize" hidden>
+            <section class="card" aria-labelledby="appearanceTitle">
+                <h2 id="appearanceTitle">Appearance</h2>
+                <div class="customize-grid">
+                    <form id="settingsForm">
+                        <label for="setName">Chatbot name</label>
+                        <input id="setName" type="text" maxlength="60" placeholder="Help Assistant">
+                        <label for="setWelcome">Welcome message</label>
+                        <textarea id="setWelcome" maxlength="300" placeholder="Hi! Ask me anything about our products and services."></textarea>
+                        <label for="setColor">Colour</label>
+                        <div class="color-row">
+                            <input id="setColorPicker" type="color" value="#2E6B4E" aria-label="Pick a colour">
+                            <input id="setColor" type="text" maxlength="7" placeholder="#2E6B4E" style="max-width:140px">
+                        </div>
+                        <label for="setOrigins">Websites allowed to show this chatbot</label>
+                        <textarea id="setOrigins" placeholder="https://www.example.com&#10;https://help.example.com"></textarea>
+                        <p class="hint">One address per line. Leave empty to allow any website. This stops other websites from embedding your chatbot in visitors' browsers; it is not a password.</p>
+                        <div class="actions"><button class="primary" type="submit" id="saveSettings">Save settings</button></div>
+                        <div id="settingsMessage" role="status"></div>
+                    </form>
+                    <aside class="live-preview" aria-label="Preview of the chatbot's look">
+                        <div class="live-title">Preview (not saved yet)</div>
+                        <div class="mini-chat" aria-hidden="true">
+                            <div class="mini-head"><div class="mini-logo" id="miniLogo"></div><div class="mini-name" id="miniName"></div></div>
+                            <div class="mini-body">
+                                <div class="mini-bot" id="miniWelcome"></div>
+                                <div class="mini-user" id="miniUser">What do you offer?</div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </div>
+
+        <div class="panel" id="tab-install" role="tabpanel" aria-labelledby="t-install" hidden>
+            <section class="card" aria-labelledby="installTitle">
+                <h2 id="installTitle">Install</h2>
+                <p class="hint">Copy this code and paste it into every page where the chatbot should appear, just before <code>&lt;/body&gt;</code>. No other changes to your website are needed.</p>
+                <pre class="code" id="embedCode"></pre>
+                <div class="actions"><button class="primary" type="button" id="copyEmbed">Copy code</button></div>
+                <div id="copyMessage" role="status"></div>
+                <h3>Where to paste it</h3>
+                <ol class="steps">
+                    <li><b>Plain HTML website:</b> paste it before <code>&lt;/body&gt;</code> in your page template.</li>
+                    <li><b>WordPress:</b> use a "header and footer code" plugin, or Appearance → Theme File Editor → footer, and paste it into the footer area.</li>
+                    <li><b>Wix, Squarespace, Shopify and similar:</b> open the site settings for "custom code" (body end / footer) and paste it there.</li>
+                </ol>
+                <p class="hint" id="installNote"></p>
+            </section>
+        </div>
+    </section>
+
+    <section class="card platform" id="platformSection" aria-labelledby="platformTitle" style="margin-top:24px" hidden>
+        <h2 id="platformTitle">Customer accounts (platform admin)</h2>
+        <p class="hint">Only the admin key can see this. A customer who logs in sees only the chatbots assigned to them.</p>
+        <form id="createAccountForm" class="row" novalidate autocomplete="off">
+            <div class="grow">
+                <label for="newAccountEmail">New account email</label>
+                <input id="newAccountEmail" type="email" autocomplete="off">
+            </div>
+            <div class="grow">
+                <label for="newAccountPassword">Password (12 to 200 characters)</label>
+                <input id="newAccountPassword" type="password" autocomplete="new-password">
+            </div>
+            <button class="primary" type="submit" id="createAccountButton">Create account</button>
+        </form>
+        <h3>Assign a chatbot</h3>
+        <form id="assignForm" class="row" novalidate>
+            <div class="grow">
+                <label for="assignChatbot">Chatbot</label>
+                <select id="assignChatbot"></select>
+            </div>
+            <div class="grow">
+                <label for="assignAccount">Owner</label>
+                <select id="assignAccount"></select>
+            </div>
+            <button class="primary" type="submit" id="assignButton">Assign</button>
+        </form>
+        <h3>Reset a password</h3>
+        <form id="resetForm" class="row" novalidate autocomplete="off">
+            <div class="grow">
+                <label for="resetAccount">Account</label>
+                <select id="resetAccount"></select>
+            </div>
+            <div class="grow">
+                <label for="resetPassword">New password (12 to 200 characters)</label>
+                <input id="resetPassword" type="password" autocomplete="new-password">
+            </div>
+            <button class="secondary" type="submit" id="resetButton">Reset password</button>
+        </form>
+        <h3>Accounts</h3>
+        <div id="platformMessage" role="status"></div>
+        <div id="accountList"></div>
+    </section>
+</main>
+</div>
+
+<dialog id="addDialog" aria-labelledby="addTitle">
+    <div class="card-head">
+        <h2 id="addTitle">Add a website</h2>
+        <button class="link" type="button" id="closeAddWebsite">Close</button>
+    </div>
+    <p class="hint">Enter the public address of the website (for example its help centre). The chatbot will read up to the page limit and answer only from those pages.</p>
+    <form id="addForm" class="row" novalidate>
+        <div class="grow">
+            <label for="newUrl">Website address</label>
+            <input id="newUrl" type="url" placeholder="https://help.example.com/" required>
+        </div>
+        <div class="small">
+            <label for="newPages">Page limit</label>
+            <input id="newPages" type="number" min="1" max="50" value="20">
+        </div>
+        <div><button class="primary" type="submit" id="addButton">Create chatbot</button></div>
+    </form>
+    <div id="addMessage" role="status"></div>
+</dialog>
+
+<script>
+(function () {
+    "use strict";
+
+    // The admin key is kept only in this page's memory: never in storage, URLs or the widget.
+    let adminKey = "";
+    // A logged-in customer's email. The session itself is an HttpOnly cookie this page cannot read;
+    // the password is never kept or stored.
+    let customerEmail = "";
+    let chatbots = [];
+    // Whether the server has SMTP settings (needed for "Email your question").
+    let emailConfigured = false;
+    let selectedId = null;
+    let pollTimer = null;
+
+    const $ = id => document.getElementById(id);
+
+    function show(target, text, kind) {
+        const box = typeof target === "string" ? $(target) : target;
+        box.replaceChildren();
+        if (!text) return;
+        const div = document.createElement("div");
+        div.className = "message " + (kind || "info");
+        div.textContent = text;
+        box.appendChild(div);
+    }
+
+    // ---- Which screen shows: logged out, the chatbot list, or one chatbot ----
+    function enterApp() {
+        $("loginScreen").hidden = true;
+        $("appShell").hidden = false;
+        $("sessionBar").hidden = false;
+        $("adminPill").hidden = !adminKey;
+        $("appMain").prepend($("globalMessage"));
+    }
+
+    function showAllChatbots() {
+        selectedId = null;
+        $("detail").hidden = true;
+        $("listSection").hidden = false;
+        renderList();
+    }
+
+    // ---- API ----
+    function authHeaders() {
+        return adminKey ? { "x-admin-api-key": adminKey } : {};
+    }
+
+    // A customer's session ended on the server: reload to the login form, which also clears everything
+    // of this customer from the page's memory.
+    function sessionEnded() {
+        if (customerEmail) location.replace(location.pathname + "?session=expired");
+    }
+
+    async function api(path, options = {}) {
+        const response = await fetch(path, {
+            method: options.method || "GET",
+            headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+            body: options.body ? JSON.stringify(options.body) : undefined
+        });
+        let data = null;
+        try { data = await response.json(); } catch (e) { data = null; }
+        if (!response.ok && response.status !== 202) {
+            if (response.status === 401) sessionEnded();
+            const error = new Error(friendlyError(response.status, data));
+            error.status = response.status;
+            throw error;
+        }
+        return data;
+    }
+
+    function friendlyError(status, data) {
+        if (status === 401) return customerEmail ? "Your session has ended. Please log in again." : "Please enter the admin key.";
+        if (status === 403) return customerEmail ? "This request was refused. Reload the dashboard and try again." : "The admin key was not accepted.";
+        if (status === 503) return "The admin key is not configured on the server (ADMIN_API_KEY in .env).";
+        if (status === 429) return "Too many requests. Please wait a few minutes and try again.";
+        if (status === 409) return (data && data.error) || "Indexing is already running for this chatbot.";
+        // 502: a failed indexing run (details), or a removal that did not finish (error says which steps did).
+        if (status === 502) return data && !data.details && data.error ? data.error : "Indexing failed: " + ((data && data.details) || "the website could not be read.");
+        if (status >= 400 && status < 500 && data && data.error) return data.error;
+        return "Something went wrong. Please try again.";
+    }
+
+    // ---- Status helpers ----
+    function badgeClass(displayStatus) {
+        if (displayStatus === "ready") return "ready";
+        if (displayStatus === "partially indexed") return "partial";
+        if (displayStatus === "failed" || displayStatus === "deleting") return "failed";
+        if (displayStatus === "indexing") return "indexing";
+        return "pending";
+    }
+
+    function timeAgo(value) {
+        if (!value) return "never";
+        const seconds = Math.round((Date.now() - new Date(value).getTime()) / 1000);
+        if (seconds < 60) return "just now";
+        if (seconds < 3600) return Math.round(seconds / 60) + " min ago";
+        if (seconds < 86400) return Math.round(seconds / 3600) + " h ago";
+        return new Date(value).toLocaleDateString();
+    }
+
+    function progressInfo(progress) {
+        if (!progress || progress.state !== "running") return null;
+        if (progress.stage === "embedding" && progress.toEmbed) {
+            return { percent: 60 + Math.round(35 * progress.embedded / progress.toEmbed), text: `Reading pages done. Preparing answers: ${progress.embedded} of ${progress.toEmbed} sections…` };
+        }
+        if (progress.stage === "embedding") return { percent: 62, text: "Reading pages done. Preparing answers…" };
+        if (progress.stage === "saving") return { percent: 97, text: "Saving…" };
+        const limit = progress.pageLimit || 1;
+        const doing = progress.type === "urls" ? "Reading chosen pages" : "Reading pages";
+        return { percent: Math.min(60, Math.round(60 * (progress.pagesCrawled || 0) / limit)), text: `${doing}: ${progress.pagesCrawled || 0} of up to ${limit}${progress.pagesFailed ? ` (${progress.pagesFailed} could not be read)` : ""}…` };
+    }
+
+    function progressElement(progress) {
+        const info = progressInfo(progress);
+        if (!info) return null;
+        const wrap = document.createElement("div");
+        const bar = document.createElement("div");
+        bar.className = "progress";
+        bar.setAttribute("role", "progressbar");
+        bar.setAttribute("aria-valuemin", "0");
+        bar.setAttribute("aria-valuemax", "100");
+        bar.setAttribute("aria-valuenow", String(info.percent));
+        const fill = document.createElement("div");
+        fill.style.width = info.percent + "%";
+        bar.appendChild(fill);
+        const text = document.createElement("div");
+        text.className = "progress-text";
+        text.textContent = info.text;
+        wrap.append(bar, text);
+        return wrap;
+    }
+
+    // Current address counts per chatbot, checked against the stored content (set when its crawl
+    // report is loaded). Without them the recorded counts of the report rows are shown, and for
+    // chatbots crawled before the URL-level report existed, the totals of the last crawl.
+    const reconciledCounts = {};
+
+    function statLine(bot) {
+        const s = bot.stats;
+        const now = reconciledCounts[bot.id] || (s.current && Object.keys(s.current).length ? s.current : null);
+        // Chatbots indexed before indexing details were recorded (v18) have sections but no record.
+        const lastIndexed = ["Last indexed", s.lastIndexedAt ? timeAgo(s.lastIndexedAt) : (s.chunks > 0 ? "not recorded (re-index to update)" : "never")];
+        const parts = now
+            ? [
+                ["Pages indexed", (now.indexed || 0) + (now["indexed-elsewhere"] || 0) + (now["kept-earlier"] || 0)],
+                ["Sections", s.chunks == null ? "–" : s.chunks],
+                ["Pages that failed", now.failed || 0],
+                ["Pages found", Object.values(now).reduce((total, n) => total + n, 0)],
+                ...(now["not-processed"] ? [["Pending (not processed)", now["not-processed"]]] : []),
+                lastIndexed
+            ]
+            : [
+                ["Pages indexed", s.pagesIndexed == null ? "–" : s.pagesIndexed],
+                ["Sections", s.chunks == null ? "–" : s.chunks],
+                ["Pages that failed", s.pagesFailed == null ? "–" : s.pagesFailed],
+                ...(s.pagesDiscovered != null ? [["Pages found", s.pagesDiscovered]] : []),
+                ...(s.pagesNotProcessed ? [["Not read (limit reached)", s.pagesNotProcessed]] : []),
+                lastIndexed
+            ];
+        const div = document.createElement("div");
+        div.className = "stats";
+        for (const [label, value] of parts) {
+            const span = document.createElement("span");
+            const name = document.createElement("small");
+            name.textContent = label;
+            const colon = document.createElement("span");
+            colon.className = "colon";
+            colon.textContent = ": ";
+            name.appendChild(colon);
+            span.appendChild(name);
+            const b = document.createElement("b");
+            b.textContent = String(value);
+            span.appendChild(b);
+            div.appendChild(span);
+        }
+        return div;
+    }
+
+    function botName(bot) {
+        return bot.settings.displayName || bot.domain || bot.websiteUrl;
+    }
+
+    // The number tiles in Overview (menu buttons clicked is filled in from the crawl report).
+    function paintTiles(bot) {
+        const s = bot.stats;
+        const now = reconciledCounts[bot.id] || (s.current && Object.keys(s.current).length ? s.current : null);
+        $("tilePages").textContent = now ? (now.indexed || 0) + (now["indexed-elsewhere"] || 0) + (now["kept-earlier"] || 0) : (s.pagesIndexed == null ? "–" : s.pagesIndexed);
+        $("tileSections").textContent = s.chunks == null ? "–" : s.chunks;
+    }
+
+    // One short heading and one plain line.
+    function emptyState(title, line) {
+        const box = document.createElement("div");
+        box.className = "empty-state";
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+        const text = document.createElement("p");
+        text.className = "empty";
+        text.textContent = line;
+        box.append(heading, text);
+        return box;
+    }
+
+    // Text on a chatbot's colour must stay readable, whatever colour was chosen.
+    function textOnColor(color) {
+        if (!/^#[0-9a-f]{6}$/i.test(color || "")) return "#ffffff";
+        const hex = color.slice(1);
+        const light = 0.299 * parseInt(hex.slice(0, 2), 16) + 0.587 * parseInt(hex.slice(2, 4), 16) + 0.114 * parseInt(hex.slice(4, 6), 16) > 170;
+        return light ? "#2A2420" : "#ffffff";
+    }
+
+    // ---- List ----
+    function renderList() {
+        const list = $("chatbotList");
+        list.replaceChildren();
+        fillSelect($("chatbotSelect"), [["", "All chatbots"], ...chatbots.map(bot => [bot.id, botName(bot)])]);
+        $("chatbotSelect").value = selectedId || "";
+        if (!chatbots.length) {
+            list.appendChild(emptyState("No chatbots yet", "Use + Add website to create your first one."));
+            return;
+        }
+        for (const bot of chatbots) {
+            const card = document.createElement("article");
+            card.className = "bot" + (bot.id === selectedId ? " selected" : "");
+
+            const head = document.createElement("div");
+            head.className = "bot-head";
+            const name = document.createElement("div");
+            name.className = "bot-text";
+            const title = document.createElement("div");
+            title.className = "bot-name";
+            title.textContent = botName(bot);
+            const url = document.createElement("div");
+            url.className = "bot-url";
+            url.textContent = bot.websiteUrl;
+            name.append(title, url);
+            const badge = document.createElement("span");
+            badge.className = "badge " + badgeClass(bot.displayStatus);
+            badge.textContent = bot.displayStatus;
+            head.append(name, badge);
+            card.appendChild(head);
+
+            card.appendChild(statLine(bot));
+            const progress = progressElement(bot.progress);
+            if (progress) card.appendChild(progress);
+            if (bot.displayStatus === "partially indexed") {
+                const note = document.createElement("div");
+                note.className = "hint";
+                note.textContent = `Only the first ${bot.stats.pageLimit} pages were indexed. Raise the page limit and re-index to cover more of the site.`;
+                card.appendChild(note);
+            }
+            if (bot.stats.lastError) {
+                const err = document.createElement("div");
+                err.className = "message error";
+                err.textContent = "Last indexing failed: " + bot.stats.lastError;
+                card.appendChild(err);
+            }
+
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const manage = document.createElement("button");
+            manage.className = "secondary";
+            manage.type = "button";
+            manage.textContent = "Manage";
+            manage.setAttribute("aria-label", "Manage " + botName(bot));
+            manage.addEventListener("click", () => selectBot(bot.id));
+            actions.appendChild(manage);
+            card.appendChild(actions);
+
+            list.appendChild(card);
+        }
+    }
+
+    async function loadChatbots() {
+        const data = await api("/api/admin/chatbots");
+        chatbots = data.chatbots || [];
+        emailConfigured = data.emailConfigured === true;
+        renderList();
+        if (adminKey) renderAssignChoices();
+        if (selectedId) renderDetail(false);
+        schedulePolling();
+    }
+
+    function schedulePolling() {
+        clearTimeout(pollTimer);
+        if (chatbots.some(bot => bot.progress && bot.progress.state === "running")) {
+            pollTimer = setTimeout(() => loadChatbots().catch(() => {}), 2000);
+        }
+    }
+
+    // ---- Detail ----
+    function selectBot(id) {
+        selectedId = id;
+        renderList();
+        renderDetail(true);
+        $("listSection").hidden = true;
+        $("detail").hidden = false;
+        $("detail").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    const STOP_REASONS = {
+        "complete": "Every page found within the limits was read.",
+        "page-limit": "The crawl stopped at the page limit. Raise the page limit and re-index to read more pages.",
+        "request-limit": "The crawl stopped at its limit of network requests per crawl (pages with many scripts use more)."
+    };
+
+    // ---- Live crawl: every address of the running crawl with its status, refreshed while it runs ----
+    const PHASES = { starting: "starting", fetching: "fetching", extracting: "extracting text" };
+    const OUTCOME_LABELS = { "indexed": "Indexed", "up-to-date": "Already up to date", "skipped": "Skipped", "failed": "Failed" };
+    let lastJobState = {};
+
+    async function renderLive(bot) {
+        const box = $("overviewLive");
+        const job = bot.progress;
+        if (!job || (job.state !== "running" && !job.results)) { box.replaceChildren(); return; }
+        box.replaceChildren();
+        const heading = document.createElement("h3");
+        heading.textContent = job.state === "running" ? (job.type === "urls" ? "Crawling chosen pages (live)" : "Crawl in progress (live)") : "Chosen pages: result";
+        box.appendChild(heading);
+        if (job.state === "running") {
+            const current = document.createElement("div");
+            current.className = "current-url";
+            current.textContent = job.stage === "crawling" && job.currentUrl
+                ? `Now: ${job.currentUrl} — ${PHASES[job.phase] || job.phase || "fetching"}`
+                : `Stage: ${job.stage}`;
+            box.appendChild(current);
+            const c = job.counts;
+            if (c) {
+                const counts = document.createElement("div");
+                counts.className = "live-counts";
+                counts.textContent = `Found ${c.discovered} · queued ${c.queued} · in progress ${c.inProgress} · read, waiting to be stored ${c.read} · indexed ${c.indexed} · failed ${c.failed} · skipped ${c.skipped} · not processed (limit) ${c.notProcessed} · remaining ${c.remaining}`;
+                box.appendChild(counts);
+            }
+            const data = await api(`/api/admin/chatbots/${bot.id}/crawl-live?limit=200`).catch(() => null);
+            if (selectedId !== bot.id || !data || !data.urls.length) return;
+            const table = document.createElement("table");
+            table.className = "crawl-table";
+            const head = document.createElement("tr");
+            for (const title of ["Address", "Status", "Details"]) {
+                const th = document.createElement("th");
+                th.textContent = title;
+                head.appendChild(th);
+            }
+            table.appendChild(head);
+            for (const row of data.urls) {
+                const tr = document.createElement("tr");
+                tr.className = "status-" + row.status;
+                const details = [row.httpStatus ? `HTTP ${row.httpStatus}` : "", row.reason || "", row.finalUrl ? `→ ${row.finalUrl}` : "", row.attempts > 1 ? `${row.attempts} attempts` : "", row.sections ? `${row.sections} section(s)` : ""].filter(Boolean).join(" · ");
+                const status = cell(row.status === "read" ? "read, waiting to be stored" : row.status);
+                status.className = "status-cell";
+                tr.append(cell(row.url), status, cell(details));
+                table.appendChild(tr);
+            }
+            const scroll = document.createElement("div");
+            scroll.className = "table-scroll";
+            scroll.appendChild(table);
+            box.appendChild(scroll);
+            if (data.total > data.urls.length) {
+                const more = document.createElement("p");
+                more.className = "hint";
+                more.textContent = `Showing ${data.urls.length} of ${data.total} addresses.`;
+                box.appendChild(more);
+            }
+            return;
+        }
+        // Finished page crawl: what happened to each requested address.
+        const summary = document.createElement("p");
+        summary.className = job.state === "failed" ? "message error" : "hint";
+        summary.textContent = job.message || "";
+        const list = document.createElement("ul");
+        list.className = "url-results";
+        for (const item of job.results) {
+            const li = document.createElement("li");
+            const extra = [item.finalUrl && item.finalUrl !== item.url ? `→ ${item.finalUrl}` : "", item.httpStatus ? `HTTP ${item.httpStatus}` : "", item.sections ? `${item.sections} section(s)` : "", item.reason || ""].filter(Boolean).join(" · ");
+            li.textContent = `${OUTCOME_LABELS[item.outcome] || item.outcome}: ${item.url}${extra ? " — " + extra : ""}`;
+            list.appendChild(li);
+        }
+        box.append(summary, list);
+    }
+
+    async function crawlPages(urls) {
+        show("crawlUrlsMessage", "Starting…", "info");
+        try {
+            const data = await api(`/api/admin/chatbots/${selectedId}/crawl-urls/index`, { method: "POST", body: { urls } });
+            show("crawlUrlsMessage", data.message, "info");
+            await loadChatbots();
+        } catch (error) {
+            show("crawlUrlsMessage", error.message, "error");
+        }
+    }
+
+    // Last crawl: reconciled counts, why it stopped, and every address found (filterable).
+    const STATUS_LABELS = { "indexed": "Indexed", "failed": "Failed", "skipped": "Skipped", "not-processed": "Not processed (limit)" };
+    // Current status of an address when it differs from the recorded one (nothing is changed).
+    const CURRENT_LABELS = Object.assign({}, STATUS_LABELS, {
+        "indexed-elsewhere": "Indexed (under another address form)",
+        "kept-earlier": "Earlier version still indexed"
+    });
+    let crawlFilter = { status: "", search: "", offset: 0 };
+    const CRAWL_PAGE_SIZE = 50;
+
+    async function loadCrawlReport(bot) {
+        crawlFilter = { status: "", search: "", offset: 0 };
+        await renderCrawlReport(bot.id);
+    }
+
+    function cell(text) {
+        const td = document.createElement("td");
+        td.textContent = text == null ? "" : String(text);
+        return td;
+    }
+
+    async function renderCrawlReport(botId) {
+        const box = $("overviewReport");
+        const [detail, page] = await Promise.all([
+            api(`/api/admin/chatbots/${botId}`),
+            api(`/api/admin/chatbots/${botId}/crawl-urls?status=${encodeURIComponent(crawlFilter.status)}&search=${encodeURIComponent(crawlFilter.search)}&limit=${CRAWL_PAGE_SIZE}&offset=${crawlFilter.offset}`)
+        ]);
+        if (selectedId !== botId) return;
+        box.replaceChildren();
+        const s = detail.chatbot.stats;
+        const report = detail.chatbot.crawlReport;
+        renderEmailSuggestions(report, detail.chatbot.settings.supportEmail);
+        $("tileClicks").textContent = report ? (report.buttonClicks || []).filter(click => !/^not clicked/.test(click.outcome)).length : "–";
+        if (!s.stopReason && !report) {
+            box.appendChild(emptyState("Not read yet", "Read the website to see what the chatbot found."));
+            return;
+        }
+
+        const summary = document.createElement("p");
+        summary.className = "hint";
+        const counts = page.counts || {};
+        const total = Object.values(counts).reduce((sum, n) => sum + n, 0);
+        const full = page.lastFullCrawl;
+        const when = s.lastIndexedAt ? ` (${new Date(s.lastIndexedAt).toLocaleString()})` : "";
+        summary.textContent = (STOP_REASONS[s.stopReason] || "") + (full
+            ? ` Last full crawl${when}: found ${full.discovered} = indexed ${full.indexed} + failed ${full.failed} + skipped ${full.skipped} + not processed ${full.notProcessed}. Pages read: ${full.read}.`
+            : total
+                ? ` Found ${s.pagesDiscovered ?? total} = indexed ${counts.indexed || 0} + failed ${counts.failed || 0} + skipped ${counts.skipped || 0} + not processed ${counts["not-processed"] || 0}. Pages read: ${s.pagesRead ?? "–"}.`
+                : ` Pages found: ${s.pagesDiscovered ?? "–"}, indexed: ${s.pagesIndexed ?? "–"}, failed: ${s.pagesFailed ?? "–"}, not read: ${s.pagesNotProcessed || 0}.`);
+        box.append(summary);
+        const withNewText = (report?.buttonClicks || []).filter(click => click.outcome === "new text");
+        if (withNewText.length) {
+            const chips = document.createElement("div");
+            chips.className = "chips";
+            for (const click of withNewText) {
+                chips.appendChild(Object.assign(document.createElement("span"), { className: "chip", textContent: `${click.label}: ${click.sections || 0}` }));
+            }
+            box.appendChild(chips);
+        }
+        const warnings = document.createElement("div");
+        warnings.className = "warn-box";
+        for (const warning of report?.warnings || []) {
+            const note = document.createElement("p");
+            note.textContent = warning.message;
+            warnings.appendChild(note);
+        }
+        if (warnings.children.length) box.appendChild(warnings);
+        if (report?.buttonClicks?.length) {
+            const clickDetails = document.createElement("details");
+            clickDetails.appendChild(Object.assign(document.createElement("summary"), { textContent: `Every menu button (${report.buttonClicks.length})` }));
+            const clicks = document.createElement("ul");
+            clicks.className = "hint";
+            for (const click of report.buttonClicks) {
+                const item = document.createElement("li");
+                item.textContent = `${click.label}: ${click.outcome}${click.sections ? ` (${click.sections} section(s))` : ""}${click.url ? ` ${click.url}` : ""}`;
+                clicks.appendChild(item);
+            }
+            clickDetails.appendChild(clicks);
+            box.appendChild(clickDetails);
+        }
+        const now = page.currentCounts;
+        if (total && now) {
+            reconciledCounts[botId] = now;
+            const bot = chatbots.find(item => item.id === botId);
+            if (bot) {
+                $("overviewStats").replaceWith(Object.assign(statLine(bot), { id: "overviewStats" }));
+                paintTiles(bot);
+            }
+            const current = document.createElement("p");
+            current.className = "hint";
+            current.textContent = `Now (after any single-page crawls, checked against the stored content): indexed ${(now.indexed || 0) + (now["indexed-elsewhere"] || 0)}` +
+                (now["indexed-elsewhere"] ? ` (of which ${now["indexed-elsewhere"]} under another address form)` : "") +
+                `, failed ${now.failed || 0}` + (now["kept-earlier"] ? ` (earlier version still indexed: ${now["kept-earlier"]})` : "") +
+                `, skipped ${now.skipped || 0}, not processed (pending) ${now["not-processed"] || 0}. Stored: ${page.storedPages} page(s), ${page.storedSections} section(s).`;
+            box.appendChild(current);
+            if (now["indexed-elsewhere"]) {
+                const note = document.createElement("p");
+                note.className = "hint";
+                note.textContent = `${now["indexed-elsewhere"]} address(es) were recorded as not indexed, but their content is stored under an equivalent address (with or without "www."). Nothing was changed; crawling these pages again updates their rows.`;
+                box.appendChild(note);
+            }
+        }
+        const liveNote = document.createElement("p");
+        liveNote.className = "hint";
+        liveNote.textContent = "Live progress (the address being read, live counts) exists only while a crawl runs in this server process. After a server restart, this saved report is still available.";
+        box.appendChild(liveNote);
+
+        if (!total) {
+            // Crawled before the address-level report existed: the earlier summary lists only.
+            const note = document.createElement("p");
+            note.className = "hint";
+            note.textContent = "Re-index to see every address found and what happened to it.";
+            box.appendChild(note);
+            const list = (title, items) => {
+                if (!items || !items.length) return;
+                const details = document.createElement('details');
+                const caption = document.createElement('summary');
+                caption.textContent = `${title} (${items.length})`;
+                const ul = document.createElement("ul");
+                for (const item of items) {
+                    const li = document.createElement("li");
+                    li.textContent = item;
+                    ul.appendChild(li);
+                }
+                details.append(caption, ul);
+                box.appendChild(details);
+            };
+            list("Pages read", report?.indexedUrls);
+            list("Pages that failed", (report?.failedPages || []).map(item => `${item.url} — ${item.reason}`));
+            list("Pages found but not read", report?.notProcessedUrls);
+            return;
+        }
+
+        // Filters: status and a search over the address and the reason.
+        const filters = document.createElement("form");
+        filters.className = "row crawl-filters";
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", "Show addresses with status");
+        const currentOnly = ["indexed-elsewhere", "kept-earlier"].filter(key => (page.currentCounts || {})[key]).map(key => [key, `${CURRENT_LABELS[key]} (${page.currentCounts[key]})`]);
+        for (const [value, label] of [["", `All (${total})`], ...Object.entries(STATUS_LABELS).map(([key, text]) => [key, `${text} (${counts[key] || 0})`]), ...currentOnly]) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = label;
+            if (value === crawlFilter.status) option.selected = true;
+            select.appendChild(option);
+        }
+        const search = document.createElement("input");
+        search.type = "search";
+        search.placeholder = "Search address or reason";
+        search.value = crawlFilter.search;
+        search.setAttribute("aria-label", "Search address or reason");
+        const go = document.createElement("button");
+        go.type = "submit";
+        go.className = "secondary";
+        go.textContent = "Show";
+        filters.append(select, search, go);
+        filters.addEventListener("submit", event => {
+            event.preventDefault();
+            crawlFilter = { status: select.value, search: search.value.trim(), offset: 0 };
+            renderCrawlReport(botId).catch(error => show("overviewReport", error.message, "error"));
+        });
+        box.appendChild(filters);
+
+        const table = document.createElement("table");
+        table.className = "crawl-table";
+        const head = document.createElement("tr");
+        for (const title of ["", "Address", "Page title", "Status", "Details", "Found via", "Processed", ""]) {
+            const th = document.createElement("th");
+            th.textContent = title;
+            head.appendChild(th);
+        }
+        table.appendChild(head);
+        for (const row of page.urls) {
+            const tr = document.createElement("tr");
+            const nowStatus = row.current_status || row.status;
+            tr.className = "status-" + nowStatus;
+            // Attempts (transient failures are retried) and time spent, when recorded.
+            const effort = [row.attempts > 1 ? `${row.attempts} attempts` : "", row.duration_ms != null ? `${(row.duration_ms / 1000).toFixed(1)} s` : ""];
+            const details = (row.status === "indexed"
+                ? [`${row.sections} section(s)`, row.final_url ? `→ ${row.final_url}` : "", ...effort]
+                : [row.http_status ? `HTTP ${row.http_status}` : "", row.reason === "page-limit" ? "page limit reached" : row.reason === "request-limit" ? "network-request limit reached" : row.reason || "", row.final_url ? `→ ${row.final_url}` : "", ...effort]
+            ).filter(Boolean);
+            if (nowStatus !== row.status) {
+                details.unshift(`recorded: ${STATUS_LABELS[row.status] || row.status}`);
+                if (row.current_reason) details.unshift(row.current_reason);
+                if (row.stored_sections) details.push(`${row.stored_sections} section(s) stored${row.stored_url && row.stored_url !== row.url ? ` under ${row.stored_url}` : ""}`);
+            }
+            const pick = document.createElement("td");
+            const pickBox = document.createElement("input");
+            pickBox.type = "checkbox";
+            pickBox.className = "crawl-pick";
+            pickBox.value = row.url;
+            pickBox.setAttribute("aria-label", "Select " + row.url);
+            pick.appendChild(pickBox);
+            const status = cell(CURRENT_LABELS[nowStatus] || nowStatus);
+            status.className = "status-cell";
+            const action = document.createElement("td");
+            if (["failed", "not-processed", "indexed-elsewhere", "kept-earlier"].includes(nowStatus)) {
+                const retry = document.createElement("button");
+                retry.type = "button";
+                retry.className = "secondary";
+                retry.textContent = nowStatus === "not-processed" ? "Crawl" : nowStatus === "indexed-elsewhere" ? "Re-crawl" : "Retry";
+                retry.addEventListener("click", () => crawlPages([row.url]));
+                action.appendChild(retry);
+            }
+            // A page with stored sections can be removed from the knowledge (only that page).
+            if (nowStatus === "indexed" || row.stored_sections > 0) {
+                const remove = document.createElement("button");
+                remove.type = "button";
+                remove.className = "secondary";
+                remove.textContent = "Remove";
+                remove.addEventListener("click", () => removePage(botId, row.stored_url || row.url));
+                action.appendChild(remove);
+            }
+            tr.append(pick, cell(row.url), cell(row.title || "–"), status, cell(details.join(" · ")), cell(row.source), cell(row.processed_at ? new Date(row.processed_at).toLocaleString() : "–"), action);
+            table.appendChild(tr);
+        }
+        const scroll = document.createElement("div");
+        scroll.className = "table-scroll";
+        scroll.appendChild(table);
+        box.appendChild(scroll);
+
+        const pager = document.createElement("div");
+        pager.className = "actions";
+        const info = document.createElement("span");
+        info.className = "hint";
+        info.textContent = page.total ? `Showing ${crawlFilter.offset + 1}–${crawlFilter.offset + page.urls.length} of ${page.total}` : "No addresses match.";
+        const previous = document.createElement("button");
+        previous.type = "button";
+        previous.className = "secondary";
+        previous.textContent = "Previous";
+        previous.disabled = crawlFilter.offset === 0;
+        previous.addEventListener("click", () => { crawlFilter.offset = Math.max(0, crawlFilter.offset - CRAWL_PAGE_SIZE); renderCrawlReport(botId).catch(() => {}); });
+        const next = document.createElement("button");
+        next.type = "button";
+        next.className = "secondary";
+        next.textContent = "Next";
+        next.disabled = crawlFilter.offset + page.urls.length >= page.total;
+        next.addEventListener("click", () => { crawlFilter.offset += CRAWL_PAGE_SIZE; renderCrawlReport(botId).catch(() => {}); });
+        const crawlSelected = document.createElement("button");
+        crawlSelected.type = "button";
+        crawlSelected.className = "secondary";
+        crawlSelected.textContent = "Crawl selected pages";
+        crawlSelected.addEventListener("click", () => {
+            const urls = [...box.querySelectorAll(".crawl-pick:checked")].map(input => input.value);
+            if (!urls.length) return show("crawlUrlsMessage", "Select one or more addresses first.", "error");
+            if (urls.length > 10) return show("crawlUrlsMessage", "Select at most 10 addresses at a time.", "error");
+            crawlPages(urls);
+        });
+        pager.append(previous, next, crawlSelected, info);
+        box.appendChild(pager);
+
+        // Continue: the next batch of addresses that were found but not processed.
+        const pendingNow = (page.currentCounts || {})["not-processed"] || 0;
+        const failedNow = (page.currentCounts || {}).failed || 0;
+        const form = document.createElement("form");
+        form.className = "continue-form";
+        form.id = "continueForm";
+        // Our own messages explain invalid values (as in the "add website" form).
+        form.noValidate = true;
+        const title = document.createElement("strong");
+        title.textContent = "Continue pending addresses";
+        const explain = document.createElement("p");
+        explain.className = "hint";
+        explain.textContent = `${pendingNow} address(es) were found but not processed; ${failedNow} failed. Each batch reads only the next addresses (no full re-crawl) with the normal checks and limits (up to 250 network requests per batch). A page that fails keeps its earlier version.`;
+        const row = document.createElement("div");
+        row.className = "row";
+        const field = (labelText, input) => {
+            const wrap = document.createElement("div");
+            const label = document.createElement("label");
+            label.textContent = labelText;
+            label.htmlFor = input.id;
+            wrap.append(label, input);
+            return wrap;
+        };
+        const size = Object.assign(document.createElement("input"), { id: "continueBatch", type: "number", min: 1, max: 10, value: 5 });
+        let registeredPath = "";
+        try {
+            const path = new URL(detail.chatbot.websiteUrl).pathname;
+            registeredPath = path === "/" ? "" : path.replace(/[^/]*$/, "");
+        } catch { registeredPath = ""; }
+        const prefix = Object.assign(document.createElement("input"), { id: "continuePrefix", type: "text", value: registeredPath, placeholder: "/ (whole website)" });
+        const failedBox = Object.assign(document.createElement("input"), { id: "continueFailed", type: "checkbox" });
+        const failedLabel = document.createElement("label");
+        failedLabel.append(failedBox, " Include failed addresses");
+        const button = Object.assign(document.createElement("button"), { id: "continueButton", type: "submit", className: "secondary", textContent: "Process next batch" });
+        button.disabled = !pendingNow && !failedNow;
+        row.append(field("Pages per batch (1–10)", size), field("Only addresses under", prefix), failedLabel, button);
+        const message = Object.assign(document.createElement("div"), { id: "continueMessage" });
+        message.setAttribute("role", "status");
+        form.append(title, explain, row, message);
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+            const batchSize = Number(size.value);
+            if (!Number.isInteger(batchSize) || batchSize < 1 || batchSize > 10) return show(message, "Pages per batch must be a whole number from 1 to 10.", "error");
+            const pathPrefix = prefix.value.trim();
+            if (pathPrefix && !pathPrefix.startsWith("/")) return show(message, "The section must be a path starting with /, for example /docs/.", "error");
+            button.disabled = true;
+            try {
+                const data = await api(`/api/admin/chatbots/${botId}/crawl-urls/continue`, { method: "POST", body: { batchSize, pathPrefix, includeFailed: failedBox.checked } });
+                show(message, data.message, data.started ? "info" : "success");
+                if (data.started) await loadChatbots();
+            } catch (error) {
+                show(message, error.message, "error");
+            } finally {
+                button.disabled = false;
+            }
+        });
+        box.appendChild(form);
+    }
+
+    // ---- Documents ----
+    let documentPoll = null;
+
+    function formatBytes(bytes) {
+        return bytes >= 1024 * 1024 ? (bytes / 1024 / 1024).toFixed(1) + " MB" : Math.max(1, Math.round(bytes / 1024)) + " KB";
+    }
+
+    async function loadDocuments(botId) {
+        clearTimeout(documentPoll);
+        const data = await api(`/api/admin/chatbots/${botId}/documents`);
+        if (selectedId !== botId) return;
+        $("documentFormats").textContent = `Supported: ${data.supportedTypes.join(", ")}. Up to ${formatBytes(data.maxFileBytes)} per file, ${data.maxDocuments} documents per chatbot. Scanned (image-only) PDFs cannot be read; older .doc files must be saved as .docx.`;
+        const list = $("documentList");
+        list.replaceChildren();
+        if (!data.documents.length) {
+            list.appendChild(emptyState("No documents yet", "Upload a PDF or Word file for the chatbot to read."));
+        }
+        for (const doc of data.documents) {
+            const item = document.createElement("div");
+            item.className = "bot";
+            const name = document.createElement("div");
+            name.className = "bot-url";
+            name.textContent = doc.filename;
+            const badge = document.createElement("span");
+            badge.className = "badge " + (doc.status === "indexed" ? "ready" : doc.status === "failed" ? "failed" : "indexing");
+            // While processing: the real stage (queued, reading text, creating embeddings n/m, saving).
+            const stage = doc.stage && doc.stage.stage;
+            badge.textContent = doc.status !== "processing" ? doc.status
+                : !stage ? "processing…"
+                : stage === "creating embeddings" && doc.stage.total ? `creating embeddings ${doc.stage.done}/${doc.stage.total}`
+                : `${stage}…`;
+            const facts = document.createElement("div");
+            facts.className = "stats";
+            facts.textContent = [formatBytes(doc.sizeBytes), doc.pages ? `${doc.pages} page(s)` : "", doc.sections != null ? `${doc.sections} section(s)` : "",
+                doc.indexedAt ? `indexed ${timeAgo(doc.indexedAt)}` : ""].filter(Boolean).join(" · ");
+            item.append(name, badge, facts);
+            if (doc.error) {
+                const error = document.createElement("div");
+                error.className = "message error";
+                error.textContent = doc.error + (doc.status === "failed" && doc.sections ? " (the previous version is still used)" : "");
+                item.appendChild(error);
+            }
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const reindex = document.createElement("button");
+            reindex.type = "button";
+            reindex.className = "secondary";
+            reindex.textContent = "Re-index";
+            reindex.disabled = doc.status === "processing";
+            reindex.addEventListener("click", async () => {
+                try {
+                    await api(`/api/admin/chatbots/${botId}/documents/${doc.id}/reindex`, { method: "POST" });
+                    await loadDocuments(botId);
+                } catch (error) { show("documentMessage", error.message, "error"); }
+            });
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "secondary";
+            remove.textContent = "Remove";
+            remove.disabled = doc.status === "processing";
+            remove.addEventListener("click", async () => {
+                if (!confirm(`Remove "${doc.filename}" and its knowledge from this chatbot? The website and other documents are not affected.`)) return;
+                try {
+                    const result = await api(`/api/admin/chatbots/${botId}/documents/${doc.id}`, { method: "DELETE" });
+                    show("documentMessage", `Removed "${result.removed.filename}" (${result.removed.sections} section(s)).`, "success");
+                    await loadDocuments(botId);
+                } catch (error) { show("documentMessage", error.message, "error"); }
+            });
+            // Open the stored file (admins only: fetched with the admin key, shown from memory).
+            const open = document.createElement("button");
+            open.type = "button";
+            open.className = "secondary";
+            open.textContent = "Open";
+            open.addEventListener("click", async () => {
+                try {
+                    const response = await fetch(`/api/admin/chatbots/${botId}/documents/${doc.id}/file`, { headers: authHeaders() });
+                    if (response.status === 401) sessionEnded();
+                    if (!response.ok) throw new Error(friendlyError(response.status, await response.json().catch(() => null)));
+                    const url = URL.createObjectURL(await response.blob());
+                    window.open(url, "_blank", "noopener");
+                    setTimeout(() => URL.revokeObjectURL(url), 60000);
+                } catch (error) { show("documentMessage", error.message, "error"); }
+            });
+            // Visitors may open it from a citation (off by default; documents stay private).
+            const access = document.createElement("label");
+            access.className = "hint";
+            const accessBox = document.createElement("input");
+            accessBox.type = "checkbox";
+            accessBox.checked = doc.visitorAccess === true;
+            accessBox.setAttribute("aria-label", `Visitors may open ${doc.filename}`);
+            accessBox.addEventListener("change", async () => {
+                accessBox.disabled = true;
+                try {
+                    await api(`/api/admin/chatbots/${botId}/documents/${doc.id}`, { method: "PATCH", body: { visitorAccess: accessBox.checked } });
+                    show("documentMessage", accessBox.checked
+                        ? `Visitors can now open "${doc.filename}" from answers that cite it.`
+                        : `"${doc.filename}" is private again: answers still cite it, without a link.`, "success");
+                } catch (error) {
+                    accessBox.checked = !accessBox.checked;
+                    show("documentMessage", error.message, "error");
+                } finally { accessBox.disabled = false; }
+            });
+            access.append(accessBox, " Visitors may open this document");
+            actions.append(open, reindex, remove, access);
+            item.appendChild(actions);
+            list.appendChild(item);
+        }
+        // Keep the statuses current while documents are being processed.
+        if (data.documents.some(doc => doc.status === "processing")) {
+            documentPoll = setTimeout(() => loadDocuments(botId).catch(() => {}), 3000);
+        }
+    }
+
+    async function uploadDocuments(botId, files) {
+        const results = [];
+        for (const file of files) {
+            try {
+                const response = await fetch(`/api/admin/chatbots/${botId}/documents`, {
+                    method: "POST",
+                    headers: { ...authHeaders(), "X-File-Name": encodeURIComponent(file.name), "Content-Type": file.type || "application/octet-stream" },
+                    body: file
+                });
+                let data = null;
+                try { data = await response.json(); } catch (e) { data = null; }
+                if (response.status === 401) sessionEnded();
+                results.push(response.ok ? `${file.name}: uploaded` : `${file.name}: ${data && data.error ? data.error : "upload failed (HTTP " + response.status + ")"}`);
+            } catch (error) {
+                results.push(`${file.name}: could not reach the server`);
+            }
+        }
+        return results;
+    }
+
+    function embedSnippet(bot) {
+        return `<script src="${location.origin}/widget.js" data-chatbot-id="${bot.id}" async><\/script>`;
+    }
+
+    function renderDetail(resetForms) {
+        const bot = chatbots.find(item => item.id === selectedId);
+        if (!bot) { showAllChatbots(); return; }
+
+        $("detailTitle").textContent = botName(bot);
+        $("detailUrl").textContent = bot.websiteUrl;
+        $("detailLastRead").textContent = "· " + (bot.stats.lastIndexedAt ? "last read " + new Date(bot.stats.lastIndexedAt).toLocaleDateString() : "not read yet");
+        const badge = $("detailBadge");
+        badge.className = "badge dotted " + badgeClass(bot.displayStatus);
+        badge.textContent = bot.displayStatus === "ready" ? "Ready to answer" : bot.displayStatus.charAt(0).toUpperCase() + bot.displayStatus.slice(1);
+
+        $("overviewStats").replaceWith(Object.assign(statLine(bot), { id: "overviewStats" }));
+        paintTiles(bot);
+        const progressBox = $("overviewProgress");
+        progressBox.replaceChildren();
+        const progress = progressElement(bot.progress);
+        if (progress) progressBox.appendChild(progress);
+        else if (bot.progress && bot.progress.state === "done" && bot.progress.message) show(progressBox, bot.progress.message, "success");
+        show("overviewError", bot.stats.lastError ? "Last indexing failed: " + bot.stats.lastError + (bot.status === "ready" ? " (the previous knowledge is still being used)" : "") : "", "error");
+        const running = Boolean(bot.progress && bot.progress.state === "running");
+        $("reindexButton").disabled = running;
+        $("crawlUrlsButton").disabled = running;
+        renderLive(bot).catch(() => {});
+        const finishedNow = lastJobState[bot.id] === "running" && !running;
+        lastJobState[bot.id] = bot.progress ? bot.progress.state : null;
+        if (resetForms) {
+            show("crawlUrlsMessage", "");
+            $("crawlUrlsInput").value = "";
+        }
+        if (resetForms || finishedNow) loadCrawlReport(bot).catch(() => {});
+
+        if (resetForms) {
+            $("setName").value = bot.settings.displayName;
+            $("setWelcome").value = bot.settings.welcomeMessage;
+            $("setColor").value = bot.settings.accentColor;
+            $("setColorPicker").value = bot.settings.accentColor || "#2E6B4E";
+            updateLivePreview();
+            $("setOrigins").value = bot.settings.allowedOrigins.join("\n");
+            $("setSupportEmail").value = bot.settings.supportEmail || "";
+            $("supportEmailSuggestions").replaceChildren();
+            $("supportEmailNote").textContent = emailConfigured
+                ? "When the chatbot cannot answer from this website's information, visitors see a form to send their question. It is saved in the Enquiries tab and emailed to this address. Without an address, questions are only saved in the Enquiries tab."
+                : "When the chatbot cannot answer from this website's information, visitors see a form to send their question. It is saved in the Enquiries tab; no email is sent yet because the server's email (SMTP) is not configured. Leave empty to turn the form off.";
+            $("t-enquiries").textContent = "Enquiries";
+            if (bot.enquiriesOpen) $("t-enquiries").appendChild(Object.assign(document.createElement("span"), { className: "badge new", textContent: `${bot.enquiriesOpen} open` }));
+            if (!$("tab-enquiries").hidden) loadEnquiries(bot.id).catch(error => show("enquiryMessage", error.message, "error"));
+            if (bot.stats.pageLimit) $("reindexPages").value = bot.stats.pageLimit;
+            // Only the platform admin (admin key) can change it; the server refuses customers anyway.
+            $("buttonDiscoveryBox").hidden = !adminKey;
+            $("buttonDiscovery").checked = bot.settings.buttonDiscovery === true;
+            show("settingsMessage", "");
+            show("supportMessage", "");
+            show("reindexMessage", "");
+            show("copyMessage", "");
+            $("embedCode").textContent = embedSnippet(bot);
+            $("installNote").textContent = location.protocol === "https:"
+                ? "This code points at this server."
+                : "This code points at your local development server (" + location.origin + "). For a live website, run the server on a public HTTPS domain and copy the code again from there.";
+            refreshPreview(bot);
+        }
+    }
+
+    // Addresses the last full crawl found on this website. "Use this" only fills the field: nothing
+    // changes until the user clicks Save.
+    const EMAIL_SOURCES = {
+        "structured-data": "the site's structured data on", mailto: "an email link on", "contact-page": "the contact page", "contact-section": "the contact section of",
+        "about-page": "the about page", "about-section": "the about section of", footer: "the footer of"
+    };
+    function renderEmailSuggestions(report, savedEmail) {
+        const box = $("supportEmailSuggestions");
+        box.replaceChildren();
+        for (const candidate of report?.supportEmailCandidates || []) {
+            if (candidate.address.toLowerCase() === String(savedEmail || "").toLowerCase()) continue;
+            let path = "";
+            try { path = new URL(candidate.url).pathname; } catch { /* shown without a page */ }
+            const row = Object.assign(document.createElement("p"), { className: "hint" });
+            row.style.overflowWrap = "anywhere";
+            row.textContent = `Found on your website: ${candidate.address} (from ${EMAIL_SOURCES[candidate.source] || "the website"} ${path}) `;
+            const use = Object.assign(document.createElement("button"), { type: "button", className: "secondary", textContent: "Use this" });
+            use.addEventListener("click", () => {
+                $("setSupportEmail").value = candidate.address;
+                show("supportMessage", "Not saved yet: click Save to use this address.", "info");
+            });
+            row.appendChild(use);
+            box.appendChild(row);
+        }
+    }
+
+    function refreshPreview(bot) {
+        const params = new URLSearchParams({ chatbotId: bot.id });
+        params.set("title", bot.settings.displayName || String(bot.domain || "").replace(/^www\./, "") || "Website Assistant");
+        if (bot.domain) params.set("subtitle", "Answers from " + String(bot.domain).replace(/^www\./, ""));
+        $("previewFrame").src = "/widget.html?" + params.toString();
+    }
+
+    // ---- Tabs ----
+    document.querySelectorAll(".tabs button").forEach(tab => {
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".tabs button").forEach(other => {
+                const selected = other === tab;
+                other.setAttribute("aria-selected", String(selected));
+                $("tab-" + other.dataset.tab).hidden = !selected;
+            });
+            if (tab.dataset.tab === "documents" && selectedId) loadDocuments(selectedId).catch(error => show("documentMessage", error.message, "error"));
+            if (tab.dataset.tab === "enquiries" && selectedId) loadEnquiries(selectedId).catch(error => show("enquiryMessage", error.message, "error"));
+        });
+    });
+
+    $("documentForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const files = [...$("documentFiles").files];
+        if (!selectedId) return;
+        if (!files.length) return show("documentMessage", "Choose one or more PDF or Word (.docx) files first.", "error");
+        $("uploadDocuments").disabled = true;
+        show("documentMessage", `Uploading ${files.length} file(s)…`, "info");
+        try {
+            const results = await uploadDocuments(selectedId, files);
+            show("documentMessage", results.join(" | "), results.every(line => line.endsWith(": uploaded")) ? "success" : "error");
+            $("documentFiles").value = "";
+            await loadDocuments(selectedId);
+        } finally {
+            $("uploadDocuments").disabled = false;
+        }
+    });
+
+    // ---- Actions ----
+    // The admin key field stays out of the way until a platform admin asks for it.
+    $("showAdminKey").addEventListener("click", () => {
+        const opening = $("keyForm").hidden;
+        $("keyForm").hidden = !opening;
+        $("showAdminKey").setAttribute("aria-expanded", String(opening));
+        if (opening) $("adminKey").focus();
+    });
+
+    $("keyForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        adminKey = $("adminKey").value.trim();
+        $("adminKey").value = "";
+        show("globalMessage", "");
+        try {
+            await loadChatbots();
+            $("keyState").textContent = "Connected";
+            // A key takes priority over a login: the login form is not offered while connected.
+            $("loginForm").hidden = true;
+            enterApp();
+            $("platformSection").hidden = false;
+            loadAccounts().catch(error => show("platformMessage", error.message, "error"));
+        } catch (error) {
+            adminKey = "";
+            $("keyState").textContent = "Not connected";
+            show("globalMessage", error.message, "error");
+        }
+    });
+
+    // ---- Customer login ----
+    function showCustomerView() {
+        $("sessionState").textContent = "Logged in as " + customerEmail;
+        enterApp();
+        $("loginForm").hidden = true;
+        // Platform controls are never offered to a customer (and the server refuses them anyway).
+        $("keyForm").hidden = true;
+        $("platformSection").hidden = true;
+    }
+
+    $("loginForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const email = $("loginEmail").value.trim();
+        const password = $("loginPassword").value;
+        $("loginPassword").value = "";
+        show("globalMessage", "");
+        if (!email || !password) return show("globalMessage", "Enter your email and password.", "error");
+        const button = $("loginForm").querySelector("button");
+        button.disabled = true;
+        try {
+            const response = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+            const data = await response.json().catch(() => null);
+            if (!response.ok) return show("globalMessage", (data && data.error) || "Login is not available right now. Please try again later.", "error");
+            customerEmail = data.account.email;
+            $("loginEmail").value = "";
+            showCustomerView();
+            await loadChatbots();
+        } catch (error) {
+            show("globalMessage", error.message || "Could not reach the server.", "error");
+        } finally {
+            button.disabled = false;
+        }
+    });
+
+    $("logoutButton").addEventListener("click", async () => {
+        $("logoutButton").disabled = true;
+        try {
+            const response = await fetch("/api/auth/logout", { method: "POST" });
+            if (!response.ok) throw new Error();
+            location.replace(location.pathname);
+        } catch (error) {
+            $("logoutButton").disabled = false;
+            show("globalMessage", "Could not log out. Please try again.", "error");
+        }
+    });
+
+    // ---- Customer accounts (platform admin; the server refuses these for customers) ----
+    let accounts = [];
+
+    function fillSelect(select, options) {
+        const current = select.value;
+        select.replaceChildren(...options.map(([value, text]) => Object.assign(document.createElement("option"), { value, textContent: text })));
+        if (options.some(([value]) => value === current)) select.value = current;
+    }
+
+    function renderAssignChoices() {
+        fillSelect($("assignChatbot"), chatbots.map(bot => {
+            const owner = accounts.find(account => account.id === bot.ownerAccountId);
+            return [bot.id, `${bot.settings.displayName || bot.domain} (${owner ? owner.email : "no owner"})`];
+        }));
+        fillSelect($("assignAccount"), [["", "No owner"], ...accounts.map(account => [account.id, account.email])]);
+        fillSelect($("resetAccount"), accounts.map(account => [account.id, account.email]));
+    }
+
+    async function loadAccounts() {
+        accounts = (await api("/api/admin/accounts")).accounts || [];
+        renderAssignChoices();
+        const list = $("accountList");
+        list.replaceChildren();
+        if (!accounts.length) list.appendChild(Object.assign(document.createElement("p"), { className: "empty", textContent: "No customer accounts yet." }));
+        for (const account of accounts) {
+            const row = document.createElement("div");
+            row.className = "account";
+            const disabled = account.status === "disabled";
+            const text = Object.assign(document.createElement("span"), { textContent: account.email + (disabled ? " (disabled)" : "") });
+            const toggle = Object.assign(document.createElement("button"), { type: "button", className: disabled ? "secondary" : "danger", textContent: disabled ? "Enable" : "Disable" });
+            toggle.addEventListener("click", async () => {
+                if (!disabled && !confirm(`Disable ${account.email}? They are logged out and cannot log in until enabled again.`)) return;
+                toggle.disabled = true;
+                try {
+                    await api(`/api/admin/accounts/${account.id}`, { method: "PATCH", body: { status: disabled ? "active" : "disabled" } });
+                    show("platformMessage", `${account.email} is now ${disabled ? "enabled" : "disabled"}.`, "success");
+                    await loadAccounts();
+                } catch (error) {
+                    toggle.disabled = false;
+                    show("platformMessage", error.message, "error");
+                }
+            });
+            row.append(text, toggle);
+            list.appendChild(row);
+        }
+    }
+
+    $("createAccountForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const email = $("newAccountEmail").value.trim();
+        const password = $("newAccountPassword").value;
+        $("newAccountPassword").value = "";
+        $("createAccountButton").disabled = true;
+        try {
+            await api("/api/admin/accounts", { method: "POST", body: { email, password } });
+            $("newAccountEmail").value = "";
+            show("platformMessage", `Account created for ${email}.`, "success");
+            await loadAccounts();
+        } catch (error) {
+            show("platformMessage", error.message, "error");
+        } finally {
+            $("createAccountButton").disabled = false;
+        }
+    });
+
+    $("assignForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        if (!$("assignChatbot").value) return show("platformMessage", "There is no chatbot to assign yet.", "error");
+        $("assignButton").disabled = true;
+        try {
+            await api(`/api/admin/chatbots/${$("assignChatbot").value}/owner`, { method: "PUT", body: { accountId: $("assignAccount").value || null } });
+            show("platformMessage", "The chatbot's owner was changed.", "success");
+            await loadChatbots();
+        } catch (error) {
+            show("platformMessage", error.message, "error");
+        } finally {
+            $("assignButton").disabled = false;
+        }
+    });
+
+    $("resetForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const password = $("resetPassword").value;
+        $("resetPassword").value = "";
+        if (!$("resetAccount").value) return show("platformMessage", "There is no account yet.", "error");
+        $("resetButton").disabled = true;
+        try {
+            await api(`/api/admin/accounts/${$("resetAccount").value}/password`, { method: "POST", body: { password } });
+            show("platformMessage", "The password was reset. That account was logged out everywhere.", "success");
+        } catch (error) {
+            show("platformMessage", error.message, "error");
+        } finally {
+            $("resetButton").disabled = false;
+        }
+    });
+
+    $("refreshButton").addEventListener("click", () => loadChatbots().catch(error => show("globalMessage", error.message, "error")));
+
+    $("chatbotSelect").addEventListener("change", () => {
+        if ($("chatbotSelect").value) selectBot($("chatbotSelect").value);
+        else showAllChatbots();
+    });
+
+    $("openAddWebsite").addEventListener("click", () => {
+        show("addMessage", "");
+        $("addDialog").showModal();
+        $("newUrl").focus();
+    });
+    $("closeAddWebsite").addEventListener("click", () => $("addDialog").close());
+
+    async function startIndexing(chatbotId, maxPages, reindex, messageBox) {
+        await api("/api/website", { method: "POST", body: { chatbotId, maxPages, reindex, async: true } });
+        show(messageBox, "Indexing started. Progress is shown here; you can keep using the dashboard.", "info");
+        await loadChatbots();
+    }
+
+    function readPageLimit(input) {
+        const value = Number(input.value);
+        return Number.isInteger(value) && value >= 1 && value <= 50 ? value : null;
+    }
+
+    $("addForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        if (!adminKey && !customerEmail) return show("addMessage", "Log in, or connect with the admin key, first.", "error");
+        const url = $("newUrl").value.trim();
+        const maxPages = readPageLimit($("newPages"));
+        if (!/^https?:\/\/\S+$/i.test(url)) return show("addMessage", "Enter a full address starting with https:// (or http://).", "error");
+        if (!maxPages) return show("addMessage", "The page limit must be a whole number from 1 to 50.", "error");
+        $("addButton").disabled = true;
+        show("addMessage", "Checking the website…", "info");
+        try {
+            const registered = await api("/api/register", { method: "POST", body: { websiteUrl: url } });
+            if (registered.existing && registered.status === "ready") {
+                await loadChatbots();
+                selectBot(registered.chatbotId);
+                $("addDialog").close();
+                show("reindexMessage", "This website already has a chatbot. Opening it — use Read the website again to refresh its content.", "info");
+            } else {
+                await startIndexing(registered.chatbotId, maxPages, false, "addMessage");
+                selectBot(registered.chatbotId);
+                $("newUrl").value = "";
+                $("addDialog").close();
+                show("reindexMessage", "Indexing started. Progress is shown here; you can keep using the dashboard.", "info");
+            }
+        } catch (error) {
+            show("addMessage", error.message, "error");
+        } finally {
+            $("addButton").disabled = false;
+        }
+    });
+
+    // ---- Explain an answer (admin diagnostics through the real answer pipeline) ----
+    function renderExplanation(trace) {
+        const box = $("explainResult");
+        box.replaceChildren();
+        const step = name => trace.steps.find(item => item.step === name) || null;
+        const line = (label, value) => {
+            const p = document.createElement("p");
+            const strong = document.createElement("strong");
+            strong.textContent = label + ": ";
+            p.append(strong, document.createTextNode(value));
+            box.appendChild(p);
+        };
+        const decision = step("decision");
+        if (decision) {
+            line("Result", decision.outcome === "answer" ? "answered" : `fallback — ${decision.reason || "no reason given"}`);
+            if (decision.answer) {
+                const pre = document.createElement("pre");
+                pre.className = "code";
+                pre.textContent = decision.answer;
+                box.appendChild(pre);
+            }
+            if (decision.rejectedModelAnswer) line("Model reply rejected by a check", decision.rejectedModelAnswer);
+            if (Array.isArray(decision.sources) && decision.sources.length) {
+                const list = document.createElement("ul");
+                for (const source of decision.sources) {
+                    const li = document.createElement("li");
+                    const label = source.type === "document"
+                        ? `${source.title}${source.page ? `, page ${source.page}` : ""}${source.section ? ` — ${source.section}` : ""}`
+                        : `${source.title || source.url}${source.section ? ` — ${source.section}` : ""}`;
+                    if (source.type !== "document" && /^https?:\/\//i.test(source.link || source.url || "")) {
+                        const a = document.createElement("a");
+                        a.href = source.link || source.url;
+                        a.target = "_blank";
+                        a.rel = "noopener noreferrer";
+                        a.textContent = label;
+                        li.appendChild(a);
+                    } else {
+                        li.textContent = label;
+                    }
+                    list.appendChild(li);
+                }
+                line("Sources", "");
+                box.appendChild(list);
+            }
+        } else {
+            line("Result", "the model was not asked (tick 'Ask the model too' to see the answer)");
+        }
+        const index = step("index");
+        if (index) line("Indexed", `${index.pagesStored ?? "?"} page(s), ${index.sectionsStored ?? "?"} section(s) from the website`);
+        const documents = step("documents");
+        if (documents) line("Documents", `${documents.total} uploaded, ${(documents.indexed || []).length} indexed`);
+        const subject = step("subject-check");
+        if (subject) line("Subject found in the sections sent", subject.passed ? "yes" : "no — the fallback is given before the model is asked");
+        const context = step("context");
+        if (context && Array.isArray(context.droppedForLength)) line("Left out for length", context.droppedForLength.map(item => item.source).join("; "));
+        const retrieval = step("retrieval");
+        if (retrieval && Array.isArray(retrieval.results)) {
+            line("Retrieved", `${retrieval.retrieved} section(s), ${retrieval.sentToModel} sent to the model`);
+            const table = document.createElement("table");
+            table.className = "crawl-table";
+            const head = document.createElement("tr");
+            for (const title of ["#", "Page", "Section", "Meaning", "Score", "Decision"]) {
+                const th = document.createElement("th");
+                th.textContent = title;
+                head.appendChild(th);
+            }
+            table.appendChild(head);
+            for (const row of retrieval.results.slice(0, 15)) {
+                const tr = document.createElement("tr");
+                tr.append(cell(row.rank), cell(row.url), cell(row.section), cell(row.vectorScore), cell(row.finalScore), cell(row.decision));
+                table.appendChild(tr);
+            }
+            const scroll = document.createElement("div");
+            scroll.className = "table-scroll";
+            scroll.appendChild(table);
+            box.appendChild(scroll);
+        }
+    }
+
+    $("explainForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const question = $("explainQuestion").value.trim();
+        if (!question) return show("explainMessage", "Type a question first.", "error");
+        $("explainButton").disabled = true;
+        $("explainResult").replaceChildren();
+        show("explainMessage", $("explainGenerate").checked ? "Asking… (as long as a normal answer)" : "Checking retrieval…");
+        try {
+            const data = await api(`/api/admin/chatbots/${selectedId}/diagnose`, { method: "POST", body: { question, generate: $("explainGenerate").checked } });
+            show("explainMessage", "");
+            renderExplanation(data.trace);
+        } catch (error) {
+            show("explainMessage", error.message, "error");
+        } finally {
+            $("explainButton").disabled = false;
+        }
+    });
+
+    $("crawlUrlsForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const urls = $("crawlUrlsInput").value.split(/\s+/).map(item => item.trim()).filter(Boolean);
+        if (!urls.length) return show("crawlUrlsMessage", "Enter at least one page address.", "error");
+        if (urls.length > 10) return show("crawlUrlsMessage", "Enter at most 10 addresses at a time.", "error");
+        if (urls.some(url => !/^https?:\/\/\S+$/i.test(url))) return show("crawlUrlsMessage", "Each address must start with https:// (or http://).", "error");
+        crawlPages(urls);
+    });
+
+    $("reindexForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const maxPages = readPageLimit($("reindexPages"));
+        if (!maxPages) return show("reindexMessage", "The page limit must be a whole number from 1 to 50.", "error");
+        $("reindexButton").disabled = true;
+        try {
+            await startIndexing(selectedId, maxPages, true, "reindexMessage");
+        } catch (error) {
+            show("reindexMessage", error.message, "error");
+            $("reindexButton").disabled = false;
+        }
+    });
+
+    $("buttonDiscovery").addEventListener("change", async () => {
+        const enabled = $("buttonDiscovery").checked;
+        try {
+            await api(`/api/admin/chatbots/${selectedId}/button-discovery`, { method: "PUT", body: { enabled } });
+            const bot = chatbots.find(item => item.id === selectedId);
+            if (bot) bot.settings.buttonDiscovery = enabled;
+            show("reindexMessage", enabled ? "Menu buttons will be clicked at the next re-index." : "Menu buttons will not be clicked.", "success");
+        } catch (error) {
+            $("buttonDiscovery").checked = !enabled;
+            show("reindexMessage", error.message, "error");
+        }
+    });
+
+    // ---- Enquiries: questions sent with the contact form (admin key; this chatbot only) ----
+    // "accepted": the mail server accepted the email (not proof of delivery). "sent" is the older name.
+    const EMAIL_STATUS_TEXT = {
+        accepted: "Accepted by mail server",
+        sent: "Accepted by mail server",
+        failed: "Email could not be sent",
+        disabled: "No email sent (server email not configured)",
+        "no-recipient": "No email sent (no support email was set)",
+        pending: "Email pending"
+    };
+
+    async function loadEnquiries(botId) {
+        const filter = $("enquiryFilter").value;
+        const data = await api(`/api/admin/chatbots/${botId}/enquiries?status=${encodeURIComponent(filter)}&limit=100`);
+        if (selectedId !== botId) return;
+        // Why visitors do or do not see the form, and whether emails go out (setting names only).
+        const notes = [];
+        if (!data.storageReady) notes.push(["error", "Enquiries cannot be saved yet: the database table is missing, so visitors are not offered the contact form. Run npm run setup:db once (it only adds the table), then refresh."]);
+        if (!data.supportEmail) notes.push(["info", "No support email is set for this chatbot: visitors still see the contact form, and their questions are saved here only (no email). Set one in Overview to be emailed."]);
+        if (!data.emailConfigured) notes.push(["info", `Questions are saved here, but no email notification is sent: the server's email is not configured (missing in .env: ${data.missingSmtpSettings.join(", ")}).`]);
+        const notice = $("enquiryNotice");
+        notice.replaceChildren(...notes.map(([kind, text]) => Object.assign(document.createElement("div"), { className: "message " + kind, textContent: text })));
+        const list = $("enquiryList");
+        list.replaceChildren();
+        if (!data.enquiries.length) {
+            list.appendChild(emptyState("Nothing to show", filter === "open" ? "No open enquiries." : "No enquiries."));
+            return;
+        }
+        const table = document.createElement("table");
+        table.className = "crawl-table enquiry-table";
+        const head = document.createElement("tr");
+        for (const title of ["Received", "Visitor", "Question", "Email to support", "Action"]) {
+            head.appendChild(Object.assign(document.createElement("th"), { textContent: title }));
+        }
+        table.appendChild(head);
+        for (const enquiry of data.enquiries) {
+            const item = document.createElement("tr");
+            item.className = "enquiry";
+            const who = document.createElement("td");
+            who.appendChild(Object.assign(document.createElement("div"), { textContent: enquiry.name }));
+            const mail = document.createElement("a");
+            mail.href = "mailto:" + enquiry.email + "?subject=" + encodeURIComponent("Re: your question");
+            mail.textContent = enquiry.email;
+            who.appendChild(mail);
+            const question = document.createElement("td");
+            question.appendChild(Object.assign(document.createElement("div"), { className: "enquiry-text", textContent: enquiry.question }));
+            if (enquiry.details) question.appendChild(Object.assign(document.createElement("div"), { className: "enquiry-text enquiry-details", textContent: "Details: " + enquiry.details }));
+            // Text and colour together: accepted is green, not sent is red, waiting and handled are grey.
+            const accepted = ["accepted", "sent"].includes(enquiry.emailStatus);
+            const status = document.createElement("td");
+            const pills = document.createElement("div");
+            pills.className = "pill-stack";
+            pills.appendChild(Object.assign(document.createElement("span"), {
+                className: "email-pill " + (accepted ? "good" : enquiry.emailStatus === "pending" ? "grey" : "bad"),
+                textContent: EMAIL_STATUS_TEXT[enquiry.emailStatus] || enquiry.emailStatus
+            }));
+            if (enquiry.status === "handled") pills.appendChild(Object.assign(document.createElement("span"), { className: "email-pill grey", textContent: "Handled" }));
+            const emailNote = (accepted && enquiry.recipient ? `to ${enquiry.recipient}` : "") + (enquiry.emailError ? `(${enquiry.emailError})` : "");
+            if (emailNote) pills.appendChild(Object.assign(document.createElement("span"), { className: "hint", textContent: emailNote }));
+            status.appendChild(pills);
+            const action = document.createElement("td");
+            const actions = document.createElement("div");
+            actions.className = "action-stack";
+            const toggle = Object.assign(document.createElement("button"), { type: "button", className: "secondary", textContent: enquiry.status === "handled" ? "Reopen" : "Mark as handled" });
+            toggle.addEventListener("click", async () => {
+                toggle.disabled = true;
+                try {
+                    await api(`/api/admin/chatbots/${botId}/enquiries/${enquiry.id}`, { method: "PATCH", body: { status: enquiry.status === "handled" ? "open" : "handled" } });
+                    await loadEnquiries(botId);
+                    await loadChatbots();
+                } catch (error) { show("enquiryMessage", error.message, "error"); toggle.disabled = false; }
+            });
+            actions.appendChild(toggle);
+            // Resend goes to the chatbot's CURRENT support email (also for enquiries saved before it was set).
+            if (data.emailConfigured && data.supportEmail && !accepted) {
+                const resend = Object.assign(document.createElement("button"), { type: "button", className: "secondary", textContent: "Resend", title: "Send to " + data.supportEmail });
+                resend.addEventListener("click", async () => {
+                    resend.disabled = true;
+                    try {
+                        await api(`/api/admin/chatbots/${botId}/enquiries/${enquiry.id}/resend`, { method: "POST" });
+                        show("enquiryMessage", "The email was sent.", "success");
+                    } catch (error) { show("enquiryMessage", error.message, "error"); }
+                    await loadEnquiries(botId).catch(() => {});
+                });
+                actions.appendChild(resend);
+            }
+            action.appendChild(actions);
+            item.append(cell(new Date(enquiry.createdAt).toLocaleString()), who, question, status, action);
+            table.appendChild(item);
+        }
+        const scroll = document.createElement("div");
+        scroll.className = "table-scroll";
+        scroll.style.maxHeight = "none";
+        scroll.appendChild(table);
+        list.appendChild(scroll);
+        list.appendChild(Object.assign(document.createElement("p"), { className: "hint", textContent: '"Accepted" means the mail server took it, not that it reached the inbox.' }));
+    }
+    $("enquiryFilter").addEventListener("change", () => { if (selectedId) loadEnquiries(selectedId).catch(error => show("enquiryMessage", error.message, "error")); });
+    $("enquiryRefresh").addEventListener("click", () => { if (selectedId) loadEnquiries(selectedId).catch(error => show("enquiryMessage", error.message, "error")); });
+
+    // ---- Removing knowledge / the chatbot (the server checks scope, confirmation and running jobs) ----
+    async function removePage(botId, url) {
+        if (!confirm(`Remove this page from the chatbot's knowledge?\n\n${url}\n\nOnly this page's sections are removed; other pages and documents stay. A later full re-index can add the page again.`)) return;
+        try {
+            const result = await api(`/api/admin/chatbots/${botId}/pages`, { method: "DELETE", body: { url } });
+            show("crawlUrlsMessage", `Removed ${result.removed.sections} section(s) of ${result.removed.url}.`, "success");
+            await loadChatbots();
+        } catch (error) { show("crawlUrlsMessage", error.message, "error"); }
+    }
+
+    // A typed confirmation: the website's domain, so the right chatbot is chosen deliberately.
+    function confirmTyped(message, expected) {
+        const typed = prompt(`${message}\n\nThis cannot be undone. Type ${expected} to confirm.`);
+        return typed !== null && typed.trim().toLowerCase() === String(expected).toLowerCase();
+    }
+
+    $("clearWebsiteButton").addEventListener("click", async () => {
+        const bot = chatbots.find(item => item.id === selectedId);
+        if (!bot) return;
+        try {
+            const preview = await api(`/api/admin/chatbots/${bot.id}/deletion-preview`);
+            const message = `Remove the website content of ${bot.websiteUrl}?\n\nRemoved: ${preview.websiteContent.sections} indexed section(s) and ${preview.websiteContent.reportRows} crawl report row(s).\nKept: the chatbot, its settings and its ${preview.documents.count} document(s).`;
+            if (!confirmTyped(message, bot.domain)) return show("removalMessage", "Nothing was removed.", "info");
+            const result = await api(`/api/admin/chatbots/${bot.id}/website-content`, { method: "DELETE", body: { confirm: bot.id } });
+            show("removalMessage", `Removed ${result.removed.websiteSections} indexed section(s) and ${result.removed.reportRows} crawl report row(s). The settings and ${result.kept.documents} document(s) were kept.`, "success");
+            await loadChatbots();
+        } catch (error) { show("removalMessage", error.message, "error"); }
+    });
+
+    $("deleteChatbotButton").addEventListener("click", async () => {
+        const bot = chatbots.find(item => item.id === selectedId);
+        if (!bot) return;
+        try {
+            const preview = await api(`/api/admin/chatbots/${bot.id}/deletion-preview`);
+            const message = `Delete the chatbot for ${bot.websiteUrl} completely?\n\nRemoved: its settings, ${preview.websiteContent.sections} indexed section(s), ${preview.websiteContent.reportRows} crawl report row(s), ${preview.documents.count} document(s) (${preview.documents.sections} section(s), ${preview.documents.storedFiles} stored file(s)), ${preview.enquiries || 0} visitor enquir${preview.enquiries === 1 ? "y" : "ies"}.\nThe embed code on the website will stop working.`;
+            if (!confirmTyped(message, bot.domain)) return show("removalMessage", "Nothing was deleted.", "info");
+            const result = await api(`/api/admin/chatbots/${bot.id}`, { method: "DELETE", body: { confirm: bot.id } });
+            showAllChatbots();
+            await loadChatbots();
+            show("listMessage", `Deleted the chatbot for ${bot.websiteUrl}: ${result.removed.vectors} section(s), ${result.removed.documents} document(s), ${result.removed.storedFiles} stored file(s).`, "success");
+        } catch (error) {
+            show("removalMessage", error.message, "error");
+            await loadChatbots().catch(() => {});
+        }
+    });
+
+    // Shows the name, welcome message and colour as they are typed. Only "Save settings" stores them.
+    function updateLivePreview() {
+        const bot = chatbots.find(item => item.id === selectedId);
+        const typed = $("setColor").value.trim();
+        const color = /^#[0-9a-f]{6}$/i.test(typed) ? typed : "#2E6B4E";
+        const text = textOnColor(color);
+        $("miniName").textContent = $("setName").value.trim() || (bot ? botName(bot) : "Website Assistant");
+        $("miniWelcome").textContent = $("setWelcome").value.trim() || "Hi! Ask me anything about this website.";
+        $("miniLogo").textContent = Array.from($("miniName").textContent)[0] || "";
+        $("miniLogo").style.backgroundColor = color;
+        $("miniLogo").style.color = text;
+        $("miniUser").style.backgroundColor = color;
+        $("miniUser").style.color = text;
+    }
+    ["setName", "setWelcome", "setColor", "setColorPicker"].forEach(id => $(id).addEventListener("input", updateLivePreview));
+
+    $("setColorPicker").addEventListener("input", () => {
+        $("setColor").value = $("setColorPicker").value;
+        updateLivePreview();
+    });
+    $("setColor").addEventListener("input", () => {
+        if (/^#[0-9a-f]{6}$/i.test($("setColor").value)) $("setColorPicker").value = $("setColor").value;
+    });
+
+    $("settingsForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        $("saveSettings").disabled = true;
+        try {
+            const data = await api(`/api/admin/chatbots/${selectedId}`, {
+                method: "PATCH",
+                body: {
+                    displayName: $("setName").value,
+                    welcomeMessage: $("setWelcome").value,
+                    accentColor: $("setColor").value.trim(),
+                    allowedOrigins: $("setOrigins").value.split(/\s+/).filter(Boolean)
+                }
+            });
+            const index = chatbots.findIndex(bot => bot.id === selectedId);
+            if (index >= 0) chatbots[index] = data.chatbot;
+            renderList();
+            renderDetail(true);
+            show("settingsMessage", "Settings saved. The preview and installed widgets use them right away.", "success");
+        } catch (error) {
+            show("settingsMessage", error.message, "error");
+        } finally {
+            $("saveSettings").disabled = false;
+        }
+    });
+
+    // The support email is saved on its own, from its card in Overview.
+    $("supportForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        $("saveSupportEmail").disabled = true;
+        try {
+            const data = await api(`/api/admin/chatbots/${selectedId}`, { method: "PATCH", body: { supportEmail: $("setSupportEmail").value.trim() } });
+            const index = chatbots.findIndex(bot => bot.id === selectedId);
+            if (index >= 0) chatbots[index] = data.chatbot;
+            renderList();
+            renderDetail(true);
+            show("supportMessage", "Support email saved.", "success");
+        } catch (error) {
+            show("supportMessage", error.message, "error");
+        } finally {
+            $("saveSupportEmail").disabled = false;
+        }
+    });
+
+    $("copyEmbed").addEventListener("click", async () => {
+        const code = $("embedCode").textContent;
+        try {
+            await navigator.clipboard.writeText(code);
+            show("copyMessage", "Code copied.", "success");
+        } catch (error) {
+            const range = document.createRange();
+            range.selectNodeContents($("embedCode"));
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            show("copyMessage", "Press Ctrl+C to copy the selected code.", "info");
+        }
+    });
+    // On opening the page: continue an existing session (the cookie is sent automatically).
+    (async () => {
+        const params = new URLSearchParams(location.search);
+        if (params.get("session") === "expired") {
+            show("globalMessage", "Your session has ended. Please log in again.", "error");
+            history.replaceState(null, "", location.pathname);
+        }
+        try {
+            const response = await fetch("/api/auth/me");
+            const data = response.ok ? await response.json() : null;
+            if (data && data.kind === "customer" && !adminKey) {
+                customerEmail = data.email;
+                showCustomerView();
+                await loadChatbots();
+            }
+        } catch (error) { /* not logged in, or the server is unreachable: the forms stay */ }
+    })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test host page - pretend customer website</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #111827; }
+  .banner { background: #fef3c7; color: #78350f; padding: 10px 6%; font-size: 14px; border-bottom: 1px solid #fcd34d; }
+  header { padding: 56px 6%; background: #1f2937; color: #fff; }
+  header h1 { font-size: 40px; margin: 0 0 12px; }
+  main { padding: 40px 6%; max-width: 1000px; margin: auto; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card { background: #fff; padding: 26px; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.07); }
+  code { background: #eef2f7; padding: 2px 6px; border-radius: 6px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } header h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="banner">TEST HOST PAGE - this page stands in for a customer's own website. It is served from a
+  different origin than the chatbot server, exactly like a real installation. It is not part of the product.</div>
+<header>
+  <h1>Python Learning Corner</h1>
+  <p>A pretend website whose owner installed the AI chatbot. The chat button in the bottom-right corner is the embedded widget.</p>
+</header>
+<main>
+  <div class="grid">
+    <div class="card">
+      <h2>What the owner did</h2>
+      <p>Opened the dashboard, chose the chatbot, opened <b>Install</b>, clicked <b>Copy code</b> and pasted that one
+        line just before <code>&lt;/body&gt;</code> in this page. Nothing else.</p>
+    </div>
+    <div class="card">
+      <h2>Try these questions</h2>
+      <p>"Why are Python strings immutable?"<br>"How do I create a static class variable?"<br>
+        Something the site does not cover: "What is the price of a Python certification exam?"</p>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PASTE THE SNIPPET FROM THE DASHBOARD'S INSTALL TAB BELOW (replace the line under this comment) ===== -->
+ <script src="http://localhost:3000/widget.js" data-chatbot-id="06a09801-806b-44a5-9ab7-6683ccfdf213" async></script>
+ <!-- <script src="http://localhost:3002/widget.js" data-chatbot-id="27569fca-705a-4ad3-befd-8747407a6c94" async></script> -->
+ <!-- <script src="http://localhost:3002/widget.js" data-chatbot-id="f0b8f15f-5aa5-4093-ade5-bfdd18f016c2" async></script> -->
+ <!-- <script src="http://localhost:3000/widget.js" data-chatbot-id="f0b8f15f-5aa5-4093-ade5-bfdd18f016c2" async></script> -->
+<!-- <script src="http://localhost:3000/widget.js" data-chatbot-id="5375ea8a-b021-4288-930c-c28a7a300333" async></script> -->
+<!-- ===== END OF SNIPPET ===== -->
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Website Assistant</title>
+<style>
+    :root {
+        --accent: #2E6B4E;
+        --on-accent: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+        font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        background: #fff;
+        color: #2A2420;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .header {
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border-bottom: 1px solid #E2D8C9;
+    }
+    .logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--on-accent);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        flex: 0 0 auto;
+    }
+    .headcopy { min-width: 0; }
+    .title {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .subtitle {
+        font-size: 12px;
+        line-height: 1.3;
+        color: #6A5F55;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .chat {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px;
+        background: #FDFBF7;
+    }
+    .welcome { padding: 8px 2px; }
+    .welcome h2 { margin: 0; font-size: 18px; }
+    .welcome p {
+        margin: 4px 0 0;
+        line-height: 1.45;
+        color: #6A5F55;
+    }
+    .suggestions {
+        display: grid;
+        gap: 6px;
+        margin-top: 14px;
+    }
+    .suggestion {
+        border: 1px solid #E2D8C9;
+        background: white;
+        color: inherit;
+        border-radius: 8px;
+        text-align: left;
+        min-height: 44px;
+        padding: 9px 12px;
+        cursor: pointer;
+        font: inherit;
+    }
+    .suggestion:hover { background: #F3EEE6; }
+    .suggestion strong { display: block; font-size: 13px; font-weight: 600; }
+    .suggestion span { display: block; margin-top: 1px; font-size: 12px; color: #6A5F55; }
+    .row { display: flex; margin-bottom: 10px; }
+    .row.user { justify-content: flex-end; }
+    .bubble {
+        max-width: 88%;
+        padding: 10px 13px;
+        line-height: 1.5;
+        background: white;
+        border: 1px solid #E2D8C9;
+        border-radius: 14px 14px 14px 4px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+    .bubble.notfound { background: #FDF1D6; border-color: #F3DFB1; color: #5A3E05; }
+    .row.user .bubble {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--on-accent);
+        border-radius: 14px 14px 4px 14px;
+    }
+    .sources { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 14px; }
+    .source-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        max-width: 100%;
+        background: #F3EEE6;
+        color: #2A2420;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 4px 11px;
+        font-size: 12px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+    a.source-chip:hover { text-decoration: underline; }
+    .source-chip svg { width: 13px; height: 13px; flex: 0 0 auto; }
+    .source-note { flex: 1 1 100%; font-size: 12px; color: #6A5F55; }
+    .contact { margin: 0 0 14px; }
+    .contact-open, .contact-send { background: var(--accent); color: var(--on-accent, #fff); border: 0; border-radius: 8px; min-height: 44px; padding: 8px 16px; font: inherit; font-weight: 600; cursor: pointer; }
+    .contact-cancel { background: #fff; color: #2A2420; border: 1px solid #B9AD9D; border-radius: 8px; min-height: 44px; padding: 8px 16px; font: inherit; cursor: pointer; }
+    .contact-open:disabled, .contact-send:disabled, .contact-cancel:disabled { opacity: .6; cursor: default; }
+    .contact-form { display: grid; gap: 10px; background: #fff; border: 1px solid #E2D8C9; border-radius: 12px; padding: 13px; }
+    .contact-title { font-weight: 700; font-size: 15px; color: #2A2420; overflow-wrap: anywhere; }
+    .contact-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+    .contact-form label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: #2A2420; min-width: 0; align-content: start; }
+    .contact-form input, .contact-form textarea { width: 100%; min-height: 44px; max-height: none; font: inherit; font-size: 14px; font-weight: 400; color: #2A2420; padding: 8px 10px; border: 1px solid #B9AD9D; border-radius: 8px; background: #fff; resize: vertical; }
+    .contact-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .contact-status { font-size: 13px; color: #6A5F55; }
+    .contact-status:empty { display: none; }
+    .contact-done { color: #1F4C37; font-weight: 600; background: #E6F0EA; border-radius: 8px; padding: 10px 12px; }
+    .contact-label { font-size: 13px; font-weight: 600; color: #2A2420; margin-bottom: -6px; }
+    .contact-question { font-size: 14px; color: #2A2420; background: #F3EEE6; border-radius: 8px; padding: 9px 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .contact-error { font-size: 12px; font-weight: 500; color: #A8412A; }
+    .contact-error:empty { display: none; }
+    .contact-form [aria-invalid="true"] { border-color: #A8412A; }
+    @media (max-width: 480px) { .contact-form input, .contact-form textarea { font-size: 16px; } }
+    .slow-hint {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #6A5F55;
+    }
+
+    .typing {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #6A5F55; animation: blink 1.1s ease-in-out infinite; }
+    .dot:nth-child(2) { animation-delay: .14s; }
+    .dot:nth-child(3) { animation-delay: .28s; }
+    @keyframes blink { 0%, 60%, 100% { opacity: .35; } 30% { opacity: 1; } }
+    .composer {
+        padding: 10px;
+        background: white;
+        border-top: 1px solid #E2D8C9;
+    }
+    .composer-box {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+    }
+    textarea {
+        flex: 1;
+        min-width: 0;
+        min-height: 44px;
+        resize: none;
+        border: 1px solid #B9AD9D;
+        border-radius: 8px;
+        padding: 10px 12px;
+        font: inherit;
+        line-height: 1.4;
+        max-height: 90px;
+        color: #2A2420;
+        background: #fff;
+    }
+    textarea:focus-visible { outline: 2px solid #2A2420; outline-offset: 1px; }
+    .send {
+        width: 44px;
+        height: 44px;
+        border: 0;
+        padding: 0;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--on-accent);
+        cursor: pointer;
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+    }
+    .send svg { width: 20px; height: 20px; }
+    .send:disabled { opacity: .45; cursor: default; }
+    button:focus-visible, a:focus-visible, input:focus { outline: 2px solid #2A2420; outline-offset: 2px; }
+    @media (max-width: 480px) { textarea { font-size: 16px; } }
+    @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; }
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <div class="logo" id="logo" aria-hidden="true"></div>
+    <div class="headcopy">
+        <div class="title" id="title">Website Assistant</div>
+        <div class="subtitle" id="subtitle">Answers from this website</div>
+    </div>
+</div>
+
+<div class="chat" id="chat" role="log" aria-live="polite" aria-label="Conversation">
+    <div class="welcome" id="welcome">
+        <h2>How can I help?</h2>
+        <p>Ask a question and I’ll answer using the information available on this website.</p>
+        <div class="suggestions">
+            <button class="suggestion" data-question="What does this website provide?">
+                <strong>What does this website provide?</strong>
+                <span>Get a quick overview</span>
+            </button>
+            <button class="suggestion" data-question="What services or products are available?">
+                <strong>What services or products are available?</strong>
+                <span>Explore the main offerings</span>
+            </button>
+            <button class="suggestion" data-question="How can I contact the company?">
+                <strong>How can I contact the company?</strong>
+                <span>Find contact information</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="composer">
+    <div class="composer-box">
+        <textarea id="input" rows="1" placeholder="Ask a question..." aria-label="Ask a question"></textarea>
+        <button class="send" id="send" type="button" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+</div>
+
+<script>
+(function () {
+    "use strict";
+
+    var params = new URLSearchParams(window.location.search);
+    // Shown inside the dashboard (same server), not on a visitor's page or another website.
+    var inDashboardPreview = (function () {
+        try { return window.parent !== window && window.parent.location.origin === window.location.origin; } catch (error) { return false; }
+    })();
+    var chatbotId = (params.get("chatbotId") || "").trim();
+    var apiBase = window.location.origin;
+    var title = params.get("title") || "Website Assistant";
+    var subtitle = params.get("subtitle") || "Answers from this website";
+
+    function setTitle(text) {
+        document.getElementById("title").textContent = text;
+        document.getElementById("logo").textContent = Array.from(String(text).trim())[0] || "";
+    }
+    setTitle(title);
+    document.getElementById("subtitle").textContent = subtitle;
+    document.title = title;
+
+    var chat = document.getElementById("chat");
+    var welcome = document.getElementById("welcome");
+    var input = document.getElementById("input");
+    var send = document.getElementById("send");
+
+    var UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    // The local model can take a minute or more; the server gives up after
+    // about 240 s, so the page waits a little longer than that.
+    var REQUEST_TIMEOUT_MS = 270000;
+    var SLOW_HINT_AFTER_MS = 15000;
+
+    function isSafeHttpUrl(value) {
+        try {
+            var url = new URL(value);
+            return url.protocol === "https:" || url.protocol === "http:";
+        } catch (error) {
+            return false;
+        }
+    }
+
+    // Visitor-facing messages only; never show server internals.
+    function friendlyError(status, data) {
+        if (status === 0) return "Could not reach the assistant. Please check your connection and try again.";
+        if (status === -1 || status === 504) return "The assistant took too long to answer. Please try again.";
+        if (status === 429 || status === 503) return "The assistant is busy right now. Please try again in a minute.";
+        if (status >= 400 && status < 500 && data && typeof data.error === "string") return data.error;
+        return "Something went wrong. Please try again.";
+    }
+
+    function scrollBottom() {
+        chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addMessage(role, text) {
+        var row = document.createElement("div");
+        row.className = "row " + role;
+
+        var bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.textContent = text;
+
+        row.appendChild(bubble);
+        chat.appendChild(row);
+        scrollBottom();
+        return row;
+    }
+
+    function addTyping() {
+        var row = document.createElement("div");
+        row.className = "row assistant";
+
+        var bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.innerHTML = '<span class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+
+        row.appendChild(bubble);
+        chat.appendChild(row);
+        scrollBottom();
+        return row;
+    }
+
+    var EXTERNAL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+
+    function domainOf(url) {
+        try {
+            return new URL(url).hostname.replace(/^www\./, "");
+        } catch (error) {
+            return "";
+        }
+    }
+
+    function addSources(sources) {
+        if (!Array.isArray(sources) || sources.length === 0) return;
+
+        var wrap = document.createElement("div");
+        wrap.className = "sources";
+
+        sources.slice(0, 3).forEach(function (source) {
+            // An uploaded document: file name and page. A link only if the owner allows visitors to open it.
+            if (source && source.type === "document") {
+                var documentChip = document.createElement("span");
+                documentChip.className = "source-chip";
+                documentChip.textContent = [source.section || source.title || "Uploaded document", source.page ? "Page " + source.page : "", source.section ? source.title : ""].filter(Boolean).join(" · ");
+                wrap.appendChild(documentChip);
+                // A signed, expiring link from the server.
+                if (typeof source.link === "string" && source.link.indexOf("/api/documents/") === 0) {
+                    var documentLink = document.createElement("a");
+                    documentLink.className = "source-url source-chip";
+                    documentLink.href = apiBase + source.link;
+                    documentLink.target = "_blank";
+                    documentLink.rel = "noopener noreferrer";
+                    documentLink.innerHTML = EXTERNAL_ICON;
+                    documentLink.append(source.page ? "Open document at page " + source.page : "Open document");
+                    wrap.appendChild(documentLink);
+                } else if (inDashboardPreview) {
+                    // Only the owner sees this, in the dashboard's Test tab.
+                    var privateNote = document.createElement("div");
+                    privateNote.className = "source-note";
+                    privateNote.textContent = "Visitors can't open this document. Allow it in the Documents tab.";
+                    wrap.appendChild(privateNote);
+                }
+                return;
+            }
+            if (!source || !isSafeHttpUrl(source.url)) return;
+
+            // Link straight to the section when the server provides one.
+            var target = isSafeHttpUrl(source.link) ? source.link : source.url;
+            var link = document.createElement("a");
+            link.className = "source-url source-chip";
+            link.href = target;
+            link.title = target;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.innerHTML = EXTERNAL_ICON;
+            link.append([source.section || source.title || "Website source", domainOf(source.url)].filter(Boolean).join(" · "));
+            wrap.appendChild(link);
+        });
+
+        if (wrap.children.length) {
+            chat.appendChild(wrap);
+            scrollBottom();
+        }
+    }
+
+    // Sent with the next question so short follow-ups keep their context.
+    var previousQuestion = "";
+
+    async function ask(question) {
+        question = String(question || "").trim();
+        if (!question || !chatbotId || send.disabled) return;
+
+        if (welcome) {
+            welcome.remove();
+            welcome = null;
+        }
+
+        input.value = "";
+        input.style.height = "auto";
+        addMessage("user", question);
+        var typingRow = addTyping();
+        send.disabled = true;
+
+        var slowHint = setTimeout(function () {
+            var hint = document.createElement("div");
+            hint.className = "slow-hint";
+            hint.textContent = "Still working… answers can take up to a minute.";
+            typingRow.querySelector(".bubble").appendChild(hint);
+            scrollBottom();
+        }, SLOW_HINT_AFTER_MS);
+
+        var controller = new AbortController();
+        var timeout = setTimeout(function () { controller.abort(); }, REQUEST_TIMEOUT_MS);
+
+        var nextFocus = input;
+        try {
+            var response;
+            var data = null;
+
+            try {
+                response = await fetch(apiBase + "/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chatbotId: chatbotId, question: question, previousQuestion: previousQuestion }),
+                    signal: controller.signal
+                });
+                data = await response.json().catch(function () { return null; });
+            } catch (networkError) {
+                throw { status: networkError && networkError.name === "AbortError" ? -1 : 0 };
+            }
+
+            if (!response.ok || !data || !data.success) {
+                throw { status: response.status, data: data };
+            }
+
+            typingRow.remove();
+            var answer = data.answer || "I could not find this information on the website.";
+            var answerRow = addMessage("assistant", answer);
+            if (data.unanswered === true || answer === "I could not find this information on the website.") answerRow.querySelector(".bubble").classList.add("notfound");
+            addSources(data.sources || []);
+            if (data.contact === true) nextFocus = addContactOption(question);
+            previousQuestion = question;
+        } catch (failure) {
+            typingRow.remove();
+            addMessage("assistant", friendlyError(failure && failure.status, failure && failure.data));
+        } finally {
+            clearTimeout(slowHint);
+            clearTimeout(timeout);
+            send.disabled = false;
+            nextFocus.focus();
+        }
+    }
+
+
+    function contactContainer() { return chat; }
+    function contactScroll() { scrollBottom(); }
+    // Contact form after an unanswered question: shown automatically when the server says so
+    // (contact: true, i.e. the chatbot could not answer and has a support address). The visitor's
+    // original question is kept exactly as asked (shown, not editable) and sent with the form;
+    // nothing is sent until the visitor submits. Success is shown only when the server confirms the
+    // question was saved; its message says whether an email was also sent.
+    function newRequestId() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+        var id = "";
+        while (id.length < 24) id += Math.random().toString(36).slice(2);
+        return id.slice(0, 24);
+    }
+    function addContactOption(question) {
+        var original = String(question || "").slice(0, 1000);
+        // One request ID per form: repeated clicks or retries never save or send it twice.
+        var requestId = newRequestId();
+        var formId = "contact-" + requestId.slice(0, 8);
+        var wrap = document.createElement("div");
+        wrap.className = "contact";
+        var form = document.createElement("form");
+        form.className = "contact-form";
+        form.noValidate = true;
+        form.setAttribute("aria-label", "Send your question to the support team");
+
+        var intro = document.createElement("div");
+        intro.className = "contact-intro contact-title";
+        // With no chatbot name set, the header shows the general title: not a team's name.
+        var teamName = document.getElementById("title").textContent;
+        intro.textContent = "Ask the " + (teamName === "Website Assistant" ? "support" : teamName) + " team instead";
+        form.appendChild(intro);
+
+        var questionLabel = document.createElement("div");
+        questionLabel.className = "contact-label";
+        questionLabel.id = formId + "-question-label";
+        questionLabel.textContent = "Your question";
+        var questionText = document.createElement("div");
+        questionText.className = "contact-question";
+        questionText.setAttribute("aria-labelledby", questionLabel.id);
+        questionText.textContent = original;
+
+        function field(labelText, element, name, parent) {
+            var label = document.createElement("label");
+            label.textContent = labelText;
+            element.name = name;
+            element.id = formId + "-" + name;
+            var error = document.createElement("span");
+            error.className = "contact-error";
+            error.id = element.id + "-error";
+            element.setAttribute("aria-describedby", error.id);
+            label.appendChild(element);
+            label.appendChild(error);
+            (parent || form).appendChild(label);
+            return { input: element, error: error };
+        }
+        function input(type, maxLength, autocomplete) {
+            var element = document.createElement("input");
+            element.type = type;
+            element.maxLength = maxLength;
+            element.required = true;
+            if (autocomplete) element.autocomplete = autocomplete;
+            return element;
+        }
+        var pair = document.createElement("div");
+        pair.className = "contact-pair";
+        form.appendChild(pair);
+        var name = field("Name", input("text", 100, "name"), "name", pair);
+        var email = field("Email", input("email", 254, "email"), "email", pair);
+        form.appendChild(questionLabel);
+        form.appendChild(questionText);
+        var detailsInput = document.createElement("textarea");
+        detailsInput.maxLength = 2000;
+        detailsInput.rows = 2;
+        var details = field("Anything else? (optional)", detailsInput, "additional");
+
+        var buttons = document.createElement("div");
+        buttons.className = "contact-buttons";
+        var submit = document.createElement("button");
+        submit.type = "submit";
+        submit.className = "contact-send";
+        submit.textContent = "Send question";
+        var later = document.createElement("button");
+        later.type = "button";
+        later.className = "contact-cancel";
+        later.textContent = "Not now";
+        buttons.appendChild(submit);
+        buttons.appendChild(later);
+        form.appendChild(buttons);
+        var status = document.createElement("div");
+        status.className = "contact-status";
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
+        form.appendChild(status);
+
+        // "Not now" folds the form into one button; the question and anything typed are kept.
+        var reopen = document.createElement("button");
+        reopen.type = "button";
+        reopen.className = "contact-open";
+        reopen.textContent = "Send this question to support";
+        later.addEventListener("click", function () { wrap.replaceChildren(reopen); });
+        reopen.addEventListener("click", function () { wrap.replaceChildren(form); name.input.focus(); });
+
+        function showError(target, text) {
+            target.error.textContent = text;
+            target.input.setAttribute("aria-invalid", text ? "true" : "false");
+        }
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            if (submit.disabled) return;
+            showError(name, name.input.value.trim() ? "" : "Please enter your name.");
+            showError(email, /^[^\s@<>()[\]",;:\\]+@[^\s@]+\.[^\s@]+$/.test(email.input.value.trim()) ? "" : "Please enter a valid email address.");
+            showError(details, "");
+            var firstInvalid = [name, email].filter(function (f) { return f.input.getAttribute("aria-invalid") === "true"; })[0];
+            if (firstInvalid) {
+                status.textContent = "Please check the highlighted fields.";
+                firstInvalid.input.focus();
+                return;
+            }
+            submit.disabled = true;
+            later.disabled = true;
+            submit.textContent = "Sending…";
+            status.textContent = "Sending your question…";
+            try {
+                var response = await fetch(apiBase + "/api/chat/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chatbotId: chatbotId, name: name.input.value, email: email.input.value, question: original, details: details.input.value, requestId: requestId })
+                });
+                var result = await response.json().catch(function () { return null; });
+                if (response.ok && result && result.success === true && result.saved === true) {
+                    var done = document.createElement("div");
+                    done.className = "contact-status contact-done";
+                    done.setAttribute("role", "status");
+                    done.textContent = typeof result.message === "string" ? result.message : "Thank you. Your question has been received.";
+                    wrap.replaceChildren(done);
+                    contactScroll();
+                    return;
+                }
+                // A field the server refused (400 with "field"): its message is shown next to that field.
+                var fieldTarget = result && { name: name, email: email, details: details }[result.field];
+                if (fieldTarget && typeof result.error === "string") {
+                    showError(fieldTarget, result.error);
+                    fieldTarget.input.focus();
+                }
+                status.textContent = response.status === 429
+                    ? "Too many messages were sent. Please try again later."
+                    : (result && typeof result.error === "string" ? result.error : "Your question could not be sent. Please try again later.");
+            } catch (networkError) {
+                status.textContent = "Your question could not be sent. Please check your connection and try again.";
+            }
+            submit.disabled = false;
+            later.disabled = false;
+            submit.textContent = "Send question";
+        });
+
+        wrap.appendChild(form);
+        contactContainer().appendChild(wrap);
+        contactScroll();
+        return name.input;
+    }
+
+    document.querySelectorAll(".suggestion").forEach(function (button) {
+        button.addEventListener("click", function () {
+            ask(button.getAttribute("data-question"));
+        });
+    });
+
+    send.addEventListener("click", function () {
+        ask(input.value);
+    });
+
+    input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            ask(input.value);
+        }
+    });
+
+    input.addEventListener("input", function () {
+        input.style.height = "auto";
+        input.style.height = Math.min(input.scrollHeight, 90) + "px";
+    });
+
+    // Name and welcome message set in the dashboard (a ?title= parameter wins).
+    if (UUID_PATTERN.test(chatbotId)) {
+        fetch(apiBase + "/api/chatbots/" + encodeURIComponent(chatbotId) + "/config")
+            .then(function (response) { return response.ok ? response.json() : null; })
+            .then(function (config) {
+                if (!config) return;
+                // Same colour as the widget on the website; text on it stays readable.
+                if (/^#[0-9a-f]{6}$/i.test(config.accentColor || "")) {
+                    var hex = config.accentColor.slice(1);
+                    var light = 0.299 * parseInt(hex.slice(0, 2), 16) + 0.587 * parseInt(hex.slice(2, 4), 16) + 0.114 * parseInt(hex.slice(4, 6), 16) > 170;
+                    document.documentElement.style.setProperty("--accent", config.accentColor);
+                    document.documentElement.style.setProperty("--on-accent", light ? "#2A2420" : "#ffffff");
+                }
+                if (!params.get("title") && typeof config.displayName === "string" && config.displayName.trim()) {
+                    setTitle(config.displayName.trim().slice(0, 60));
+                    document.title = config.displayName.trim().slice(0, 60);
+                }
+                var welcomeText = welcome && welcome.querySelector("p");
+                if (welcomeText && typeof config.welcomeMessage === "string" && config.welcomeMessage.trim()) {
+                    welcomeText.textContent = config.welcomeMessage.trim().slice(0, 300);
+                }
+            })
+            .catch(function () {});
+    }
+
+    // Without a valid chatbot ID the page cannot answer anything.
+    if (!UUID_PATTERN.test(chatbotId)) {
+        if (welcome) {
+            welcome.remove();
+            welcome = null;
+        }
+        addMessage("assistant", "This chat is not set up correctly (missing or invalid chatbotId).");
+        input.disabled = true;
+        send.disabled = true;
+    }
+})();
+</script>
+</body>
+</html>

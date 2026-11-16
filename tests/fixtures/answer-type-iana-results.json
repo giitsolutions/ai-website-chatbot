@@ -1,0 +1,270 @@
+{
+ "note": "Real search results (public iana.org page text) for the question below, captured 2026-10-21. Used to test answer-type evidence in ranking only.",
+ "question": "How much money does a trusted community representative receive for each key ceremony?",
+ "results": [
+  {
+   "id": "208daaef-be53-48e9-9768-eec7025fdaa6",
+   "score": 0.45844233,
+   "payload": {
+    "url": "https://www.iana.org/domains/reserved",
+    "title": "IANA-managed Reserved Domains",
+    "heading": "Policy-reserved domains",
+    "chunk": "Policy-reserved domains: We act as both the registrant and registrar for a select number of domains which have been reserved under policy grounds. These exclusions are typically indicated in either technical standards (RFC documents), or contractual limitations. Domains which are described as registered to IANA or ICANN on policy grounds are not available for registration or transfer, with the exception of country-name.info domains. These domains are available for release by the ICANN Governmental Advisory Committee Secretariat.",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "37eecce6-c53a-459e-96bf-00f48855b4d7",
+   "score": 0.43989414,
+   "payload": {
+    "url": "https://www.iana.org/domains/reserved",
+    "title": "IANA-managed Reserved Domains",
+    "heading": "Test IDN top-level domains",
+    "chunk": "Test IDN top-level domains: These domains were temporarily delegated by IANA for the IDN Evaluation being conducted by ICANN. Domain Domain (A-label) Language Script إختبار xn--kgbechtv Arabic آزمایشی xn--hgbk6aj7f53bba Persian xn--0zwm56d Chinese Han (Simplified variant) xn--g6w251d Han (Traditional variant) испытание xn--80akhbyknj4f Russian Cyrillic परीक्षा xn--11b5bs3a9aj6g Hindi Devanagari (Nagari) δοκιμή xn--jxalpdlp Greek, Modern (1453-) Greek 테스트 xn--9t4b11yi5a Korean Hangul (Hangŭl, Hangeul) טעסט xn--deba0ad Yiddish Hebrew テスト xn--zckzah Japanese Katakana பரிட்சை xn--hlcj6aya9esc7a Tamil",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "94398fc8-c6f3-40c1-b489-bc1bc904df2a",
+   "score": 0.6925832,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4.1. Visas",
+    "chunk": "4.1. Visas: If the TCR requires a visa to attend a KSK ceremony, we will cover up to $200 (USD) of the cost and will provide an invitation letter. Please contact constituency-travel@icann.org at least ninety (90) days before the ceremony’s start date since processing times vary. Eligible costs we will cover are: The visa application fee; Passport photos for visa application; and Shipping costs to send/receive your visa",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "d8a1312f-9ae3-4249-9832-7b7733016232",
+   "score": 0.67644846,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "Travel Support for Trusted Community Representatives",
+    "chunk": "Travel Support for Trusted Community Representatives: We provide travel support for eligible TCRs to participate in the Root Key Signing Key (KSK) ceremonies. This document describes eligibility for this support, and the process to make use of this support.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "c5a3dea8-a9eb-4ca9-973c-fcfe637415fd",
+   "score": 0.66738343,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4.4. Stipend",
+    "chunk": "4.4. Stipend: We provide eligible travelers with a stipend of $300 for each ceremony. Stipends are intended to cover incidental expenses incurred while attending the KSK Ceremony such as: Meals Transportation between airport, hotel and KMF (e.g. taxis or rental cars) Parking Immunizations All stipends are in US dollars. If TCRs incur reasonable expenses significantly more than the standard rate, they may request to be reimbursed for actual costs. Email constituency-travel@icann.org for the reimbursement form and return the completed form and scanned receipts to the same address. If possible, the stipend will be wire transferred to a bank account designated by the TCR at least one week prior to the start of the ceremony. If the TCR is from a country that has restrictions on receiving wire transfers from other countries, please notify constituency-travel@icann.org to coordinate an alternative.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "1c6de51b-f5a9-4f99-871b-7b3fe87945ca",
+   "score": 0.65767086,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "2. Deadlines",
+    "chunk": "2. Deadlines: We cover limited travel and lodging costs related to the KSK ceremonies. The planned dates for these ceremonies are typically announced four months in advance. TCRs must confirm attendance with our KSK management staff. Once acknowledged, the TCR must email ICANN Constituency Travel (constituency-travel@icann.org) at least 60 days prior to the scheduled ceremony date if they wish to make use of this travel support.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "1e0a574f-d6fd-4e28-9bb2-0b41f0452046",
+   "score": 0.6485969,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "1. Eligibility",
+    "chunk": "1. Eligibility: TCRs who have a designated role in a specific KSK ceremony are eligible to apply for travel support. For normally scheduled KSK ceremonies, this means active Cryptographic Officers (COs) for the facility in which the ceremony is taking place. For exceptional ceremonies, such as when a new KSK is generated, this may also include active Recovery Key Share Holders (RKSHs). Eligibility and attendance must be confirmed with our KSK management staff prior to applying for travel support. TCRs are not required to make use of this travel support program. They may choose to arrange their own travel at their own cost.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "6c997dca-be91-4f89-92d6-72fbd8bbae81",
+   "score": 0.64810014,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "5. History",
+    "chunk": "5. History: The original Trusted Community Representatives (TCRs) appointed in 2010 undertook all travel costs associated with their participation. In 2014, we began reimbursing TCRs for expenses associated with attending key signing ceremonies. This approach has been adjusted in 2016 to align it with current internal ICANN procedures for expense reimbursement and travel support for community members.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "44e10143-ee63-41f1-a7f5-83e682d28a38",
+   "score": 0.63410914,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "3. Travel Duration",
+    "chunk": "3. Travel Duration: Typically, a KSK ceremony lasts one day, with the following day reserved as a backup day in case of unexpected events. TCRs should plan to arrive one or two days prior to the KSK ceremony, and leave the day after the ceremony. For example, if a ceremony is scheduled for a Thursday, a TCR should arrive on either Tuesday or Wednesday and depart on Friday. In the exceptional case where the KSK ceremony requires the backup day, we will cover costs associated with changing hotel and travel arrangements.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "34b7e04a-4298-4a13-8006-5b15fd7dd58d",
+   "score": 0.61275834,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4.1.1. Reimbursement",
+    "chunk": "4.1.1. Reimbursement: TCRs must provide ICANN Travel Support with legible electronic receipts for these costs in order to be reimbursed. All reimbursement will be provided at the conclusion of the ceremony. Should additional expenses be incurred during the process, please contact constituency-travel@icann.org.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "0a26f833-f5f2-4b6c-a1d6-d0bfaf622891",
+   "score": 0.61075985,
+   "payload": {
+    "url": "https://www.iana.org/help",
+    "title": "Instructions and Guides",
+    "heading": "Root Zone Key Signing Ceremonies",
+    "chunk": "Root Zone Key Signing Ceremonies: Attending a key signing ceremony Key Ceremony Roles Key Signing Ceremony scheduling Trusted Community Representatives (TCRs) Selection Criteria Call for volunteers Roles Travel Support Procedures Changes Selection Criteria Call for volunteers Roles Travel Support Procedures Changes Key Management Facilities Facility requirements KMF East: Culpeper, Virginia KMF West: El Segundo, California Facility requirements KMF East: Culpeper, Virginia KMF West: El Segundo, California",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "b499d7bf-721e-4684-a439-8beaa812290b",
+   "score": 0.5898011,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4.2. Flight & Hotel",
+    "chunk": "4.2. Flight & Hotel: Ticket is a non-refundable economy class airfare. The following hotels are preferred for attendees to the KSK ceremonies. If these venues do not have availability, we will book a room of a similar rate at a nearby hotel. KMF East (Virginia) KMF West (California) Airport Washington Dulles (IAD) Los Angeles International (LAX) Preferred Hotel Holiday Inn Express & SuitesCulpeper, VA Hampton Inn & SuitesEl Segundo, CA Distance Airport to Hotel 59mi / 95km 2mi / 3km Recommended method of transferfrom Airport to Hotel Rental car / car pool Taxi Distance Hotel to KMF 3mi / 5km 0.2mi / 300m",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "f9b9d648-56d1-4892-ab00-b4a150d97757",
+   "score": 0.586828,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4. Travel Reservations",
+    "chunk": "4. Travel Reservations: Self-bookings will not be reimbursed through this travel support program. A representative from ICANN Travel will contact the TCR to arrange all travel details approximately 60 days before the ceremony. Our travel team will contact first time travelers for tax and bank account information.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "9b112feb-f73f-4798-bbc0-f2910e86b321",
+   "score": 0.5660947,
+   "payload": {
+    "url": "https://www.iana.org/help/tcr-travel-support",
+    "title": "Travel Support for Trusted Community Representatives",
+    "heading": "4.3. Changes in Travel Plans",
+    "chunk": "4.3. Changes in Travel Plans: Contact constituency-travel@icann.org and ceremony-support@icann.org to request any changes. It is important any changes are known well in advance. In particular, the inability of a TCR to attend at short notice may require a ceremony to be rescheduled or cancelled.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "ddc98384-5e26-4cb6-9bdf-23b8a29976a9",
+   "score": 0.5112635,
+   "payload": {
+    "url": "https://www.iana.org/dnssec/procedures",
+    "title": "DNSSEC Practice Statement",
+    "heading": "Additional Procedures",
+    "chunk": "Additional Procedures: acceptable level, and the management and maintenance of this level of risk over time in relation to KSK operations. KSK PMA Charter v3.8 Effective 2026-09-21 Describes the structure and responsibility of the PMA and PMA members' roles and responsibilities in relation to RZ KSK operations. KSK Software Maintenance Procedure v3.8 Effective 2026-09-21 Describes the parameters of the key management software used by the RZ KSK Operator to create and maintain KSKs and to process Key Signing Requests (KSRs) submitted by the Zone Signing Key (ZSK) operator. KSK Termination Plan v3.8 Effective 2026-09-21 Describes a high-level plan for terminating and transferring the roles and responsibilities of the RZ KSK Operator to a successor.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "34290d8c-9027-463e-befd-1fb3aca35821",
+   "score": 0.50849736,
+   "payload": {
+    "url": "https://www.iana.org/dnssec/procedures",
+    "title": "DNSSEC Practice Statement",
+    "heading": "Additional Procedures",
+    "chunk": "Additional Procedures: The requirements of the DNSSEC Practice Statements are implemented by a series of policies and procedural documents. These documents are reviewed annually by the Root Zone KSK Policy Management Authority. Title of Document Description KSK Audit and Accountability Policy v3.8 Effective 2026-09-21 Describes access to Key Management Facilities (KMFs) and operations involving the private component of the RZ KSK to remain traceable in time including the responsible party triggering the event. KSK Audit Logging Procedure v3.8 Effective 2026-09-21 Describes recording access to Key Management Facilities (KMFs) and operations involving the private component of the RZ KSK including the parties involved and operations performed when access to a KMF or RZ KSK occurred. KSK Disaster Recovery and Business ContinuityProcedure v3.9 Effective 2026-09-21 Describes requirements and recommendations to be performed by designated personnel, systems, and other means in disaster recovery scenarios in relation to RZ KSK operations. KSK Document Management Procedure v3.8 Effective 2026-09-21 Describes the life cycle of supporting documents in relation to RZ KSK operations. KSK Emergency Rollover Plan v3.8 Effective 2026-09-21 Describes emergency RZ KSK rollovers in relation to RZ KSK operations, initiated if the RZ KSK Private Key has been irrecoverably lost or compromised. KSK Incident Handling Procedure v3.8 Effective 2026-09-21 Describes requirements and recommendations for handling security incidents, or events that could potentially be security incidents in relation to RZ KSK operations. KSK Information Security Policy v3.8 Effective 2026-09-21 Describes the establishment of preventive controls and measures for the identification, management, and monitoring of threats (whether internal or external, deliberate or accidental) to the information assets in relation to RZ KSK operations. KSK Key Management Policy v3.9 Effective 2026-09-21 Describes risks associated with the management of cryptographic",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "ece3b3e6-d6cc-4a59-bd85-a8099bf538d9",
+   "score": 0.4933904,
+   "payload": {
+    "url": "https://www.iana.org/dnssec/procedures",
+    "title": "DNSSEC Practice Statement",
+    "heading": "Additional Procedures",
+    "chunk": "Additional Procedures: Effective 2026-09-21 Describes the establishment of preventive controls and measures for the identification, management, and monitoring of threats (whether internal or external, deliberate or accidental) to the information assets in relation to RZ KSK operations. KSK Key Management Policy v3.9 Effective 2026-09-21 Describes risks associated with the management of cryptographic keys, proper mitigation of risks to an acceptable level, and the management and maintenance of this level of risk over time in relation to RZ KSK operations. KSK Key Management Procedure v3.9 Effective 2026-09-21 Describes requirements and recommendations for procedures to be performed by designated personnel, systems, and other means in relation to RZ KSK operations. KSK Password Policy v3.8 Effective 2026-09-21 Describes requirements for managing passwords and personal identification numbers (PINs) in relation to RZ KSK operations. KSK Personnel Security Policy v3.8 Effective 2026-09-21 Describes responsibilities of staff, contractors, and third-party users to ensure understanding and suitability for the roles in which they are considered in relation to RZ KSK operations and seeks to mitigate risk from internal threats such as sabotage, espionage, denial of service, and in extreme cases, terrorism. KSK Physical Access Control Procedure v3.8 Effective 2026-09-21 Describes responsibilities and provides recommendations to be performed by designated personnel, systems, and other means in relation to RZ KSK operations. KSK Physical Security Policy v3.8 Effective 2026-09-21 Describes risks associated with physical security, proper mitigation of risks to an acceptable level, and the management and maintenance of this level of risk over time in relation to KSK operations. KSK PMA Charter v3.8 Effective 2026-09-21 Describes the structure and responsibility of the PMA and PMA members' roles and responsibilities in relation to RZ KSK operations. KSK Software Maintenance Procedure v3.8",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "426b2898-21c2-4d5a-baac-8dd813b839dc",
+   "score": 0.48361814,
+   "payload": {
+    "url": "https://www.iana.org/help/licensing-terms",
+    "title": "Licensing Terms",
+    "heading": "Joint Statement of IANA and IETF Concerning Copyright Rights in the Protocol Registries dated 10 November 2021",
+    "chunk": "Joint Statement of IANA and IETF Concerning Copyright Rights in the Protocol Registries dated 10 November 2021: date of this statement neither IANA nor IETF are aware of any third parties claiming intellectual property rights in the Protocol Registries, neither can guarantee that third parties will not do so. Further, the Protocol Registries are made available without any other sort of representation or warranty. The limitations and disclaimers found in the CC0 1.0 dedication are an integral part of this joint statement. For example, in no way are the patent or trademark rights of any person affected by CC0, nor are the rights that other persons may have in the work or in how the work is used, including data protection rights.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "b2933a29-cabc-4706-9c3b-2dbb5f738753",
+   "score": 0.4832611,
+   "payload": {
+    "url": "https://www.iana.org/dnssec/procedures",
+    "title": "DNSSEC Practice Statement",
+    "heading": "ICANN CA Certification Policy and Certification Practice Statement",
+    "chunk": "ICANN CA Certification Policy and Certification Practice Statement: Describes the policies and operational practices governing the ICANN Certificate Authority (ICANN CA) used to support DNS Root Trust Anchor signing and publication. ICANN CA Certification Policy and Certification Practice Statement v1.0 2026-05-28",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "576a6e9a-767e-4d91-9873-8f3b48dab001",
+   "score": 0.4800949,
+   "payload": {
+    "url": "https://www.iana.org/help/licensing-terms",
+    "title": "Licensing Terms",
+    "heading": "Joint Statement of IANA and IETF Concerning Copyright Rights in the Protocol Registries dated 10 November 2021",
+    "chunk": "Joint Statement of IANA and IETF Concerning Copyright Rights in the Protocol Registries dated 10 November 2021: Terminology. For the purposes of this statement, “IANA” means the Internet Corporation for Assigned Names and Numbers (ICANN) and its affiliate that performs the IANA functions, and “IETF” means IETF Trust, the body that manages intellectual property matters for the Internet Engineering Task Force. “Protocol Registries” means the technical protocol registry data directly linked at either https://www.iana.org/protocols or https://www.ietf.org/assignments/; it does not include any other material on or linked from those pages (e.g., the RFC documents that are linked on those pages are excluded). IANA and IETF intend that the Protocol Registries may be freely used by any party for any purpose. Both IANA and IETF believe that the Protocol Registries consist primarily of factual information that is unlikely to be protectable as a matter of copyright law. However, for additional clarity, and to avoid any potential confusion about applicable rights, both IANA and IETF desire to (a) dedicate any applicable copyright rights that they may own in the Protocol Registries to the public domain, and (b) license any copyright or related rights for which they are a licensee (with a right to sublicense) to the broadest extent that they are permitted to do so. Accordingly, both IANA and IETF affirm that any applicable rights that they may have in the Protocol Registries are subject to the Creative Commons CC0 1.0 dedication found at https://creativecommons.org/publicdomain/zero/1.0/legalcode. Disclaimer. While as of the date of this statement neither IANA nor IETF are aware of any third parties claiming intellectual property rights in the Protocol Registries, neither can guarantee that third parties will not do so. Further, the Protocol Registries are made available without any other sort of representation or warranty. The limitations and",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "ed563fff-48b4-43d2-9333-51417797caf9",
+   "score": 0.4694972,
+   "payload": {
+    "url": "https://www.iana.org/help/idn-repository-procedure",
+    "title": "IDN Repository Procedures",
+    "heading": "Registration Process",
+    "chunk": "Registration Process: All delegated TLD registries can apply to register an LGR or submit an update to an existing LGR. Deprecated LGRs will be archived and marked as historical.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "fc3d2672-a289-442b-bea0-1a5a02ebe9fb",
+   "score": 0.4586631,
+   "payload": {
+    "url": "https://www.iana.org/help/idn-repository-procedure",
+    "title": "IDN Repository Procedures",
+    "heading": "ccTLD and Other Submissions",
+    "chunk": "ccTLD and Other Submissions: Anyone may submit a request to list or update an LGR, but we will ask for its posting to be approved by the current Administrative Contact for the domain in the Root Zone Database. Before submitting any registration or change request, the submitter should ensure that the Administrative Contact is aware of the proposed LGR and ready to consent to its publication. A registration request must include all of the necessary elements described in the requirements listed above. Requests should be sent to the email address idn-tables@iana.org. The submitter will receive a confirmation email containing a ticket number. Requests comprising multiple LGRs should be sent in the form of an archive (such as a ZIP or TAR file). For particularly complex applications, involving many LGRs or domains, please contact us in advance in order to identify the most optimal method of submission that does not involve unnecessary repetition. Upon submission, within five days either: the Administrative Contact will receive an email, with the Technical Contact and submitter in copy, requesting the Administrative Contact’s confirmation that the details of the request are correct, or the submitter will receive notice that the LGR does not contain all of the elements necessary for registration. The LGR will not be sent to the Administrative Contact for confirmation until any necessary changes have been made. LGRs may be revised according to the same process (i.e. request to idn-tables@iana.org followed by confirmation request to Administrative Contact). Updated LGRs must have a version number that is distinct from the current or previously posted version of the LGR. Updates should be accompanied by a description of the reason(s) for the request.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  }
+ ]
+}

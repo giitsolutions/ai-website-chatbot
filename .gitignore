@@ -1,0 +1,32 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Local data, backups and snapshots (may contain crawled content, old code or credentials)
+backups/
+backup-before-deployment/
+*.snapshot
+*.before-*.js
+*.before-*.html
+public/*.before-*
+*.backup.js
+*.bak
+server_v14_backup.js
+
+# Uploaded documents (customer files; never commit)
+data/uploads/
+
+# Logs and test artifacts
+*.log
+test-results/
+playwright-report/
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
