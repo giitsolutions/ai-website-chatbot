@@ -1,0 +1,279 @@
+{
+ "note": "Real search results (public inhousegym.in page text) for the question below, captured 2026-10-20. Used to test ranking and context order only.",
+ "question": "What are the online fitness training packages and their prices?",
+ "results": [
+  {
+   "id": "46ab0bcb-ddda-452a-9d07-ac1500d1652d",
+   "score": 0.5754378,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "We are Home and Commercial Fitness Equipment Engineers.",
+    "anchor": "",
+    "chunk": "We are Home and Commercial Fitness Equipment Engineers.:\nWe specialize in the Repair, Service, and Maintenance, on all Makes and Models of Fitness Equipment (Treadmills, Cross Trainer, Exercise Bike, Strength Equipment etc.)",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "31bfe21e-c3c1-4265-9f4f-82fc74c2bc44",
+   "score": 0.5609315,
+   "payload": {
+    "url": "https://inhousegym.in/",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Treadmill on Rent for Home. Rent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida",
+    "anchor": "para",
+    "chunk": "Treadmill on Rent for Home. Rent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida:\nRent Cross Trainer, Exercise Bike, Treadmill and Gym Fitness Equipment in Delhi, Gurgaon, Faridabad, Noida",
+    "pageType": "content",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "d45d2bb0-4b09-4a74-b2f5-90a8b589a3e9",
+   "score": 0.6930729,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "OUR PACKAGES",
+    "anchor": "",
+    "chunk": "OUR PACKAGES:\nwe offer 4 differents packages for our customers, one can choose package accordingly as per his/her convininece\n₹1200: Customer can try our weekly plan worth ₹1200/- only.\n₹3000: An individual can choose our monthly basis plan for only ₹3000/- .\n₹7500: one can also select our 3 months plan worth ₹7500/- and transform his /her body.\n₹12000: If you wish for single time investment then you can go for our 6 months plan worth ₹12000/- only.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "d63ba3d6-1adf-411d-a5c8-f6dbdd3e01bf",
+   "score": 0.6825459,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Introducing online Training Programme",
+    "anchor": "",
+    "chunk": "Introducing online Training Programme:\nIs Social Distancing become barrier in your workout? No Need to Worry, Join Inhousegym’s live fitness Training Programme today!\n45 Minutes Training: There will be a 45 Minutes online training by our fitness trainer, trainer will guide you on live video call and keep you motivated\n3 Classes per week: One can choose 3 classes in a week as per comfort\nRegular one to one call with Personal Trainer: Regular monitering of your progress and there will be direct call with your fitness trainer.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "a6bef22a-38fd-4e5e-ab60-045d8a822f40",
+   "score": 0.666888,
+   "payload": {
+    "url": "https://www.inhousegym.in/dietitian_service.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Packages",
+    "anchor": "",
+    "chunk": "Packages:\nPackage Duration\nPackage Name\nRate\n1 months package\nHit and Try\n₹2000/-\n3 month package\nBasic\n₹5000/-\n6 month package\nPro package\n₹9000/-\n1 year package\nPremium package\n₹12,000/-\nWeight loss: Only you can improve your fitness no one can do it for you, so wake up every morning for fitness you want to achieve\n2-Balanced Diet: Inhousegym is here to offer you both at same place. You can buy our combo package at less than offered prices.(T&C Applied)",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "7c0772eb-e650-4c3b-ad89-d56540cb52ef",
+   "score": 0.62829554,
+   "payload": {
+    "url": "https://www.inhousegym.in/online_fitness_training.php",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Below are some reasons that why you should go for our experts:",
+    "anchor": "",
+    "chunk": "Below are some reasons that why you should go for our experts::\n- No fitness coals can be achieved without a trainer who trains you dedicatedly.\n- Proper Body posture is required to get positive results of exercise can give us come nagetive results.\n- individual attention by our trainer with small batch size.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "1cde7111-571d-4592-89b5-e963d04db490",
+   "score": 0.6129041,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Benefits Of Using Treadmill",
+    "anchor": "",
+    "chunk": "Benefits Of Using Treadmill:\nSome phrases are always fit in life “Pehla sukh nirogi kaya”. Fitness is a state of an individual when his body and brain are free from any kind of stress. A fit body and a healthy brain both are a necessity for an individual to give a hundred percent in any task. But the bitter truth is that in the whole world everyone is facing hundreds of health issues in their lifestyle. Nowadays people have time to fix appointments with doctors but they don’t have time to spend on their fitness. Now due to busy lifestyles, people regularly visit specialist doctors and pay the costly fee, but they can’t pay attention to their fitness. We must know that if we want a fit and healthy lifestyle in the future then we have to work on it from today. All the health-related issues have only a single solution that is your lifestyle. In this bust lifestyle of today, nobody has time to go to gym, then why not bring gym into the house just by making a call. We, Inhousegym deliver quality fitness equipment like Treadmill, Cross Trainer, Exercise Bike at your doorstep.\nWell, there are several benefits of doing morning workout. Instead of enjoying your bed tea you should spend some time on the treadmill, it is going to keep you healthy for life. You must know that for a healthy body you must work for it and if you don’t have time to spend in the gym then just give us a phone call. We will be delivering fitness equipment at your doorstep. There are several benefits of having a treadmill in your home.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "f2777e41-f2ac-463d-91a2-de353f141bcf",
+   "score": 0.6122186,
+   "payload": {
+    "url": "https://www.inhousegym.in/blogA.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Benefits of using treadmill",
+    "anchor": "",
+    "chunk": "Benefits of using treadmill:\nSome phrases are always fit in life “Pehla sukh nirogi kaya”. Fitness is a state of an individual when his body and brain are free from any kind of stress. A fit body and a healthy brain both are a necessity for an individual to give a hundred percent in any task. But the bitter truth is that in the whole world everyone is facing hundreds of health issues in their lifestyle. All the health-related issues have only a single solution that is your lifestyle. In this bust lifestyle of today, nobody has time to go to gym, then why not bring gym into the house just by making a call. We, Inhousegym deliver quality fitness equipment like Treadmill, Cross Trainer, Exercise Bike at your doorstep.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "24112d16-2449-42da-aa41-b55f261993f9",
+   "score": 0.60766435,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Why To Choose Treadmill?",
+    "anchor": "",
+    "chunk": "Why To Choose Treadmill?:\n5. Preloaded workout programs: Sometimes we spend much time on different exercises but we don’t get the desired result. The only reason behind that is we don’t follow a particular workout program. One day we go on jogging and on the next day we take an off from our exercise but if you have a treadmill in your home you will be getting a preloaded program in the treadmill. You can also customize your workout program as per your convenience. Once you start following your workout program, you will definitely get a desired result. So start following the preloaded workout program and get desired results in your fitness with treadmill.\n6. Track your fitness: Nowadays, treadmills come with different sensors. You can also track your fitness with inbuilt sensors on your treadmill. You can track your pulse rate, heart rate, etc. with inbuilt sensors.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "52c96abe-ab70-4c46-8d74-b8763af6b1b1",
+   "score": 0.5918851,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Conclusion:",
+    "anchor": "",
+    "chunk": "Conclusion::\nWell, yes if you are a fitness freak and you wish to stay fit in the future so you have to work for that from today. Just making a single phone call to Inhousegym. Inhousegym can give you several benefits in your workout. You will be enjoying a safe and sound walk in the convenience of your home. You will find your workout more consistent and there will be no time barriers in your workout. You can have a walk whenever you get time from your busy schedule. You will be able to track your fitness with inbuilt sensors and as you will follow preloaded workout programs you will also receive desirable results in your fitness. So just give us a phone call we will be delivering you the best fitness equipment at your doorstep.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "f2baa742-d9d7-41c9-8fc1-f92a160b582e",
+   "score": 0.58357465,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Why To Choose Treadmill?",
+    "anchor": "",
+    "chunk": "Why To Choose Treadmill?:\n3. Consistency in your workout: If you are facing trouble in maintaining consistency in your daily workout then also you can go for a treadmill. Apart from the busy schedule of your personal and professional life, you must give a separate time for your fitness but the problem is that it is very challenging to maintain consistency and give separate time in a busy schedule. To get rid of this issue just have a treadmill inside your home so that whenever you get time, you can start your ride and take care of your health.\n4. No barrier of time: If you go for a gym membership it will greatly affect your pocket and you also have to fix a span of day for the gym but if you have a treadmill inside your home then there are no worries about time. You can do your work even having a ride on treadmill. So with the treadmill, you will no need to fix a separate time for your workout you can get yourself fit while watching your favourite TV program and doing other works. There will be no time barrier.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "c8fec308-b277-4612-8bad-4e7ac49c5bc1",
+   "score": 0.5820216,
+   "payload": {
+    "url": "https://www.inhousegym.in/about.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, about us Noida - InHouseGym",
+    "heading": "We are Home and Commercial Fitness Equipment Engineers.",
+    "anchor": "",
+    "chunk": "We are Home and Commercial Fitness Equipment Engineers.:\nWe specialize in the Repair, Service, and Maintenance, on all Makes and Models of Fitness Equipment (Treadmills, Cross Trainer, Exercise Bike, Strength Equipment etc.)",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "0c940727-eaef-4111-a70a-d3be841e0af4",
+   "score": 0.58065945,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Benefits Of Using Treadmill",
+    "anchor": "",
+    "chunk": "Benefits Of Using Treadmill:\nHome\n- Why to Choose Treadmill",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "af7c35b4-b692-4927-86f8-882190897fea",
+   "score": 0.5778878,
+   "payload": {
+    "url": "https://www.inhousegym.in/dietitian_service.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "anchor": "",
+    "chunk": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym:\nThanku for query\nWe will revert shortly!\nIntroducing InhouseGym dietitian service: On 12 years of successful achievement in serving fitness equipment with a vision of \"Healthier India\".\nExplore the packages and choose your favourite plan.\nIntroducing InhouseGym dietitian service: On 12 years of successful achievement in serving fitness equipment with a vision of \"Healthier India\".\nExplore the packages and choose your favorite plan.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "4280530a-d050-4abb-8ccc-0d1767043a9f",
+   "score": 0.57639885,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-benefits.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "Why To Choose Treadmill?",
+    "anchor": "",
+    "chunk": "Why To Choose Treadmill?:\nBelow are the reasons for which you must have a treadmill in your home.\n- Workout in convenience of your home\n- Safe and entertaining workout\n- Consistency in your exercise\n- No barrier of time\n- Preloaded workout programs\n- Track your fitness\n1. Workout in convenience of your home: First of all, the best benefit of having a treadmill in your home is that you can do exercise in the convenient way at your home. All you need to do is to connect your machine with a switchboard and start enjoying your exercise. There is no worries about the outside weather, no need to think about outside pollution, just connect your machine any time whenever you wish and start walking.\n2. Safe and entertaining workout: Well if you are living in cities then it is not at all safe for you to go for a walk on roads as there is always heavy traffic on roads. Walking needs a fresh mind and while walking on the road you have to remain focused due to traffic and hence you can’t enjoy your walk. But if you have a treadmill in your home then you can enjoy your walk with your favourite music with earphones, speakers and you can also watch your favourite TV programs. So hence if you want to enjoy a safe and entertaining walk then you must go for a treadmill.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "61dd2db9-6acd-47dc-91fc-71cf8cee3ab2",
+   "score": 0.57637286,
+   "payload": {
+    "url": "https://www.inhousegym.in/contact.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercsie Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym contact us",
+    "heading": "Are you looking for a fitness equipment on rental basis?",
+    "anchor": "first",
+    "chunk": "Are you looking for a fitness equipment on rental basis?:\nDelhi | Gurgaon | Faridabad | Noida",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "54438aa8-6d86-4b8c-90d1-0428afd61d19",
+   "score": 0.5744762,
+   "payload": {
+    "url": "https://www.inhousegym.in/blogA.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "6 reasons, Why renting is better than buying?",
+    "anchor": "",
+    "chunk": "6 reasons, Why renting is better than buying?:\nIf you are facing trouble in maintaining consistency in your daily workout then also you can go for a treadmill. Apart from the busy schedule of your personal and professional life, you must give a separate time for your fitness but the problem is that it is very challenging to maintain consistency and give separate time in a busy schedule. To get rid of this issue just have a treadmill inside your home so that whenever you get time, you can start your ride and take care of your health.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "67fa4bad-c9e4-42d6-8cd6-f5d47e59bced",
+   "score": 0.5742626,
+   "payload": {
+    "url": "https://www.inhousegym.in/blog-rent.html",
+    "title": "Muscle - Free Bootstrap 4 Template by Colorlib",
+    "heading": "6 reasons, why renting is better than buying?",
+    "anchor": "",
+    "chunk": "6 reasons, why renting is better than buying?:\nYou must have heard the phrase “Health is Wealth”. Even if you are an employee or a house wife, the most important ‘wealth’ for you is your fitness. Nothing is important enough to cost you your health. Wealth is not something that can be bought, it is something that must be maintained and to do so, one must exercise regularly. Many people prefer to use exercise equipment like treadmills, cross trainers, etc at home rather than visit the gym. Often when we start purchasing these items we browse numerous articles and websites providing various offers regarding renting and selling. Then number of questions arise in everyone’s mind, “Is it the right decision?”, “Should I buy it or rent it?”, “Which option is better?”, etc. Well, here’s a way to avoid all that hassle.\n• No worries regarding expense: First of all, these fitness equipments are pretty expensive but with renting you can purchase them at an affordable and convenient price. In this way you can have treadmill by just paying only some percent of the actual price and maintain your fitness.\n• No maintenance headache: When you rent a treadmill, the maintenance is the dealer’s duty. This is one of the major problems after buying equipments, and renting takes that off your plate.\n• Variety of equipment: You can try out various equipments from the same money that you spent on buying a single equipment. You can switch equipments on a monthly or even a weekly basis. After trying an equipment, you can switch until you come across an equipment that suits your needs.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "2dbc587d-2ed8-4c06-9208-24fbb05db293",
+   "score": 0.57204205,
+   "payload": {
+    "url": "https://www.inhousegym.in/treadmills-sell.html",
+    "title": "Treadmill sell, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Treadmill InHouseGym: Pro-500",
+    "anchor": "",
+    "chunk": "Treadmill InHouseGym: Pro-500:\nNew\n- Bluetooth Enabled Machine\n- Brand: InHouseGym\n- Incline: 0-15% AUTO\n- Color: Black\n- Maximum User Weight: 120kg\n- Features : DC 2HP Continuous Power, 4 HP Peak Power\n- Included Components: 1 Treadmill, Toolkit And Warranty Card\n- 5 inches LCD Display with time, speed, distance, calculation, pulse, Fat measure.\n- Display Type: LCD\n- Material Type: Steel\n- Running Area: 450*1260MM\n- 1 year Warranty\n- 1 Free Service\n- Speed Range: 0.8-16km/hr\n- 12 Programs, 3 Modes, USB, mp3, inbuild Bluetooth App.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "8b4cd674-ef32-46bf-9860-1c686d45791e",
+   "score": 0.567705,
+   "payload": {
+    "url": "https://www.inhousegym.in/commercial_treadmill.html",
+    "title": "Treadmill on rent, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "BENEFITS",
+    "anchor": "",
+    "chunk": "BENEFITS:\n- Monthly rental instead of bulky cost at one go\n- Full cost can be booked as expenditure.\n- We will take care of 100% maintainance at no cost.\n- Hassle free deployment right at your door step.\nALL RENTAL INCLUDES FREE SERVICE, REPAIR, PREVENTATIVE MAINTAINENCE AND EQUIPMENT REPLACEMENTS FOR LIFE.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "701a0b9e-e821-484c-b6b5-75826d205528",
+   "score": 0.56728274,
+   "payload": {
+    "url": "https://www.inhousegym.in/AC_Treadmill.html",
+    "title": "Rent Treadmill, Cross Trainer, Exercise Bike, NCR, Delhi, Gurgaon, Noida - InHouseGym",
+    "heading": "Elite W-855",
+    "anchor": "",
+    "chunk": "Elite W-855:\nNew\n- Motor: 4.5 HP High insulation\n- Speed: 1-20km/h\n- Incline: Smooth Auto Incline 0-15\n- Beltarea: 500mm x 3160mm\n- Display: 4 Speed & 4 Incline Hot Keys\n- Air Step Cushion Deck With Enlarge Footrail For Extra Safety\n- 18 Pre-set Program, 3 Users, 1 Manual & 1 Body Fat Function\n- Exquisite Control Panel with 17.78 Cm,(7\")\n- Blue Backlit Lcd Display Speed, Distance, Time, Calorie, Pulse & Incline\n- Extra Strong Stable Steel Frame For The Most Demanding Users\n- Great Entertainment With Built In Mp3\n- Speaker And Ipad/Smart Phone Holder, Foldable Treadmill With Soft Drop\n- Lowering System\n- 1 Year Warranty + 1 Free Onsite-Service\n- Brand-Fitking\n- MAX. USER WT : 120 KG.",
+    "pageType": "content",
+    "isStartPage": false
+   }
+  }
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "note": "Real answer of the 4B model for the paraphrased question (2026-10-20) and the exact docs.python.org sections it was given (public documentation text). Used to test citation selection only.",
+ "question": "Why can't a string be modified after it is created in Python?",
+ "answer": "Strings in Python are immutable, meaning once a string is created, its value cannot be changed. This is because modifying a string would require altering the original object, which is not allowed in Python's design. The immutability of strings provides performance benefits by allowing the system to allocate a fixed amount of memory at creation time, and ensures that string values remain consistent and reliable throughout program execution.",
+ "sections": [
+  {
+   "vectorScore": 0.6202001,
+   "finalScore": 0.5769972128571429,
+   "payload": {
+    "url": "https://docs.python.org/3/reference/datamodel.html",
+    "title": "3. Data model — Python 3.15.0 documentation",
+    "heading": "3.2.5.1. Immutable sequences¶",
+    "anchor": "immutable-sequences",
+    "chunk": "3.2.5.1. Immutable sequences¶:\nAn object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be changed; however, the collection of objects directly referenced by an immutable object cannot change.)\nThe following types are immutable sequences:\nStrings\nA string (str) is a sequence of values that represent characters, or more formally, Unicode code points. All the code points in the range 0 to 0x10FFFF can be represented in a string. Python doesn’t have a dedicated character type. Instead, every code point in the string is represented as a string object with length 1. The built-in function ord() converts a code point from its string form to an integer in the range 0 to 0x10FFFF; chr() converts an integer in the range 0 to 0x10FFFF to the corresponding length 1 string object. str.encode() can be used to convert a str to bytes using the given text encoding, and bytes.decode() can be used to achieve the opposite.\nA string (str) is a sequence of values that represent characters, or more formally, Unicode code points. All the code points in the range 0 to 0x10FFFF can be represented in a string.\nPython doesn’t have a dedicated character type. Instead, every code point in the string is represented as a string object with length 1."
+   }
+  },
+  {
+   "vectorScore": 0.66958123,
+   "finalScore": 0.5687068609999999,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/programming.html",
+    "title": "Programming FAQ — Python 3.15.0 documentation",
+    "heading": "How do I modify a string in place?¶",
+    "anchor": "how-do-i-modify-a-string-in-place",
+    "chunk": "How do I modify a string in place?¶:\nYou can’t, because strings are immutable. In most situations, you should simply construct a new string from the various parts you want to assemble it from. However, if you need an object with the ability to modify in-place Unicode data, try using an io.StringIO object or the array module:\n>>> import io\n>>> s = \"Hello, world\"\n>>> sio = io.StringIO(s)\n>>> sio.getvalue()\n'Hello, world'\n>>> sio.seek(7)\n7\n>>> sio.write(\"there!\")\n6\n>>> sio.getvalue()\n'Hello, there!'\n>>> import array\n>>> a = array.array('w', s)\n>>> print(a)\narray('w', 'Hello, world')\n>>> a[0] = 'y'\n>>> print(a)\narray('w', 'yello, world')\n>>> a.tounicode()\n'yello, world'"
+   }
+  },
+  {
+   "vectorScore": 0.60477763,
+   "finalScore": 0.5662014838571429,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/programming.html",
+    "title": "Programming FAQ — Python 3.15.0 documentation",
+    "heading": "Why did changing list ‘y’ also change list ‘x’?¶",
+    "anchor": "why-did-changing-list-y-also-change-list-x",
+    "chunk": "Why did changing list ‘y’ also change list ‘x’?¶:\nIf you wrote code like:\n>>> x = []\n>>> y = x\n>>> y.append(10)\n>>> y\n[10]\n>>> x\n[10]\nyou might be wondering why appending an element to y changed x too.\nThere are two factors that produce this result:\n1. Variables are simply names that refer to objects. Doing y = x doesn’t create a copy of the list – it creates a new variable y that refers to the same object x refers to. This means that there is only one object (the list), and both x and y refer to it.\n2. Lists are mutable, which means that you can change their content.\nAfter the call to append(), the content of the mutable object has changed from [] to [10]. Since both the variables refer to the same object, using either name accesses the modified value [10].\nIf we instead assign an immutable object to x:\n>>> x = 5 # ints are immutable\n>>> y = x\n>>> x = x + 1 # 5 can't be mutated, we are creating a new object here\n>>> x\n6\n>>> y\n5\nwe can see that in this case x and y are not equal anymore. This is because integers are immutable, and when we do x = x + 1 we are not mutating the int 5 by incrementing its value; instead, we are creating a new object (the int 6) and assigning it to x (that is, changing which object x refers to). After this assignment we have two objects (the ints 6 and 5) and two variables that refer to them (x now refers to 6 but y still refers to 5)."
+   }
+  },
+  {
+   "vectorScore": 0.6726157,
+   "finalScore": 0.5565452757142857,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/design.html",
+    "title": "Design and History FAQ — Python 3.15.0 documentation",
+    "heading": "Why are Python strings immutable?¶",
+    "anchor": "why-are-python-strings-immutable",
+    "chunk": "Why are Python strings immutable?¶:\nThere are several advantages.\nOne is performance: knowing that a string is immutable means we can allocate space for it at creation time, and the storage requirements are fixed and unchanging. This is also one of the reasons for the distinction between tuples and lists.\nAnother advantage is that strings in Python are considered as “elemental” as numbers. No amount of activity will change the value 8 to anything else, and in Python, no amount of activity will change the string “eight” to anything else."
+   }
+  }
+ ]
+}

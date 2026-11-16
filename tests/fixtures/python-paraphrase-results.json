@@ -1,0 +1,279 @@
+{
+ "note": "Real search results (docs.python.org FAQ/reference text, public documentation) for the question below, captured 2026-10-19. Used to test ranking only.",
+ "question": "Why can't a string be modified after it is created in Python?",
+ "results": [
+  {
+   "id": "8433c324-af3f-403e-87d1-3ea35cc0a527",
+   "score": 0.4510516,
+   "payload": {
+    "url": "https://docs.python.org/3/faq",
+    "title": "Python Frequently Asked Questions — Python 3.15.0 documentation",
+    "heading": "Python Frequently Asked Questions¶",
+    "anchor": "python-frequently-asked-questions",
+    "chunk": "Python Frequently Asked Questions¶:\n- General Python FAQ\n- Programming FAQ\n- Design and History FAQ\n- Library and Extension FAQ\n- Extending/Embedding FAQ\n- Python on Windows FAQ\n- Graphic User Interface FAQ\n- “Why is Python Installed on my Computer?” FAQ",
+    "pageType": "help",
+    "isStartPage": true
+   }
+  },
+  {
+   "id": "9b07c65e-5d3c-44e6-b6e7-8f317baa49c0",
+   "score": 0.6726157,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/design.html",
+    "title": "Design and History FAQ — Python 3.15.0 documentation",
+    "heading": "Why are Python strings immutable?¶",
+    "anchor": "why-are-python-strings-immutable",
+    "chunk": "Why are Python strings immutable?¶:\nThere are several advantages.\nOne is performance: knowing that a string is immutable means we can allocate space for it at creation time, and the storage requirements are fixed and unchanging. This is also one of the reasons for the distinction between tuples and lists.\nAnother advantage is that strings in Python are considered as “elemental” as numbers. No amount of activity will change the value 8 to anything else, and in Python, no amount of activity will change the string “eight” to anything else.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "7fe0d645-952f-47de-bf03-b4a0179b2155",
+   "score": 0.66958123,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/programming.html",
+    "title": "Programming FAQ — Python 3.15.0 documentation",
+    "heading": "How do I modify a string in place?¶",
+    "anchor": "how-do-i-modify-a-string-in-place",
+    "chunk": "How do I modify a string in place?¶:\nYou can’t, because strings are immutable. In most situations, you should simply construct a new string from the various parts you want to assemble it from. However, if you need an object with the ability to modify in-place Unicode data, try using an io.StringIO object or the array module:\n>>> import io\n>>> s = \"Hello, world\"\n>>> sio = io.StringIO(s)\n>>> sio.getvalue()\n'Hello, world'\n>>> sio.seek(7)\n7\n>>> sio.write(\"there!\")\n6\n>>> sio.getvalue()\n'Hello, there!'\n>>> import array\n>>> a = array.array('w', s)\n>>> print(a)\narray('w', 'Hello, world')\n>>> a[0] = 'y'\n>>> print(a)\narray('w', 'yello, world')\n>>> a.tounicode()\n'yello, world'",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "bdff645e-5a24-468b-8f2c-dd143b667588",
+   "score": 0.6335982,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Template strings ($-strings)¶",
+    "anchor": "template-strings-strings",
+    "chunk": "Template strings ($-strings)¶:\nsubstitute(mapping={}, /, **kwds)¶\nPerforms the template substitution, returning a new string. mapping is any dictionary-like object with keys that match the placeholders in the template. Alternatively, you can provide keyword arguments, where the keywords are the placeholders. When both mapping and kwds are given and there are duplicates, the placeholders from kwds take precedence.\nsafe_substitute(mapping={}, /, **kwds)¶\nLike substitute(), except that if placeholders are missing from mapping and kwds, instead of raising a KeyError exception, the original placeholder will appear in the resulting string intact. Also, unlike with substitute(), any other appearances of the $ will simply return $ instead of raising ValueError. While other exceptions may still occur, this method is called “safe” because it always tries to return a usable string instead of raising an exception. In another sense, safe_substitute() may be anything other than safe, since it will silently ignore malformed templates containing dangling delimiters, unmatched braces, or placeholders that are not valid Python identifiers.\nLike substitute(), except that if placeholders are missing from mapping and kwds, instead of raising a KeyError exception, the original placeholder will appear in the resulting string intact. Also, unlike with substitute(), any other appearances of the $ will simply return $ instead of raising ValueError.\nWhile other exceptions may still occur, this method is called “safe” because it always tries to return a usable string instead of raising an exception. In another sense, safe_substitute() may be anything other than safe, since it will silently ignore malformed templates containing dangling delimiters, unmatched braces, or placeholders that are not valid Python identifiers.\nis_valid()¶\nReturns False if the template has invalid placeholders that will cause substitute() to raise ValueError. Added in version 3.11.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "06898458-64b8-4158-9599-7115f8ae85b4",
+   "score": 0.62947905,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Custom string formatting¶",
+    "anchor": "custom-string-formatting",
+    "chunk": "Custom string formatting¶:\nvformat(format_string, args, kwargs)¶\nThis function does the actual work of formatting. It is exposed as a separate function for cases where you want to pass in a predefined dictionary of arguments, rather than unpacking and repacking the dictionary as individual arguments using the *args and **kwargs syntax. vformat() does the work of breaking up the format string into character data and replacement fields. It calls the various methods described below.\nIn addition, the Formatter defines a number of methods that are intended to be replaced by subclasses:\nparse(format_string)¶\nLoop over the format_string and return an iterable of tuples (literal_text, field_name, format_spec, conversion). This is used by vformat() to break the string into either literal text, or replacement fields. The values in the tuple conceptually represent a span of literal text followed by a single replacement field. If there is no literal text (which can happen if two replacement fields occur consecutively), then literal_text will be a zero-length string. If there is no replacement field, then the values of field_name, format_spec and conversion will be None. The value of field_name is unmodified and auto-numbering of non-numbered positional fields is done by vformat().\nLoop over the format_string and return an iterable of tuples (literal_text, field_name, format_spec, conversion). This is used by vformat() to break the string into either literal text, or replacement fields.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "2d4e801d-4565-46ef-836c-ecc91fe3a2b4",
+   "score": 0.62608826,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Custom string formatting¶",
+    "anchor": "custom-string-formatting",
+    "chunk": "Custom string formatting¶:\nThe built-in string class provides the ability to do complex variable substitutions and value formatting via the format() method described in PEP 3101. The Formatter class in the string module allows you to create and customize your own string formatting behaviors using the same implementation as the built-in format() method.\nclass string.Formatter¶",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "7d93d836-8bea-4225-9cb9-ac80ba08fc74",
+   "score": 0.6202001,
+   "payload": {
+    "url": "https://docs.python.org/3/reference/datamodel.html",
+    "title": "3. Data model — Python 3.15.0 documentation",
+    "heading": "3.2.5.1. Immutable sequences¶",
+    "anchor": "immutable-sequences",
+    "chunk": "3.2.5.1. Immutable sequences¶:\nAn object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be changed; however, the collection of objects directly referenced by an immutable object cannot change.)\nThe following types are immutable sequences:\nStrings\nA string (str) is a sequence of values that represent characters, or more formally, Unicode code points. All the code points in the range 0 to 0x10FFFF can be represented in a string. Python doesn’t have a dedicated character type. Instead, every code point in the string is represented as a string object with length 1. The built-in function ord() converts a code point from its string form to an integer in the range 0 to 0x10FFFF; chr() converts an integer in the range 0 to 0x10FFFF to the corresponding length 1 string object. str.encode() can be used to convert a str to bytes using the given text encoding, and bytes.decode() can be used to achieve the opposite.\nA string (str) is a sequence of values that represent characters, or more formally, Unicode code points. All the code points in the range 0 to 0x10FFFF can be represented in a string.\nPython doesn’t have a dedicated character type. Instead, every code point in the string is represented as a string object with length 1.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "b5c628d9-7e5d-4b12-a038-8fc309d7e397",
+   "score": 0.6197821,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Format string syntax¶",
+    "anchor": "format-string-syntax",
+    "chunk": "Format string syntax¶:\nThe str.format() method and the Formatter class share the same syntax for format strings (although in the case of Formatter, subclasses can define their own format string syntax). The syntax is related to that of formatted string literals and template string literals, but it is less sophisticated and, in particular, does not support arbitrary expressions in interpolations.\nFormat strings contain “replacement fields” surrounded by curly braces {}. Anything that is not contained in braces is considered literal text, which is copied unchanged to the output. If you need to include a brace character in the literal text, it can be escaped by doubling: {{ and }}.\nThe grammar for a replacement field is as follows:\nreplacement_field: \"{\" [field_name] [\"!\" conversion] [\":\" format_spec] \"}\"\nfield_name: arg_name (\".\" attribute_name | \"[\" element_index \"]\")*\narg_name: [identifier | digit+]\nattribute_name: identifier\nelement_index: digit+ | index_string\nindex_string: <any source character except \"]\"> +\nconversion: \"r\" | \"s\" | \"a\"\nformat_spec: format-spec:format_spec\nIn less formal terms, the replacement field can start with a field_name that specifies the object whose value is to be formatted and inserted into the output instead of the replacement field. The field_name is optionally followed by a conversion field, which is preceded by an exclamation point '!', and a format_spec, which is preceded by a colon ':'. These specify a non-default format for the replacement value.\nSee also the Format specification mini-language section.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "92c17e28-81a4-47ad-aabc-c83e0fcd9269",
+   "score": 0.617607,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Format string syntax¶",
+    "anchor": "format-string-syntax",
+    "chunk": "Format string syntax¶:\nThe conversion field causes a type coercion before formatting. Normally, the job of formatting a value is done by the __format__() method of the value itself. However, in some cases it is desirable to force a type to be formatted as a string, overriding its own definition of formatting. By converting the value to a string before calling __format__(), the normal formatting logic is bypassed.\nThree conversion flags are currently supported: '!s' which calls str() on the value, '!r' which calls repr() and '!a' which calls ascii().\nSome examples:\n\"Harold's a clever {0!s}\" # Calls str() on the argument first\n\"Bring out the holy {name!r}\" # Calls repr() on the argument first\n\"More {!a}\" # Calls ascii() on the argument first\nThe format_spec field contains a specification of how the value should be presented, including such details as field width, alignment, padding, decimal precision and so on. Each value type can define its own “formatting mini-language” or interpretation of the format_spec.\nMost built-in types support a common formatting mini-language, which is described in the next section.\nA format_spec field can also include nested replacement fields within it. These nested replacement fields may contain a field name, conversion flag and format specification, but deeper nesting is not allowed. The replacement fields within the format_spec are substituted before the format_spec string is interpreted. This allows the formatting of a value to be dynamically specified.\nSee the Format examples section for some examples.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "5b6841b2-9699-4801-87af-8ea82a5760c4",
+   "score": 0.6157048,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Template strings ($-strings)¶",
+    "anchor": "template-strings-strings",
+    "chunk": "Template strings ($-strings)¶:\nNote: Note\nNote: The feature described here was introduced in Python 2.4; a simple templating method based upon regular expressions. It predates str.format(), formatted string literals, and template string literals.\nNote: It is unrelated to template string literals (t-strings), which were introduced in Python 3.14. These evaluate to string.templatelib.Template objects, found in the string.templatelib module.\nTemplate strings provide simpler string substitutions as described in PEP 292. A primary use case for template strings is for internationalization (i18n) since in that context, the simpler syntax and functionality makes it easier to translate than other built-in string formatting facilities in Python. As an example of a library built on template strings for i18n, see the flufl.i18n package.\nTemplate strings support $-based substitutions, using the following rules:\n- $$ is an escape; it is replaced with a single $.\n- $identifier names a substitution placeholder matching a mapping key of \"identifier\". By default, \"identifier\" is restricted to any case-insensitive ASCII alphanumeric string (including underscores) that starts with an underscore or ASCII letter. The first non-identifier character after the $ character terminates this placeholder specification.\n- ${identifier} is equivalent to $identifier. It is required when valid identifier characters follow the placeholder but are not part of the placeholder, such as \"${noun}ification\".\nAny other appearance of $ in the string will result in a ValueError being raised.\nThe string module provides a Template class that implements these rules. The methods of Template are:\nclass string.Template(template)¶",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "af3c9e7e-c326-4615-bef0-cecbd86b8e65",
+   "score": 0.61087877,
+   "payload": {
+    "url": "https://docs.python.org/3/reference/datamodel.html",
+    "title": "3. Data model — Python 3.15.0 documentation",
+    "heading": "3.3.3. Customizing class creation¶",
+    "anchor": "customizing-class-creation",
+    "chunk": "3.3.3. Customizing class creation¶:\nIf the class variable is assigned after the class is created, __set_name__() will not be called automatically. If needed, __set_name__() can be called directly:\nclass A:\npass\nc = C()\nA.x = c # The hook is not called\nc.__set_name__(A, 'x') # Manually invoke the hook\nSee Creating the class object for more details.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "5019d1f2-0cb3-4125-9198-5d8b7d2d1db5",
+   "score": 0.6102679,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Custom string formatting¶",
+    "anchor": "custom-string-formatting",
+    "chunk": "Custom string formatting¶:\nLoop over the format_string and return an iterable of tuples (literal_text, field_name, format_spec, conversion). This is used by vformat() to break the string into either literal text, or replacement fields.\nThe values in the tuple conceptually represent a span of literal text followed by a single replacement field. If there is no literal text (which can happen if two replacement fields occur consecutively), then literal_text will be a zero-length string. If there is no replacement field, then the values of field_name, format_spec and conversion will be None. The value of field_name is unmodified and auto-numbering of non-numbered positional fields is done by vformat().\nget_field(field_name, args, kwargs)¶\nGiven field_name, convert it to an object to be formatted. Auto-numbering of field_name returned from parse() is done by vformat() before calling this method. Returns a tuple (obj, used_key). The default version takes strings of the form defined in PEP 3101, such as “0[name]” or “label.title”. args and kwargs are as passed in to vformat(). The return value used_key has the same meaning as the key parameter to get_value().\nget_value(key, args, kwargs)¶",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "2095387c-dbfe-434a-8859-aa930e3e83d1",
+   "score": 0.6102315,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Format specification mini-language¶",
+    "anchor": "format-specification-mini-language",
+    "chunk": "Format specification mini-language¶:\n“Format specifications” are used within replacement fields contained within a format string to define how individual values are presented (see Format string syntax, f-strings, and t-strings). They can also be passed directly to the built-in format() function. Each formattable type may define how the format specification is to be interpreted.\nMost built-in types implement the following options for format specifications, although some of the formatting options are only supported by the numeric types.\nA general convention is that an empty format specification produces the same result as if you had called str() on the value. A non-empty format specification typically modifies the result.\nThe general form of a standard format specifier is:\nformat_spec: [options][width_and_precision][type]\noptions: [[fill]align][sign][\"z\"][\"#\"][\"0\"]\nfill: <any character>\nalign: \"<\" | \">\" | \"=\" | \"^\"\nsign: \"+\" | \"-\" | \" \"\nwidth_and_precision: [width_with_grouping][precision_with_grouping]\nwidth_with_grouping: [width][grouping]\nprecision_with_grouping: \".\" [precision][grouping] | \".\" grouping\nwidth: digit+\nprecision: digit+\ngrouping: \",\" | \"_\"\ntype: \"b\" | \"c\" | \"d\" | \"e\" | \"E\" | \"f\" | \"F\" | \"g\"\n| \"G\" | \"n\" | \"o\" | \"s\" | \"x\" | \"X\" | \"%\"\nIf a valid align value is specified, it can be preceded by a fill character that can be any character and defaults to a space if omitted. It is not possible to use a literal curly brace (”{” or “}”) as the fill character in a formatted string literal or when using the str.format() method. However, it is possible to insert a curly brace with a nested replacement field. This limitation doesn’t affect the format() function.\nThe meaning of the various alignment options is as follows:\nOption\nMeaning\n'<'",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "0338e69a-acfa-4ab3-8447-88c6d95214f7",
+   "score": 0.6088716,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Format specification mini-language¶",
+    "anchor": "format-specification-mini-language",
+    "chunk": "Format specification mini-language¶:\nChanged in version 3.11: Added the 'z' option (see also PEP 682).\nThe '#' option causes the “alternate form” to be used for the conversion. The alternate form is defined differently for different types. This option is only valid for integer, float and complex types. For integers, when binary, octal, or hexadecimal output is used, this option adds the respective prefix '0b', '0o', '0x', or '0X' to the output value. For float and complex the alternate form causes the result of the conversion to always contain a decimal-point character, even if no digits follow it. Normally, a decimal-point character appears in the result of these conversions only if a digit follows it. In addition, for 'g' and 'G' conversions, trailing zeros are not removed from the result.\nThe width is a decimal integer defining the minimum total field width, including any prefixes, separators, and other formatting characters. If not specified, then the field width will be determined by the content.\nWhen no explicit alignment is given, preceding the width field by a zero ('0') character enables sign-aware zero-padding for numeric types, excluding complex. This is equivalent to a fill character of '0' with an alignment type of '='.\nChanged in version 3.10: Preceding the width field by '0' no longer affects the default alignment for strings.",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "9253d3a1-5641-4c37-955f-90004cfdcb76",
+   "score": 0.60713047,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Template strings ($-strings)¶",
+    "anchor": "template-strings-strings",
+    "chunk": "Template strings ($-strings)¶:\nclass string.Template(template)¶\nThe constructor takes a single argument which is the template string. substitute(mapping={}, /, **kwds)¶ Performs the template substitution, returning a new string. mapping is any dictionary-like object with keys that match the placeholders in the template. Alternatively, you can provide keyword arguments, where the keywords are the placeholders. When both mapping and kwds are given and there are duplicates, the placeholders from kwds take precedence. safe_substitute(mapping={}, /, **kwds)¶ Like substitute(), except that if placeholders are missing from mapping and kwds, instead of raising a KeyError exception, the original placeholder will appear in the resulting string intact. Also, unlike with substitute(), any other appearances of the $ will simply return $ instead of raising ValueError. While other exceptions may still occur, this method is called “safe” because it always tries to return a usable string instead of raising an exception. In another sense, safe_substitute() may be anything other than safe, since it will silently ignore malformed templates containing dangling delimiters, unmatched braces, or placeholders that are not valid Python identifiers. is_valid()¶ Returns False if the template has invalid placeholders that will cause substitute() to raise ValueError. Added in version 3.11. get_identifiers()¶ Returns a list of the valid identifiers in the template, in the order they first appear, ignoring any invalid identifiers. Added in version 3.11. Template instances also provide one public data attribute: template¶ This is the object passed to the constructor’s template argument. In general, you shouldn’t change it, but read-only access is not enforced.\nThe constructor takes a single argument which is the template string.\nsubstitute(mapping={}, /, **kwds)¶",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "29a3787f-05bc-4e97-9d15-0a4a75e42e6d",
+   "score": 0.6058129,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Custom string formatting¶",
+    "anchor": "custom-string-formatting",
+    "chunk": "Custom string formatting¶:\nclass string.Formatter¶\nThe Formatter class has the following public methods: format(format_string, /, *args, **kwargs)¶ The primary API method. It takes a format string and an arbitrary set of positional and keyword arguments. It is just a wrapper that calls vformat(). Changed in version 3.7: A format string argument is now positional-only. vformat(format_string, args, kwargs)¶ This function does the actual work of formatting. It is exposed as a separate function for cases where you want to pass in a predefined dictionary of arguments, rather than unpacking and repacking the dictionary as individual arguments using the *args and **kwargs syntax. vformat() does the work of breaking up the format string into character data and replacement fields. It calls the various methods described below. In addition, the Formatter defines a number of methods that are intended to be replaced by subclasses: parse(format_string)¶ Loop over the format_string and return an iterable of tuples (literal_text, field_name, format_spec, conversion). This is used by vformat() to break the string into either literal text, or replacement fields. The values in the tuple conceptually represent a span of literal text followed by a single replacement field. If there is no literal text (which can happen if two replacement fields occur consecutively), then literal_text will be a zero-length string. If there is no replacement field, then the values of field_name, format_spec and conversion will be None. The value of field_name is unmodified and auto-numbering of non-numbered positional fields is done by vformat(). get_field(field_name, args, kwargs)¶ Given field_name, convert it to an object to be formatted. Auto-numbering of field_name returned from parse() is done by vformat() before calling this method. Returns a tuple (obj, used_key). The default version takes strings of the form",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "35664ace-b1d0-4adc-92ad-ae782838d063",
+   "score": 0.6051575,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/programming.html",
+    "title": "Programming FAQ — Python 3.15.0 documentation",
+    "heading": "Why did changing list ‘y’ also change list ‘x’?¶",
+    "anchor": "why-did-changing-list-y-also-change-list-x",
+    "chunk": "Why did changing list ‘y’ also change list ‘x’?¶:\nSome operations (for example y.append(10) and y.sort()) mutate the object, whereas superficially similar operations (for example y = y + [10] and sorted(y)) create a new object. In general in Python (and in all cases in the standard library) a method that mutates an object will return None to help avoid getting the two types of operations confused. So if you mistakenly write y.sort() thinking it will give you a sorted copy of y, you’ll instead end up with None, which will likely cause your program to generate an easily diagnosed error.\nHowever, there is one class of operations where the same operation sometimes has different behaviors with different types: the augmented assignment operators. For example, += mutates lists but not tuples or ints (a_list += [1, 2, 3] is equivalent to a_list.extend([1, 2, 3]) and mutates a_list, whereas some_tuple += (1, 2, 3) and some_int += 1 create new objects).\nIn other words:\n- If we have a mutable object (such as list, dict, set), we can use some specific operations to mutate it and all the variables that refer to it will see the change.\n- If we have an immutable object (such as str, int, tuple), all the variables that refer to it will always see the same value, but operations that transform that value into a new value always return a new object.\nIf you want to know if two variables refer to the same object or not, you can use the is operator, or the built-in function id().",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "225b83b8-1a3d-445f-8545-3cf01bdf4818",
+   "score": 0.60477763,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/programming.html",
+    "title": "Programming FAQ — Python 3.15.0 documentation",
+    "heading": "Why did changing list ‘y’ also change list ‘x’?¶",
+    "anchor": "why-did-changing-list-y-also-change-list-x",
+    "chunk": "Why did changing list ‘y’ also change list ‘x’?¶:\nIf you wrote code like:\n>>> x = []\n>>> y = x\n>>> y.append(10)\n>>> y\n[10]\n>>> x\n[10]\nyou might be wondering why appending an element to y changed x too.\nThere are two factors that produce this result:\n1. Variables are simply names that refer to objects. Doing y = x doesn’t create a copy of the list – it creates a new variable y that refers to the same object x refers to. This means that there is only one object (the list), and both x and y refer to it.\n2. Lists are mutable, which means that you can change their content.\nAfter the call to append(), the content of the mutable object has changed from [] to [10]. Since both the variables refer to the same object, using either name accesses the modified value [10].\nIf we instead assign an immutable object to x:\n>>> x = 5 # ints are immutable\n>>> y = x\n>>> x = x + 1 # 5 can't be mutated, we are creating a new object here\n>>> x\n6\n>>> y\n5\nwe can see that in this case x and y are not equal anymore. This is because integers are immutable, and when we do x = x + 1 we are not mutating the int 5 by incrementing its value; instead, we are creating a new object (the int 6) and assigning it to x (that is, changing which object x refers to). After this assignment we have two objects (the ints 6 and 5) and two variables that refer to them (x now refers to 6 but y still refers to 5).",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "f95545ec-c807-4ecf-91c3-a3c68153afc5",
+   "score": 0.5969336,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.html",
+    "title": "string — Common string operations — Python 3.15.0 documentation",
+    "heading": "Custom string formatting¶",
+    "anchor": "custom-string-formatting",
+    "chunk": "Custom string formatting¶:\nan IndexError or KeyError should be raised. check_unused_args(used_args, args, kwargs)¶ Implement checking for unused arguments if desired. The arguments to this function is the set of all argument keys that were actually referred to in the format string (integers for positional arguments, and strings for named arguments), and a reference to the args and kwargs that was passed to vformat. The set of unused args can be calculated from these parameters. check_unused_args() is assumed to raise an exception if the check fails. format_field(value, format_spec)¶ format_field() simply calls the global format() built-in. The method is provided so that subclasses can override it. convert_field(value, conversion)¶ Converts the value (returned by get_field()) given a conversion type (as in the tuple returned by the parse() method). The default version understands ‘s’ (str), ‘r’ (repr) and ‘a’ (ascii) conversion types.\nThe Formatter class has the following public methods:\nformat(format_string, /, *args, **kwargs)¶\nThe primary API method. It takes a format string and an arbitrary set of positional and keyword arguments. It is just a wrapper that calls vformat(). Changed in version 3.7: A format string argument is now positional-only.\nThe primary API method. It takes a format string and an arbitrary set of positional and keyword arguments. It is just a wrapper that calls vformat().\nChanged in version 3.7: A format string argument is now positional-only.\nvformat(format_string, args, kwargs)¶",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "8fdf7b67-77e6-4063-a1e0-86c9f31781ad",
+   "score": 0.5963068,
+   "payload": {
+    "url": "https://docs.python.org/3/faq/design.html",
+    "title": "Design and History FAQ — Python 3.15.0 documentation",
+    "heading": "Why must dictionary keys be immutable?¶",
+    "anchor": "why-must-dictionary-keys-be-immutable",
+    "chunk": "Why must dictionary keys be immutable?¶:\n- Make a copy when using a list as a key. This doesn’t work because the list, being a mutable object, could contain a reference to itself, and then the copying code would run into an infinite loop.\n- Allow lists as keys but tell the user not to modify them. This would allow a class of hard-to-track bugs in programs when you forgot or modified a list by accident. It also invalidates an important invariant of dictionaries: every value in d.keys() is usable as a key of the dictionary.\n- Mark lists as read-only once they are used as a dictionary key. The problem is that it’s not just the top-level object that could change its value; you could use a tuple containing a list as a key. Entering anything as a key into a dictionary would require marking all objects reachable from there as read-only – and again, self-referential objects could cause an infinite loop.\nThere is a trick to get around this if you need to, but use it at your own risk: You can wrap a mutable structure inside a class instance which has both a __eq__() and a __hash__() method. You must then make sure that the hash value for all such wrapper objects that reside in a dictionary (or other hash based structure), remain fixed while the object is in the dictionary (or other structure).",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  },
+  {
+   "id": "4ad2287e-2c8c-4028-b580-a9133f4af435",
+   "score": 0.5933699,
+   "payload": {
+    "url": "https://docs.python.org/3/library/string.templatelib.html",
+    "title": "string.templatelib — Support for template string literals — Python 3.15.0 documentation",
+    "heading": "Template strings¶",
+    "anchor": "template-strings",
+    "chunk": "Template strings¶:\nAdded in version 3.14.\nTemplate strings are a mechanism for custom string processing. They have the full flexibility of Python’s f-strings, but return a Template instance that gives access to the static and interpolated (in curly brackets) parts of a string before they are combined.\nTo write a t-string, use a 't' prefix instead of an 'f', like so:\n>>> pi = 3.14\n>>> t't-strings are new in Python {pi!s}!'\nTemplate(\nstrings=('t-strings are new in Python ', '!'),\ninterpolations=(Interpolation(3.14, 'pi', 's', ''),)\n)",
+    "pageType": "help",
+    "isStartPage": false
+   }
+  }
+ ]
+}
